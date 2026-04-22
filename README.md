@@ -1,102 +1,60 @@
 # AutoMedBench
 
-> **Can AI agents autonomously conduct Medical AutoResearch?**
+> Can AI agents autonomously conduct *Medical AutoResearch*?
+
+<p align="center">
+  <img src="assets/workflow.png" alt="AutoMedBench S1–S5 workflow" width="820">
+</p>
 
 AutoMedBench scores autonomous coding agents across the medical research pipeline — **plan, setup, validate, infer, submit** — not just their final outputs.
 
-*A joint project from UC Santa Cruz × NVIDIA.*
-
 ---
-
-## What is AutoMedBench?
-
-AutoMedBench is a benchmark suite for evaluating coding-agent LLMs on realistic medical imaging and reasoning tasks. Each agent must autonomously plan a research approach, set up the environment, validate its pipeline, run inference on held-out patients, and submit results — all inside an isolated sandbox.
-
-The benchmark measures **how** agents work, not just **what** they score. Every run is graded across five stages (S1 Plan → S5 Submit) in addition to the final clinical metric.
-
-## Task domains
-
-Tasks live on separate branches so each domain is independently versioned and reproducible.
-
-| Branch | Domain | Tasks | Status |
-|---|---|---|---|
-| [`eval_seg`](../../tree/eval_seg) | 3D medical segmentation | kidney · liver · pancreas · feta (fetal brain multi-tissue) | **live** |
-| [`eval_image_enhancement`](../../tree/eval_image_enhancement) | 2D image enhancement | LDCT denoising · MRI super-resolution | **live** |
-| [`eval_report_gen`](../../tree/eval_report_gen) | CXR report generation | MIMIC-CXR findings | **live** |
-| [`eval_vqa`](../../tree/eval_vqa) | Medical VQA | PathVQA · VQA-RAD · SLAKE · MedFrameQA · MedXpertQA-MM | **live** |
-| [`eval_det2d`](../../tree/eval_det2d) | 2D detection | VinDr-CXR abnormality | **beta** |
 
 ## Quickstart
 
 ```bash
-# 1. Clone the domain branch you want to benchmark
+# 1. Clone the domain branch you want to run
 git clone --branch eval_seg --single-branch https://github.com/KumaKuma2002/AutoMedBench.git
 cd AutoMedBench
 
-# 2. Pull the sandbox container (see the branch's README for the exact tag)
+# 2. Pull the sandbox container (tag is in the branch README)
 docker pull <registry>/automedbench-seg:v1
 
-# 3. Stage the dataset (public inputs + held-out references)
+# 3. Stage the public + private splits
 python stage_data.py
 
-# 4. Configure your agent (edit agent_config.yaml)
-
-# 5. Run the benchmark
-python docker/orchestrator.py \
+# 4. Run one cell
+python eval_seg/docker/orchestrator.py \
     --agent claude-opus-4-6 \
     --task kidney-seg-task \
-    --tier lite \
-    --n-patients 20
+    --tier lite
 ```
 
-Each branch ships its own `README.md` with the exact `docker pull` tag, dataset recipe, and orchestrator invocation.
+Each domain branch ships its own `README.md` with the exact Docker tag, dataset recipe, and runner flags.
 
-## Core components
+## Domains
 
-### Task definitions
+| Branch | Domain | Tasks | Status |
+|---|---|---|---|
+| [`eval_seg`](../../tree/eval_seg) | 3D segmentation | kidney · liver · pancreas · feta | live |
+| [`eval_image_enhancement`](../../tree/eval_image_enhancement) | image enhancement | LDCT · MRI-SR | live |
+| [`eval_report_gen`](../../tree/eval_report_gen) | CXR report generation | MIMIC-CXR | live |
+| [`eval_vqa`](../../tree/eval_vqa) | medical VQA | PathVQA · VQA-RAD · SLAKE · MedFrameQA · MedXpertQA-MM | live |
+| [`eval_det2d`](../../tree/eval_det2d) | 2D detection | VinDr-CXR | beta |
 
-Each task is a self-contained directory under its domain branch. At minimum, a task provides:
-
-- `config.yaml` — task metadata (modality, patient count, time budget)
-- `model_info.yaml` — candidate models for Standard-tier runs
-- Skill markdown files (`lite_s1.md` / `standard_s1.md` / …) — tier-specific hints
-- `requirements.txt` — Python dependencies pinned for reproducibility
-
-### Execution harness
-
-Every domain uses a two-container architecture:
-
-- **Agent container** — GPU + network, runs the LLM coding loop. Read-only rootfs, sandboxed filesystem.
-- **Eval container** — GPU + `--network none`, scores agent outputs against held-out references.
-
-The orchestrator chains them sequentially and applies an isolation-breach penalty if the agent violates sandbox rules.
-
-### Scoring
-
-Every run produces an **Overall** score in `[0, 1]`:
+## Scoring
 
 ```
 Overall = 0.5 × Agentic + 0.5 × Task
 ```
 
-- **Agentic** — weighted mean of S1–S5 stage scores (see each branch's `SCORING_RUBRICS.md`)
-- **Task** — the domain-specific metric (Dice for seg, SSIM for enhancement, clinical score for report, accuracy for VQA, mAP for detection)
+- **Agentic** — weighted mean of S1–S5 stage scores (Plan · Setup · Validate · Infer · Submit)
+- **Task** — domain-specific metric (Dice · SSIM · clinical score · accuracy · mAP)
 
-## Submit to the leaderboard
+---
 
-Each live-branch README includes a `runs/` layout that matches what the public leaderboard expects. Submission instructions TBD.
-
-## License
-
-Research-use only. Not for clinical deployment.
-
-## Citation
-
-```bibtex
-@misc{automedbench2026,
-  title  = {AutoMedBench: A Benchmark for Autonomous Medical Research Agents},
-  author = {KumaKuma2002 and collaborators},
-  year   = {2026},
-  url    = {https://github.com/KumaKuma2002/AutoMedBench}
-}
-```
+<p align="center">
+  <a href="https://www.ucsc.edu/"><img src="assets/ucsc-logo.svg" alt="UC Santa Cruz" height="32"></a>
+  &nbsp;&nbsp;×&nbsp;&nbsp;
+  <a href="https://www.nvidia.com/"><img src="assets/nvidia-logo.svg" alt="NVIDIA" height="32"></a>
+</p>
