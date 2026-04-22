@@ -1,0 +1,67 @@
+{
+  "task": "ldct",
+  "n_patients": 100,
+  "baselines": {
+    "identity": {
+      "mean_psnr": 37.00305747905779,
+      "mean_ssim": 0.8663230180226975,
+      "mean_lpips": 0.2350515565648675,
+      "time_s": 6.65,
+      "n": 100
+    },
+    "gaussian": {
+      "mean_psnr": 36.037879708602674,
+      "mean_ssim": 0.9566083087953555,
+      "mean_lpips": 0.09723692119121552,
+      "time_s": 3.02,
+      "n": 100
+    },
+    "classical_bm3d": {
+      "mean_psnr": 41.79841953371895,
+      "mean_ssim": 0.9663058295715962,
+      "mean_lpips": 0.059607572369277474,
+      "time_s": 176.91,
+      "n": 100
+    },
+    "dnn_drunet": {
+      "mean_psnr": 41.79456321033945,
+      "mean_ssim": 0.9659261719365246,
+      "mean_lpips": 0.05780975288711488,
+      "time_s": 7.89,
+      "n": 100
+    },
+    "perfect": {
+      "mean_psnr": 99.0,
+      "mean_ssim": 1.0,
+      "mean_lpips": 0.0,
+      "time_s": 2.53,
+      "n": 100
+    }
+  },
+  "bands": {
+    "A": {
+      "ssim_min": 0.9863,
+      "psnr_min": 42.798,
+      "note": "beats 'classical_bm3d' baseline by +0.02 SSIM and +1 dB PSNR"
+    },
+    "B": {
+      "ssim_min": 0.9463,
+      "psnr_min": 40.798,
+      "note": "within \u00b10.02 SSIM and \u00b11 dB of 'classical_bm3d' (stronger) baseline"
+    },
+    "C": {
+      "ssim_min": 0.9163,
+      "psnr_min": 38.798,
+      "note": "approaches 'classical_bm3d' baseline but more than 3 dB / 0.05 SSIM below"
+    },
+    "F": {
+      "note": "below 'dnn_drunet' (weaker) baseline or <50% format valid or aborted"
+    }
+  },
+  "anchor_keys": {
+    "stronger": "classical_bm3d",
+    "weaker": "dnn_drunet",
+    "classical": "classical_bm3d",
+    "dnn": "dnn_drunet"
+  }
+}

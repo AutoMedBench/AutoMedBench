@@ -1,0 +1,46 @@
+# MRI Super-Resolution — Per-tier enhancement-method information (v2)
+
+lite:
+  model_architecture: "Swin2SR (HuggingFace `caidas/swin2SR-classical-sr-x2-64`)"
+  model_description: >
+    Use Swin2SR — a transformer-based 2× super-resolution DNN with a public \
+    pretrained checkpoint on HuggingFace. GPU-required, inference-only \
+    (no training). Load via: \
+    `from transformers import AutoImageProcessor, Swin2SRForImageSuperResolution; \
+    proc = AutoImageProcessor.from_pretrained('caidas/swin2SR-classical-sr-x2-64'); \
+    model = Swin2SRForImageSuperResolution.from_pretrained('caidas/swin2SR-classical-sr-x2-64').eval().cuda()`. \
+    You MUST handle: (a) grayscale → 3-channel RGB conversion (Swin2SR expects \
+    RGB; convert MRI float32 [0,1] → uint8 → PIL → RGB); (b) reduce the 3-channel \
+    output back to grayscale (mean across channels); (c) resize the output to \
+    the expected HR shape (720, 512) since Swin2SR may produce slightly \
+    different spatial dims. Falling back to bicubic is allowed but will score \
+    below the benchmark's DNN baseline band.
+
+standard:
+  model_range:
+    - "**PyTorch bicubic** — classical baseline `F.interpolate(mode='bicubic')`; 24-25 dB PSNR on SRMRI."
+    - "**PIL Lanczos** — `Image.resize(..., resample=Image.LANCZOS)`; sharper than bicubic."
+    - "**SwinIR** — https://github.com/JingyunLiang/SwinIR ; transformer-based SR with public HF checkpoints (e.g. `caidas/swin2SR-classical-sr-x2-64`). Inference-only, 29-33 dB on natural-image benchmarks; transfers to MRI with HU-agnostic [0,1] normalization."
+    - "**Restormer** — https://huggingface.co/search?q=restormer ; general image restoration, public weights available."
+  model_description: >
+    You MUST compare at least 3 inference-only candidates. At least TWO of \
+    your three compared candidates MUST be DNN-based (SwinIR + Restormer; \
+    not 3 classical methods). Training is FORBIDDEN. Record the comparison \
+    in plan.md — include candidate name, type (classical/DNN), public-weight \
+    source, setup effort, validation PSNR/SSIM qualitative observation. A \
+    real DNN with natural-image weights transfers imperfectly to MRI but \
+    should still beat bicubic on LPIPS (sharper edges).
+
+pro:
+  clinical_background: >
+    MRI super-resolution aims to recover high-frequency anatomical detail \
+    from under-sampled or low-resolution acquisitions. Clinically important \
+    structures — grey/white-matter boundaries, small lesions, cortical \
+    folds — depend on sharp edge reconstruction, which pure pixel-MSE \
+    methods (bicubic, L2-trained CNNs) tend to smooth out. Perceptual \
+    metrics (LPIPS, SSIM) capture diagnostic fidelity better than PSNR \
+    alone. Good inference-only SR options include classical methods \
+    (bicubic, Lanczos), pre-trained restoration DNNs (Restormer, SwinIR, \
+    NAFNet with public checkpoints), or hybrid approaches. Training from \
+    scratch on the data you see here is NOT allowed. Input is 360x256, \
+    target is 720x512 (scale=2).

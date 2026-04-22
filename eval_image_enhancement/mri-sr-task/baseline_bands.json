@@ -1,0 +1,67 @@
+{
+  "task": "mri-sr",
+  "n_patients": 100,
+  "baselines": {
+    "identity_nearest_up": {
+      "mean_psnr": 24.368463387761505,
+      "mean_ssim": 0.5974817649779331,
+      "mean_lpips": 0.20337156280875207,
+      "time_s": 7.58,
+      "n": 100
+    },
+    "gaussian_bicubic": {
+      "mean_psnr": 24.702166348450902,
+      "mean_ssim": 0.5970254639667131,
+      "mean_lpips": 0.5531071150302886,
+      "time_s": 4.13,
+      "n": 100
+    },
+    "classical_bicubic": {
+      "mean_psnr": 24.598749341018767,
+      "mean_ssim": 0.6131783537940364,
+      "mean_lpips": 0.297266690582037,
+      "time_s": 4.02,
+      "n": 100
+    },
+    "dnn_swinir_x2": {
+      "mean_psnr": 19.026475469041973,
+      "mean_ssim": 0.4129722721742969,
+      "mean_lpips": 0.3350102598965168,
+      "time_s": 105.95,
+      "n": 100
+    },
+    "perfect": {
+      "mean_psnr": 99.0,
+      "mean_ssim": 1.0,
+      "mean_lpips": 0.0,
+      "time_s": 3.79,
+      "n": 100
+    }
+  },
+  "bands": {
+    "A": {
+      "ssim_min": 0.6332,
+      "psnr_min": 25.599,
+      "note": "beats 'classical_bicubic' baseline by +0.02 SSIM and +1 dB PSNR"
+    },
+    "B": {
+      "ssim_min": 0.5932,
+      "psnr_min": 23.599,
+      "note": "within \u00b10.02 SSIM and \u00b11 dB of 'classical_bicubic' (stronger) baseline"
+    },
+    "C": {
+      "ssim_min": 0.5632,
+      "psnr_min": 21.599,
+      "note": "approaches 'classical_bicubic' baseline but more than 3 dB / 0.05 SSIM below"
+    },
+    "F": {
+      "note": "below 'dnn_swinir_x2' (weaker) baseline or <50% format valid or aborted"
+    }
+  },
+  "anchor_keys": {
+    "stronger": "classical_bicubic",
+    "weaker": "dnn_swinir_x2",
+    "classical": "classical_bicubic",
+    "dnn": "dnn_swinir_x2"
+  }
+}

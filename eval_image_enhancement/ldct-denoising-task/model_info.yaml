@@ -1,0 +1,46 @@
+# LDCT Denoising — Per-tier enhancement-method information (v2)
+
+lite:
+  model_architecture: "DRUNet (deep residual UNet denoiser)"
+  model_description: >
+    Use DRUNet as your denoiser — a learned deep network with a public \
+    pretrained checkpoint distributed via the `deepinv` library. GPU-required, \
+    inference-only (no training). Install: `pip install deepinv`. Load with \
+    `deepinv.models.DRUNet(in_channels=1, out_channels=1, pretrained='download')`; \
+    move to `.cuda()`; set `.eval()`. The DRUNet forward takes a noisy image \
+    tensor AND a sigma value: `model(x, sigma=...)`. You MUST decide: (a) how \
+    to normalize HU input to [0,1] before feeding DRUNet (clinical window \
+    (-1024, +3072) is standard); (b) how to estimate sigma per patient — \
+    fixed prior (e.g., 0.05), `skimage.restoration.estimate_sigma`, or \
+    air-region noise; (c) how to invert the normalization on the output. \
+    Input data is LDCT_High (I₀ = 10³, heavy noise). DRUNet is 2–4 dB better \
+    than BM3D on LDCT-Mid; on LDCT-High both degrade, so parameter choices \
+    matter more. Falling back to BM3D is allowed but will score below the \
+    benchmark's DNN baseline band.
+
+standard:
+  model_range:
+    - "**BM3D** — https://pypi.org/project/bm3d/ ; classical non-local patch denoiser. Strong LDCT baseline ~41-44 dB PSNR on SimNICT-Mid. Expected weaker (~38-40 dB) on High severity."
+    - "**DnCNN** — https://github.com/cszn/DnCNN (official) or HuggingFace mirror `neuralkim/DnCNN-denoising`; CNN denoiser with public checkpoint. Trained on natural images but transfers to CT via HU→[0,1] normalization."
+    - "**Restormer** — https://github.com/swz30/Restormer ; transformer-based image restoration, HF-hosted checkpoints available. Strongest public pretrained option."
+  model_description: >
+    You MUST compare at least 3 inference-only candidates from the list and \
+    pick the best one. At least TWO of your three compared candidates MUST be \
+    DNN-based (DnCNN + Restormer; not 3 classical methods). Training is \
+    FORBIDDEN. If a DNN has no public checkpoint, drop it and substitute \
+    another DNN (SwinIR, MIRNet, NAFNet). Record your comparison in plan.md \
+    with a table of: name, type (DNN/classical), public-weight-source, \
+    setup-effort, qualitative notes from your S3 validation.
+
+pro:
+  clinical_background: >
+    Low-dose CT denoising trades noise suppression against preservation of \
+    clinically meaningful structures. Aggressive denoisers blur small lesions \
+    (sub-cm nodules) and soft-tissue boundaries — over-smoothing is the \
+    primary diagnostic risk. Photon-shot Poisson noise at low I₀ creates \
+    streak artifacts and reduces contrast-to-noise ratio. The best \
+    inference-only methods combine either strong patch priors (BM3D, NLM), \
+    pretrained learning-based restoration models (DnCNN, Restormer, SwinIR, \
+    NAFNet with public checkpoints), or hybrid approaches. Perceptual \
+    metrics (LPIPS, SSIM) capture diagnostic fidelity better than PSNR alone. \
+    Training on the data you see here is NOT allowed.

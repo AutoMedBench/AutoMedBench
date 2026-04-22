@@ -1,0 +1,12 @@
+# LDCT Denoising Task Configuration
+task_id: ldct-denoising-task
+modality: CT
+input_format: .npy
+input_filename: input.npy
+output_filename: enhanced.npy
+task_type: "low-dose CT denoising"
+task_description: "Denoise 2D simulated low-dose chest/abdominal CT slices (Hounsfield Units). Each patient has one input.npy of shape (512, 512) float32 with values roughly in [-1300, +3200] HU. Produce one enhanced.npy per patient with the same shape, float32, no NaN/Inf, and values in a clinically plausible HU range."
+data_dir_name: LDCT_SimNICT
+time_limit_s: 1800
+intensity_units: HU
+intensity_range: [-1024, 3000]

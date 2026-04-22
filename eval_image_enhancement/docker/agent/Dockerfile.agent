@@ -1,0 +1,46 @@
+# MedAgentsBench Image Enhancement — Agent Container (v5)
+# GPU + network enabled. Pre-installed: PyTorch 2.1 + CUDA 12.1 + medical imaging libs.
+# Does NOT contain evaluation code, ground truth, scoring thresholds, or baseline bands.
+
+FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
+
+LABEL maintainer="MedAgentsBench"
+LABEL description="Isolated agent container for 2D medical image enhancement benchmark"
+
+ENV PIP_ROOT_USER_ACTION=ignore
+ENV PYTHONUNBUFFERED=1
+ENV DEBIAN_FRONTEND=noninteractive
+
+# System deps
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      wget curl git ca-certificates libgl1 libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Scientific stack — enough for BM3D / DRUNet / Swin2SR / SR/denoise workflows
+RUN pip install --no-cache-dir \
+      numpy==1.26.4 scipy==1.13.1 scikit-image==0.24.0 nibabel==5.2.1 \
+      pandas==2.2.2 Pillow==10.4.0 pyyaml==6.0.1 \
+      huggingface_hub==0.24.6 transformers==4.44.2 \
+      bm3d==4.0.3 lpips==0.1.4 \
+      deepinv==0.4.0 openai==1.54.4 httpx==0.27.2 requests==2.32.3 \
+      matplotlib==3.8.4 opencv-python-headless==4.10.0.84 \
+    && pip cache purge
+
+# Copy ONLY the agent harness — no eval code, no scorer, no bands
+COPY agent_loop.py /app/agent_loop.py
+COPY agent_code_executor.py /app/agent_code_executor.py
+COPY entrypoint_agent.sh /app/entrypoint_agent.sh
+RUN chmod +x /app/entrypoint_agent.sh
+
+# Mount points (populated by orchestrator at run time)
+RUN mkdir -p /workspace /data/public
+
+# Match host UID/GID so agent-written files are owned by the host user, not root
+ARG USER_UID=339946
+ARG USER_GID=339946
+RUN groupadd -g ${USER_GID} agent && useradd -u ${USER_UID} -g ${USER_GID} -m agent
+RUN chown -R agent:agent /workspace /app
+
+USER agent
+WORKDIR /workspace
+ENTRYPOINT ["/app/entrypoint_agent.sh"]

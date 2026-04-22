@@ -1,0 +1,53 @@
+# MedAgentsBench Image Enhancement — Evaluation Container (v5)
+# GPU-capable image for fast LPIPS scoring. Runs with --network none.
+# Build context: eval_image_enhancement/ (so enhancement_scorer.py + bands files are available).
+
+# Same CUDA/torch as the agent image so we know the driver is compatible.
+FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
+
+LABEL maintainer="MedAgentsBench"
+LABEL description="GPU-enabled evaluation container for image-enhancement benchmark (v5)"
+
+ENV PIP_ROOT_USER_ACTION=ignore
+ENV PYTHONUNBUFFERED=1
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      curl ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Minimal eval stack — torch already present from base image.
+RUN pip install --no-cache-dir \
+      numpy==1.26.4 scipy==1.13.1 scikit-image==0.24.0 \
+      lpips==0.1.4 \
+    && pip cache purge
+
+# Copy evaluation pipeline (scorer + format checker + per-task bands)
+COPY enhancement_scorer.py /eval/enhancement_scorer.py
+COPY format_checker.py     /eval/format_checker.py
+# Per-task baseline_bands.json — copied with the same relative layout that
+# enhancement_scorer._load_bands() expects.
+COPY ldct-denoising-task/baseline_bands.json /eval/ldct-denoising-task/baseline_bands.json
+COPY mri-sr-task/baseline_bands.json         /eval/mri-sr-task/baseline_bands.json
+
+# Runner + entrypoint
+COPY docker/eval/run_eval.py        /eval/run_eval.py
+COPY docker/eval/entrypoint_eval.sh /eval/entrypoint_eval.sh
+RUN chmod +x /eval/entrypoint_eval.sh
+
+# Mount points
+RUN mkdir -p /data/private /data/public /agent_outputs /results
+
+# Match host UID/GID so report files are owned by the host user
+ARG USER_UID=339946
+ARG USER_GID=339946
+RUN groupadd -g ${USER_GID} evaluser && useradd -u ${USER_UID} -g ${USER_GID} -m evaluser
+RUN chown -R evaluser:evaluser /eval /results
+
+USER evaluser
+# Pre-download LPIPS weights at image-build time so `--network none` at run time
+# does not need to fetch them. LPIPS caches to ~/.cache/torch/hub/checkpoints/.
+RUN python -c "import lpips, torch; m = lpips.LPIPS(net='alex', verbose=False); print('lpips weights cached')"
+
+WORKDIR /eval
+ENTRYPOINT ["/eval/entrypoint_eval.sh"]

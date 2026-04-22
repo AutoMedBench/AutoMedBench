@@ -1,0 +1,15 @@
+# MRI Super-Resolution Task Configuration
+task_id: mri-sr-task
+modality: MRI
+input_format: .npy
+input_filename: input.npy
+output_filename: enhanced.npy
+task_type: "MRI 2x super-resolution"
+task_description: "Super-resolve 2D low-resolution MRI slices to high-resolution. Each patient has one input.npy of shape (360, 256) float32 with values normalized to roughly [0, 1]. Produce one enhanced.npy per patient of shape (720, 512) float32, values roughly in [0, 1], no NaN/Inf. The upsampling factor is 2x in each spatial dimension."
+data_dir_name: MRI_SR_SRMRI
+time_limit_s: 1800
+intensity_units: normalized
+intensity_range: [0, 1]
+lr_shape: [360, 256]
+hr_shape: [720, 512]
+scale: 2
