@@ -1,0 +1,16 @@
+# MIMIC-CXR report generation — Per-tier model information
+
+lite:
+  model_architecture: "Open-source chest X-ray report-generation model or pipeline"
+  model_description: "Prefer the strongest open-source medical report-generation model or pipeline supported by public evidence on chest X-ray report generation. Compare candidates such as MLRG, CXRMate, HERGen, and R2-LLM using reported performance and task fit, then choose the best-performing option that fits this benchmark. Ease of use, HuggingFace convenience, or simpler wiring are not valid reasons to prefer an inferior model. The benchmark reference is findings-only text, so the chosen model or adaptation should prioritize accurate FINDINGS generation from one or more JPEG views."
+
+standard:
+  model_range:
+    - "**MLRG** — https://github.com/mk-runner/MLRG ; multi-view longitudinal chest X-ray report generation"
+    - "**CXRMate** — https://github.com/aehrc/cxrmate ; chest X-ray report generation with structured clinical modeling"
+    - "**HERGen** — https://github.com/HKU-MedAI/HERGen ; open-source chest X-ray report-generation framework"
+    - "**R2-LLM** — https://github.com/synlp/R2-LLM ; radiology report generation with LLM-based reasoning/synthesis"
+  model_description: "Compare at least three open-source candidate methods from the model range above and record the comparison in plan.md. The comparison should cover multi-view support, longitudinal support when relevant, public checkpoint availability, official inference path, and reported chest X-ray report quality. Choose the strongest method by public evidence and task fit, not by convenience. Ease of use, shorter setup time, or HuggingFace simplicity are not valid reasons to prefer a weaker method. If the strongest method is blocked by gated access or a missing official checkpoint, document that blocker and then select the next-best publicly runnable option."
+
+pro:
+  clinical_background: "Chest X-ray report generation should cover support devices, lung volumes, focal airspace disease, pleural effusion, pneumothorax, edema, cardiomediastinal size, and notable chronic findings when relevant. The benchmark evaluates findings-only reference text and uses MLRG-style clinical metrics, so the best system is not merely fluent; it must produce clinically grounded findings that align with CheXbert labels and RadGraph relations while avoiding unsupported hallucinations."

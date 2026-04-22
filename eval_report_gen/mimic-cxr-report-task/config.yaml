@@ -1,0 +1,41 @@
+task_id: mimic-cxr-report-task
+task_type: report_generation
+task_description: Generate one findings-only chest X-ray report from one or more JPEG views.
+modality: chest_xray
+input_format: jpg
+grouping_unit: study
+grouping_rule: first_three_underscore_fields
+source_dataset: MIMIC-CXR
+source_root: /mnt/data-2u-2/jmao/mimic-cxr
+data_dir_name: MIMIC_CXR_Report
+staged_split_name: test_mimic_100_v4
+pilot_split: pilot_10_studies.txt
+case_id_prefix: CXR
+public_images_subdir: images
+required_public_artifacts: ["images", "manifest.json"]
+private_reference_artifacts: ["report.txt", "labels.json", "manifest.json"]
+agent_output_subdir: agent_outputs
+output_filename: report.txt
+reference_text_mode: findings_only
+plan_subdir: plan
+report_min_chars: 40
+report_max_chars: 8000
+report_min_alpha_chars: 20
+completion_requires_all_cases: true
+invalid_output_policy: any_missing_or_invalid_case_forces_rating_F
+clinical_score_backend: mlrg
+mlrg_repo_path: /mnt/data-2u-2/jmao/test/MLRG
+chexbert_path: /mnt/data-2u-2/jmao/MedAgentsBench-report-gen/eval_report_gen/ckpts/chexbert.pth
+bert_path: /mnt/data-2u-2/jmao/MedAgentsBench-report-gen/eval_report_gen/ckpts/bert-base-uncased
+radgraph_path: /mnt/data-2u-2/jmao/MedAgentsBench-report-gen/eval_report_gen/ckpts/radgraph.tar.gz
+clinical_metric_weights:
+  BLEU: 0.142857
+  METEOR: 0.142857
+  ROUGE_L: 0.142857
+  F1RadGraph: 0.142857
+  micro_average_precision: 0.142857
+  micro_average_recall: 0.142857
+  micro_average_f1: 0.142857
+rating_thresholds: {"good": 0.80, "okay": 0.55}
+observation_schema_version: 1
+time_limit_s: 3600

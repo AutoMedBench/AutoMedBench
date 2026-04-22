@@ -1,0 +1,3 @@
+# Minimal optional packages for agents using external multimodal APIs.
+# The benchmark code itself avoids hard dependencies on these packages.
+openai>=1.30.0

@@ -1,0 +1,6 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+COPY eval_report_gen /app/eval_report_gen
+
+ENTRYPOINT ["/bin/bash", "/app/eval_report_gen/docker/eval/entrypoint_eval.sh"]
