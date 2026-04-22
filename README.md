@@ -1,6 +1,7 @@
 # AutoMedBench
 
 [![Website](https://img.shields.io/badge/Website-automedbench-76B900?style=for-the-badge)](https://keen-bonbon-690c3c.netlify.app/)
+[![HuggingFace](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-coming%20soon-FFD21E?style=for-the-badge)](#)
 [![License](https://img.shields.io/badge/License-Research_only-2B2B25?style=for-the-badge)](LICENSE)
 
 > Towards *Medical AutoResearch* <br>
@@ -22,31 +23,13 @@ Overall = 0.5 × Agentic (S1-S5 rubric) + 0.5 × Task (clinical metric)
 
 ## 2. Quick Start
 
-AutoMedBench is organized as one branch per task domain. Pick a domain and pull it.
+All sandbox containers and datasets are (or will be) hosted on HuggingFace — getting started is a single pull away.
 
-```bash
-# 1. Clone the domain branch you want to run
-git clone --branch eval_seg --single-branch \
-    https://github.com/KumaKuma2002/AutoMedBench.git
-cd AutoMedBench
+<p align="left">
+  <a href="#"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Launch%20on%20HuggingFace-coming%20soon-FFD21E?style=for-the-badge" alt="Launch on HuggingFace — coming soon"></a>
+</p>
 
-# 2. Pull the sandbox container (tag is in the branch README)
-docker pull <registry>/automedbench-seg:v1
-
-# 3. Stage public inputs + private references
-python stage_data.py
-
-# 4. Configure your agent (edit eval_seg/agent_config.yaml)
-
-# 5. Run one cell
-python eval_seg/docker/orchestrator.py \
-    --agent claude-opus-4-6 \
-    --task kidney-seg-task \
-    --tier lite \
-    --n-patients 20
-```
-
-Each domain branch ships its own `README.md` with the exact Docker tag, dataset recipe, and runner flags.
+Once live, pick the domain branch that matches your task, plug in your agent's API key, and the orchestrator runs the rest. Full per-domain walkthroughs live in each branch's own `README.md`.
 
 ---
 
@@ -133,21 +116,16 @@ See `SCORING_RUBRICS.md` on each branch for the full per-sub-criterion breakdown
 
 ## 7. Contribution
 
-### Adding a task
+We welcome contributions from clinicians, researchers, and engineers — you do not need to know our harness internals to help.
 
-1. Pick the domain branch that matches your task.
-2. Copy an existing task directory (e.g. `eval_seg/kidney-seg-task/`) as a template.
-3. Fill in `config.yaml`, `model_info.yaml`, tier-specific skill markdown files.
-4. Stage a dataset that matches the three requirements above.
-5. Open a pull request.
+### Have a task idea?
+Open a GitHub issue describing a clinical problem you'd like agents to tackle: what the input looks like, what the ground truth is, and what "done" means. We'll handle the wiring.
 
-### Adding a new domain
+### Want a new domain?
+Segmentation, VQA, and report generation are just the start. Propose any clinical AI task with deterministic ground truth — we'd love to add it.
 
-Create a new `eval_<domain>/` top-level directory on its own branch, mirroring the structure of `eval_seg/`. See the segmentation branch for a reference implementation — the S1-S5 harness, LLM judge, and Docker orchestrator are all reusable.
-
-### Submitting to the leaderboard
-
-Produce the standard `runs/` layout (a `detail_report.json` + `workspace/process/conversation.json` per repeat). Submission instructions and the evaluation server are in flight — watch this README for updates.
+### Ran the benchmark on a new agent?
+Share your results and we'll get them onto the live dashboard. Submission flow is in flight — open an issue to coordinate.
 
 ---
 
