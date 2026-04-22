@@ -1,0 +1,12 @@
+task_id: medxpertqa-mm-task
+dataset: MedXpertQA
+subset: MM
+modality: image+text
+input_filename: question.json
+task_description: "Answer medical multiple-choice visual questions from MedXpertQA MM."
+data_dir_name: MedXpertQA_MM
+time_limit_s: 3600
+answer_mode: multiple_choice
+valid_labels: ["A", "B", "C", "D", "E"]
+smoke_sample_min: 1
+smoke_sample_max: 10

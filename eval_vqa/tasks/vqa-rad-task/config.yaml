@@ -1,0 +1,10 @@
+task_id: vqa-rad-task
+dataset: VQA-RAD
+modality: image+text
+input_filename: question.json
+task_description: "Answer radiology visual questions from VQA-RAD (mixed open-ended and yes/no)."
+data_dir_name: VQA_RAD
+time_limit_s: 3600
+answer_mode: open_ended
+smoke_sample_min: 1
+smoke_sample_max: 10

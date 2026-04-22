@@ -1,0 +1,102 @@
+lite:
+  model_name: microsoft/llava-med-v1.5-mistral-7b
+  family: LLaVA-Med
+  loader_family: llava_med
+  prompt_mode: llava_med_conv
+  gated: false
+  accessibility: open
+  preferred_for_unattended_runs: true
+  rationale: >
+    LLaVA-Med 7B is the fixed lite-tier starting model. It is the canonical
+    medical VLM used across eval_vqa experiments (PathVQA / VQA-RAD / MedFrameQA
+    / PathVQA) and is the reference point for lite-tier leaderboard
+    comparability.
+  setup_notes:
+    - clone https://github.com/microsoft/LLaVA-Med into the workspace
+    - pip install -e the cloned LLaVA-Med repo for loader utilities
+    - use LLaVA-Med's load_pretrained_model helper
+
+standard:
+  candidate_models:
+    - model_name: UCSC-VLAA/MedVLThinker-3B-RL_m23k
+      family: Qwen2.5-VL medical derivative
+      loader_family: qwen2_5_vl
+      prompt_mode: chat_template
+      gated: false
+      accessibility: open
+      preferred_for_unattended_runs: true
+      selection_priority: 1
+      notes: open medical VLM, preferred first choice
+      strengths:
+        - medical-specific multimodal reasoning
+        - open weights for unattended local execution
+        - Qwen2.5-VL loader family already covered by the harness
+      risks:
+        - medical benchmark quality still needs calibration on PathVQA
+    - model_name: MedVLSynther/MedVLSynther-3B-RL_13K
+      family: Qwen2.5-VL medical derivative
+      loader_family: qwen2_5_vl
+      prompt_mode: chat_template
+      gated: false
+      accessibility: open
+      preferred_for_unattended_runs: true
+      selection_priority: 2
+      notes: open medical VLM, similar loader family
+      strengths:
+        - medical-specific multimodal reasoning
+        - open weights for unattended local execution
+        - same Qwen2.5-VL loader path as the primary lite model
+      risks:
+        - less proven in this repo than MedVLThinker
+    - model_name: Qwen/Qwen2.5-VL-3B-Instruct
+      family: Qwen2.5-VL base instruct model
+      loader_family: qwen2_5_vl
+      prompt_mode: chat_template
+      gated: false
+      accessibility: open
+      preferred_for_unattended_runs: true
+      selection_priority: 3
+      notes: open base Qwen2.5-VL instruct model, useful non-medical fallback baseline
+      strengths:
+        - open Qwen2.5-VL checkpoint with the same harness loader path as the medical derivatives
+        - useful baseline for comparing medical tuning against the underlying base family
+      risks:
+        - not medically tuned, so unattended medical VQA quality may trail the derived models
+        - should rank behind MedVLThinker and MedVLSynther for the default standard-tier choice
+    - model_name: google/gemma-4-E2B-it
+      family: Gemma 4 multimodal instruction model
+      loader_family: gemma4
+      prompt_mode: chat_template
+      gated: true
+      accessibility: gated
+      preferred_for_unattended_runs: false
+      selection_priority: 4
+      notes: multimodal and runnable through transformers, but access may be gated
+      strengths:
+        - smaller Gemma 4 multimodal option for one-GPU experimentation
+        - supported by the harness through a separate Gemma 4 loader path
+      risks:
+        - Hugging Face access may fail without Google license acceptance
+        - lower priority for unattended benchmark runs because gating is external
+    - model_name: google/gemma-4-E4B-it
+      family: Gemma 4 multimodal instruction model
+      loader_family: gemma4
+      prompt_mode: chat_template
+      gated: true
+      accessibility: gated
+      preferred_for_unattended_runs: false
+      selection_priority: 5
+      notes: larger Gemma 4 multimodal variant, but access may be gated
+      strengths:
+        - larger Gemma 4 multimodal option for comparison against the medical VLMs
+        - supported by the harness through a separate Gemma 4 loader path
+      risks:
+        - Hugging Face access may fail without Google license acceptance
+        - larger footprint increases one-GPU execution risk on an A5000
+
+selection_guidance:
+  - Prefer open medical VLMs first for unattended local runs.
+  - Treat Qwen/Qwen2.5-VL-3B-Instruct as an open baseline behind the two medical Qwen2.5-VL derivatives but ahead of gated Gemma candidates.
+  - Treat the Gemma 4 candidates as valid but potentially gated.
+  - Justify the model against PathVQA multiple-choice image+text inputs and one-GPU execution.
+  - Record why the other candidates were rejected, especially if choosing a gated model.

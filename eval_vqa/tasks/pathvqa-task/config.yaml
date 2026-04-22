@@ -1,0 +1,10 @@
+task_id: pathvqa-task
+dataset: PathVQA
+modality: image+text
+input_filename: question.json
+task_description: "Answer open-ended pathology visual questions from PathVQA."
+data_dir_name: PathVQA
+time_limit_s: 3600
+answer_mode: open_ended
+smoke_sample_min: 1
+smoke_sample_max: 10

@@ -1,0 +1,10 @@
+task_id: slake-task
+dataset: SLAKE-EN
+modality: image+text
+input_filename: question.json
+task_description: "Answer radiology visual questions from the SLAKE English test split (open-ended and closed yes/no)."
+data_dir_name: SLAKE_EN
+time_limit_s: 3600
+answer_mode: open_ended
+smoke_sample_min: 1
+smoke_sample_max: 10

@@ -1,0 +1,11 @@
+task_id: medframeqa-task
+dataset: MedFrameQA
+modality: image+text
+input_filename: question.json
+task_description: "Answer multiple-choice medical questions over multi-frame image sequences from MedFrameQA."
+data_dir_name: MedFrameQA
+time_limit_s: 3600
+answer_mode: multiple_choice
+valid_labels: ['A', 'B', 'C', 'D', 'E']
+smoke_sample_min: 1
+smoke_sample_max: 10

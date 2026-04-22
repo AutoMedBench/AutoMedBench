@@ -1,0 +1,16 @@
+# Install PyTorch separately from the official PyTorch wheel index so the CUDA
+# build matches the host driver. Verified working on this node:
+#   python -m pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 \
+#     --index-url https://download.pytorch.org/whl/cu126
+accelerate>=0.34.0
+datasets>=3.0.0
+huggingface_hub>=0.26.0
+pillow>=10.0.0
+PyYAML>=6.0
+safetensors>=0.4.5
+# Pin matches LLaVA-Med pyproject.toml exact-pin; pre-installing avoids the
+# resolver conflict that triggers BUG-040 fallback path. See bug_issues/BUG-040.
+scikit-learn==1.2.2
+sentencepiece>=0.2.0
+torchvision>=0.22.1
+transformers>=4.51.0
