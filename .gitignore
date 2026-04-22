@@ -1,0 +1,37 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.env
+.env.local
+
+# Data (stage into data/ locally; never commit)
+data/
+**/data/public/
+**/data/private/
+
+# Run artifacts
+runs/
+outputs/
+results/matrix_*/
+results/**/detail_report*.json
+results/**/workspace/
+
+# Caches
+.cache/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# API keys (never commit)
+api_keys/
+*.key
