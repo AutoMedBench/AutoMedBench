@@ -1,0 +1,9 @@
+# VinDr-CXR 2D Detection Task
+task_id: vindr-cxr-det-task
+organ: chest_abnormality
+modality: CXR
+input_filename: image.png
+task_description: "Detect abnormal findings in chest X-ray images and output 2D bounding boxes."
+data_dir_name: VinDrCXR_Detection10
+time_limit_s: 3600
+iou_threshold: 0.5

@@ -1,0 +1,26 @@
+# VinDr-CXR — Per-tier model information
+
+lite:
+  model_architecture: "Ultralytics YOLOv8s detector fine-tuned on VinDr-CXR"
+  model_description: >
+    You must use the YOLOv8s-based VinDr-CXR model package described in the
+    CSDN article at
+    https://blog.csdn.net/weixin_39381937/article/details/139466170 . The
+    required download source is the Baidu Netdisk link given in that article.
+    The package is described there as vinbigdata.zip and includes the YOLO-formatted
+    dataset layout, training code, and YOLOv8 weights. Do not switch to
+    MMDetection, Faster R-CNN, RetinaNet, or any alternative detector family.
+    Your task is to reuse that YOLOv8s route for inference only and export
+    detections as prediction.json files.
+
+standard:
+  model_range:
+    - "**MMDetection detectors** — RetinaNet, Faster R-CNN, FCOS, or ATSS checkpoints adapted for VinDr-CXR-style chest abnormality detection."
+    - "**YOLO-family detectors** — YOLOv5/YOLOv8/VinDr-CXR fine-tuned checkpoints published on HuggingFace, GitHub, or Kaggle competition repos."
+
+pro:
+  clinical_background: >
+    Chest X-rays in VinDr-CXR contain radiologist-localized thoracic findings.
+    This benchmark is box detection, not report generation or image-level
+    classification. A useful model must output localized abnormality boxes on
+    the image. Empty predictions on positive cases will drive recall and F1 down.

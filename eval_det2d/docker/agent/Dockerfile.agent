@@ -1,0 +1,34 @@
+# MedAgentsBench — Agent Container
+# GPU-enabled runtime for VinDr-CXR style 2D detection.
+# Does NOT contain evaluation code or ground truth.
+
+FROM nvcr.io/nvidia/pytorch:24.03-py3
+
+LABEL maintainer="MedAgentsBench"
+LABEL description="Isolated agent container for medical 2D detection benchmark"
+
+# Keep the base image lean around the actual det2d workflow:
+# chest X-ray image IO, tabular utilities, Hugging Face downloads, and
+# common vision helpers. Avoid segmentation-specific packages here.
+RUN pip install --no-cache-dir \
+    scipy \
+    scikit-image \
+    pandas \
+    pillow \
+    pydicom \
+    requests \
+    pyyaml \
+    huggingface_hub \
+    ultralytics
+
+# Copy ONLY the agent harness — NO eval code
+COPY agent_loop.py /app/agent_loop.py
+COPY agent_code_executor.py /app/agent_code_executor.py
+COPY entrypoint_agent.sh /app/entrypoint_agent.sh
+RUN chmod +x /app/entrypoint_agent.sh
+
+# Create mount points
+RUN mkdir -p /workspace /data/public
+
+WORKDIR /workspace
+ENTRYPOINT ["/app/entrypoint_agent.sh"]
