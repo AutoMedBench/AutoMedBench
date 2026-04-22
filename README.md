@@ -3,7 +3,8 @@
 [![Website](https://img.shields.io/badge/Website-automedbench-76B900?style=for-the-badge)](https://keen-bonbon-690c3c.netlify.app/)
 [![License](https://img.shields.io/badge/License-Research_only-2B2B25?style=for-the-badge)](LICENSE)
 
-> Can AI agents autonomously conduct *Medical AutoResearch*?
+> Towards *Medical AutoResearch* <br>
+> — a benchmark for AI agents on medical AI tasks.
 
 AutoMedBench scores autonomous coding agents across the medical research pipeline — **plan, setup, validate, infer, submit** — not just their final outputs.
 
