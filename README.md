@@ -1,12 +1,22 @@
 # AutoMedBench
 
+[![Website](https://img.shields.io/badge/Website-automedbench-76B900?style=for-the-badge)](https://keen-bonbon-690c3c.netlify.app/)
+[![License](https://img.shields.io/badge/License-Research_only-2B2B25?style=for-the-badge)](LICENSE)
+
 > Can AI agents autonomously conduct *Medical AutoResearch*?
 
-<p align="center">
-  <img src="assets/workflow.png" alt="AutoMedBench S1–S5 workflow" width="820">
-</p>
-
 AutoMedBench scores autonomous coding agents across the medical research pipeline — **plan, setup, validate, infer, submit** — not just their final outputs.
+
+```
+  ┌─────────┐    ┌──────────┐    ┌─────────────┐    ┌──────────────┐    ┌───────────┐
+  │ S1 PLAN │ ─▶ │ S2 SETUP │ ─▶ │ S3 VALIDATE │ ─▶ │ S4 INFERENCE │ ─▶ │ S5 SUBMIT │
+  └─────────┘    └──────────┘    └─────────────┘    └──────────────┘    └───────────┘
+    research       download          pilot one         run the full         verify,
+    + plan.md      + install         sample, check      cohort, save         call
+                   + GPU load        outputs            per-sample           submit_results
+```
+
+Every task in every domain runs through the same five stages. Each is scored independently.
 
 ---
 
