@@ -1,0 +1,101 @@
+# benchmark.skill — How to Run MedAgentsBench
+#
+# Read this before launching any benchmark run.
+
+## Rules
+
+1. **Only touch your own run.** Do NOT kill, monitor, or interact with
+   other processes. They may be parallel experiments.
+2. **One output directory per agent-task-tier combo.** All run attempts
+   for the same combo go into the same directory. The runner auto-appends
+   a `YYMMDD-6hex` subdirectory per attempt — they never collide.
+3. **Keep the tracker updated.** After every run starts, finishes, fails,
+   or is killed, update `tracker.md` in the output directory.
+4. **If you hit a rate limit (429), stop and tell the experimenter.**
+   Do NOT retry in a loop.
+
+---
+
+## Run
+
+```bash
+cd /lustre/fsw/portfolios/healthcareeng/projects/healthcareeng_monai/JHU/kuma_workspace/MedAgentsBench
+
+python -u eval_seg/benchmark_runner.py \
+  --agent <AGENT> \
+  --task <kidney|liver|pancreas> \
+  --tier <lite|standard|pro> \
+  --output-dir <WHERE_TO_SAVE>
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--agent` | yes | Agent key from `eval_seg/agent_config.yaml` |
+| `--task` | yes | kidney, liver, or pancreas |
+| `--tier` | yes | lite, standard, or pro |
+| `--output-dir` | yes | Direct path — all outputs land here |
+| `--offline-judge` | no | Use local DeepSeek instead of online Claude |
+
+LLM judge is **always on** (online Claude Opus 4.7 by default). It scores S1-S3.
+S4 and S5 are always deterministic. The judge cannot be disabled.
+
+---
+
+## Experiment Tracker
+
+Every output directory MUST contain `tracker.md`. Keep it updated.
+
+Location: `<WHERE_TO_SAVE>/tracker.md`
+
+### Format
+
+```markdown
+# Tracker: <agent> / <task> / <tier>
+
+| Run ID | Status | Rating | Lesion Dice | Time | Notes |
+|--------|--------|--------|-------------|------|-------|
+| 260412-a3f82b | done | A | 0.8372 | 1094s | Good |
+| 260412-b7c2d1 | done | F | 0.0000 | 3390s | Stuck in S3 |
+| 260412-c9e4f2 | running | — | — | — | In S4 |
+| 260412-d1a5b3 | killed | — | — | 645s | Was in S3 |
+| 260412-e2b6c4 | crashed | — | — | 1681s | Eval crashed |
+| 260412-f3c7d5 | dead | — | — | 0s | Never started |
+
+Summary: 1 Good, 1 Failed, 1 running, 1 killed, 1 crashed, 1 dead
+```
+
+### Status values
+
+| Status | Meaning |
+|--------|---------|
+| `done` | Has detail_report.json. Fill Rating + Dice + Time. |
+| `running` | Still active. Note current phase. |
+| `killed` | Terminated by experimenter. Note phase. |
+| `crashed` | Died unexpectedly (OOM, eval error, API). |
+| `dead` | Never started / empty directory. |
+
+### Quick scan to generate tracker
+
+```bash
+python3 -c "
+import json, os, time
+base = '<WHERE_TO_SAVE>'  # EDIT THIS
+for run_id in sorted(os.listdir(base)):
+    rdir = os.path.join(base, run_id)
+    if not os.path.isdir(rdir): continue
+    report = os.path.join(rdir, 'detail_report.json')
+    trace = os.path.join(rdir, 'process', 'trace.jsonl')
+    if os.path.isfile(report):
+        d = json.load(open(report))
+        at = d.get('agentic_tier', {})
+        dm = d.get('diagnostic_metrics', {})
+        rt = d.get('runtime', {})
+        print(f'| {run_id} | done | {at.get(\"rating\",\"?\")} | {(dm.get(\"lesion_dice\",0) or 0):.4f} | {rt.get(\"wall_time_s\",0):.0f}s | |')
+    elif os.path.isfile(trace) and os.path.getsize(trace) > 0:
+        age = time.time() - os.path.getmtime(trace)
+        status = 'running' if age < 600 else 'killed'
+        print(f'| {run_id} | {status} | — | — | — | last activity {age/60:.0f}m ago |')
+    else:
+        print(f'| {run_id} | dead | — | — | — | |')
+"
+```

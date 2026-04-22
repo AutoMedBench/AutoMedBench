@@ -1,0 +1,35 @@
+# MedAgentsBench — Agent Container
+# GPU-enabled with full scientific stack for medical image segmentation.
+# Does NOT contain evaluation code or ground truth.
+
+FROM nvcr.io/nvidia/pytorch:24.03-py3
+
+LABEL maintainer="MedAgentsBench"
+LABEL description="Isolated agent container for medical image segmentation benchmark"
+
+# Install the scientific stack the agent may need
+RUN pip install --no-cache-dir \
+    monai==1.4.0 \
+    nnunetv2 \
+    nibabel \
+    scipy \
+    scikit-image \
+    pandas \
+    SimpleITK \
+    requests \
+    pyyaml \
+    huggingface_hub \
+    totalsegmentator \
+    && pip cache purge
+
+# Copy ONLY the agent harness — NO eval code
+COPY agent_loop.py /app/agent_loop.py
+COPY agent_code_executor.py /app/agent_code_executor.py
+COPY entrypoint_agent.sh /app/entrypoint_agent.sh
+RUN chmod +x /app/entrypoint_agent.sh
+
+# Create mount points
+RUN mkdir -p /workspace /data/public
+
+WORKDIR /workspace
+ENTRYPOINT ["/app/entrypoint_agent.sh"]

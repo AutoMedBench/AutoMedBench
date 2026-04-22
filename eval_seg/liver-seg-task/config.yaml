@@ -1,0 +1,9 @@
+# Liver Segmentation Task Configuration
+task_id: liver-seg-task
+organ: liver
+modality: CT
+input_filename: ct.nii.gz
+task_description: "Segment livers and detect liver lesions/tumors."
+data_dir_name: CruzAbdomen_Liver
+time_limit_s: 3600
+lesion_ratio_min: 0.005

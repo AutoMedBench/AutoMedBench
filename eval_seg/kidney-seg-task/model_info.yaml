@@ -1,0 +1,27 @@
+# Kidney — Per-tier model information
+
+lite:
+  model_architecture: "nnU-Net v2 (KiTS19 3d_lowres)"
+  model_description: >
+    SOTA checkpoint: huggingface.co/KagglingFace/nnUNet-KiTS19-3d-lowres-50epochs.
+    nnU-Net v2 trained on KiTS19 with 3d_lowres config, fold 1, 50 epochs.
+    Has kidney organ + kidney tumor labels. Use nnUNetPredictor from
+    nnunetv2.inference.predict_from_raw_data to run inference.
+    NOTE: nnU-Net env vars (nnUNet_raw, nnUNet_preprocessed, nnUNet_results)
+    are not required for inference-only mode — use predict_from_files() or
+    predict_single_npy_array() directly.
+
+standard:
+  model_range:
+    - "**nnU-Net pre-trained models** — search for nnU-Net checkpoints trained on KiTS (kidney + tumor labels). Both v1 and v2 format checkpoints exist online. Standalone PyTorch models (e.g., MLPerf 3D-UNet KiTS19) are also available"
+    - "**MONAI Bundles / VISTA3D** — check the MONAI Model Zoo on HuggingFace (huggingface.co/MONAI). VISTA3D has kidney organ labels but verify it has kidney TUMOR labels before using"
+
+pro:
+  clinical_background: >
+    Kidney tumors in CT include renal cell carcinoma (RCC),
+    the most common kidney malignancy. Your score depends
+    primarily on tumor/lesion Dice — a model that segments
+    kidneys but misses tumors will score near zero. You need a
+    model trained specifically on tumor-annotated data.
+    Note: tools like TotalSegmentator are general organ segmenters —
+    they segment kidneys but do NOT detect tumors.

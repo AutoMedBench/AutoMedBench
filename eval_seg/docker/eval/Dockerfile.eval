@@ -1,0 +1,34 @@
+# MedAgentsBench — Evaluation Container
+# Lightweight CPU-only image. Runs the scoring pipeline against ground truth.
+# No GPU, no network, no agent code.
+
+FROM python:3.11-slim
+
+LABEL maintainer="MedAgentsBench"
+LABEL description="Isolated evaluation container — black-box scoring"
+
+RUN pip install --no-cache-dir \
+    nibabel \
+    numpy \
+    scipy \
+    pandas \
+    && pip cache purge
+
+# Copy ONLY the evaluation pipeline
+COPY run_eval.py /eval/run_eval.py
+COPY format_checker.py /eval/format_checker.py
+COPY dice_scorer.py /eval/dice_scorer.py
+COPY medal_tier.py /eval/medal_tier.py
+COPY aggregate.py /eval/aggregate.py
+COPY failure_classifier.py /eval/failure_classifier.py
+COPY detail_report.py /eval/detail_report.py
+
+# Entrypoint
+COPY docker/eval/entrypoint_eval.sh /eval/entrypoint_eval.sh
+RUN chmod +x /eval/entrypoint_eval.sh
+
+# Create mount points
+RUN mkdir -p /data/private /data/public /agent_outputs /results
+
+WORKDIR /eval
+ENTRYPOINT ["/eval/entrypoint_eval.sh"]

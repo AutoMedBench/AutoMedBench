@@ -1,0 +1,38 @@
+# Fetal brain (FeTA) — Per-tier model information
+# Task is MULTI-TISSUE segmentation. Output is a single multi-class label
+# map (dseg.nii.gz) with values 0..7 (0 = background, 1..7 = tissues).
+# Final clinical score = mean Dice across the 7 foreground tissue classes.
+
+lite:
+  model_architecture: "nnU-Net v2 (FeTA trained)"
+  model_description: >
+    SOTA checkpoint: search HuggingFace for nnU-Net v2 models trained on the
+    FeTA 2022 / 2024 fetal brain dataset (e.g., DKFZ FeTA24 submissions).
+    8-class output: 0=Background, 1=eCSF (extra-axial CSF),
+    2=GM (cortex/grey matter), 3=WM (white matter), 4=LV (lateral ventricles),
+    5=CBM (cerebellum), 6=SGM (deep grey / thalamus+putamen), 7=BS (brainstem).
+    Use nnUNetPredictor from nnunetv2.inference.predict_from_raw_data for
+    inference. Input is T2w super-resolution isotropic (~0.5 mm) reconstruction.
+
+standard:
+  model_range:
+    - "**NOTE** — this list is a starting point. Verify availability, label coverage, and setup cost before committing to any family. Move on if a family turns out to be a dead end (no public FeTA weights, incompatible label scheme, etc.)."
+    - "**nnU-Net v2 (DKFZ FeTA 2024)** — 0.828 Dice, ranked 2nd at FeTA 2024 challenge. Search HuggingFace and the DKFZ GitHub (MIC-DKFZ) for released checkpoints"
+    - "**3D U-Net (MONAI) with SyN-registration augmentation** — cesne-digair, FeTA 2024 winner at 0.816 Dice. Check for released weights on HuggingFace / Zenodo"
+    - "**MONAI Model Zoo fetal-brain bundles** — check huggingface.co/MONAI for bundles with fetal T2w multi-tissue labels"
+    - "**SwinUNETR / DynUNet FeTA checkpoints** — search HuggingFace for transformer/ensemble approaches trained on FeTA"
+    - "**BOUNTI / dHCP fetal pipelines** — fetal brain parcellators that may have compatible label schemes; verify label mapping to the 7-class FeTA scheme"
+
+pro:
+  clinical_background: >
+    Fetal brain MRI at 20-36 gestational weeks has inverted contrast relative
+    to adult T2w (unmyelinated white matter appears BRIGHT, cortical grey
+    matter darker). Input volumes are super-resolution reconstructions
+    (MIAL or IRTK) fusing motion-corrupted 2D stacks into a single isotropic
+    ~0.5 mm volume. Cohort mixes neurotypical and pathological cases
+    (spina bifida with Chiari-II malformation, ventriculomegaly) which
+    materially change brain morphology. Task is MULTI-CLASS (7 tissues,
+    label 0 = background). Final score is the MEAN Dice across the 7 tissue
+    classes — small classes like cerebellum (~0.80 SOTA) and brainstem (~0.79)
+    are the hardest and pull the mean down. A model that segments only the
+    easy classes (WM, eCSF) will score poorly on the mean.

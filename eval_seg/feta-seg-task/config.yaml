@@ -1,0 +1,19 @@
+# FeTA Fetal Brain MRI Multi-tissue Segmentation Task Configuration
+task_id: feta-seg-task
+task_type: multiclass
+organ: fetal_brain
+modality: MRI_T2w
+input_filename: t2w.nii.gz
+output_filename: dseg.nii.gz
+num_classes: 8
+tissue_labels:
+  1: eCSF
+  2: GM
+  3: WM
+  4: LV
+  5: CBM
+  6: SGM
+  7: BS
+task_description: "Multi-tissue segmentation of fetal brain T2w super-resolution MRI into 7 tissue classes (eCSF, GM, WM, LV, CBM, SGM, BS). Final clinical score = mean Dice across the 7 tissue classes."
+data_dir_name: CruzMRI_Feta
+time_limit_s: 3600

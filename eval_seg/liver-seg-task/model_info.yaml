@@ -1,0 +1,29 @@
+# Liver — Per-tier model information
+
+lite:
+  model_architecture: "nnU-Net (LiTS Task029)"
+  model_description: >
+    SOTA checkpoint: nnU-Net pretrained model for Task029_LiTS (liver + liver tumor).
+    Download via nnUNet_download_pretrained_model Task029_LiTS or find equivalent
+    checkpoints on HuggingFace / Zenodo. Has liver organ + liver tumor labels.
+    Use nnUNetPredictor from nnunetv2.inference.predict_from_raw_data to run inference.
+
+standard:
+  model_range:
+    - "**nnU-Net pretrained Task029_LiTS** — the official nnU-Net pretrained model for liver tumor segmentation. Download via nnU-Net CLI or find checkpoints online"
+    - "**MONAI VISTA3D** — check the MONAI Model Zoo on HuggingFace (huggingface.co/MONAI). VISTA3D has hepatic_tumor and liver_tumor labels for tumor detection"
+    - "**nnU-Net v2 LiTS checkpoints on HuggingFace** — search for community-trained nnU-Net models on LiTS dataset with liver + tumor labels"
+    - "**MONAI liver tumor segmentation bundle** — check for dedicated liver tumor bundles in the MONAI Model Zoo"
+    - "**nvidia/NV-Segment-CT** — NVIDIA's general CT segmentation model, check if it has liver tumor labels"
+    - "**Standalone U-Net / ResUNet trained on LiTS** — search GitHub and HuggingFace for independent LiTS challenge solutions"
+
+pro:
+  clinical_background: >
+    Liver tumors in CT include hepatocellular carcinoma (HCC),
+    metastases from colorectal/breast/lung cancers, and
+    cholangiocarcinoma. Your score depends primarily on
+    tumor/lesion Dice — a model that segments livers but misses
+    tumors will score near zero. You need a model trained
+    specifically on tumor-annotated data.
+    Note: tools like TotalSegmentator are general organ segmenters —
+    they segment livers but do NOT detect tumors.

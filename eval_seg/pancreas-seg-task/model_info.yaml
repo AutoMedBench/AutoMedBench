@@ -1,0 +1,31 @@
+# Pancreas — Per-tier model information
+
+lite:
+  model_architecture: "MedFormer (PanTS)"
+  model_description: >
+    SOTA checkpoint: huggingface.co/AbdomenAtlas/MedFormerPanTS.
+    MedFormer model trained on PanTS dataset for pancreas + pancreatic tumor
+    segmentation. Download from HuggingFace. Check the repo for inference
+    instructions, label map, and expected input format.
+
+standard:
+  model_range:
+    - "**NOTE** — this list is a starting point for your research. The model families below are NOT guaranteed to have viable, publicly available pretrained checkpoints for pancreatic tumor segmentation. Verify availability, label coverage, and setup cost before committing. If a family turns out to be a dead end (e.g., no public tumor-trained weights, or requires a proprietary codebase), move on to another."
+    - "**MedFormer (PanTS)** — SOTA on PanTS leaderboard. Available at huggingface.co/AbdomenAtlas/MedFormerPanTS. Check for pancreas organ + tumor labels"
+    - "**nnU-Net pretrained MSD Task07_Pancreas** — the official nnU-Net pretrained model for pancreas tumor segmentation (labels: 1=pancreas, 2=pancreatic tumor). NOTE: the installed nnU-Net v2 CLI has NO by-name download — `nnUNetv2_download_pretrained_model Task007_Pancreas` does NOT exist. Only `nnUNetv2_download_pretrained_model_by_url <URL>` is available. Fetch the checkpoint zip directly from Zenodo or HuggingFace (search 'Task007_Pancreas nnUNet' / 'MSD pancreas nnUNet') and pass the URL, or download and unzip manually"
+    - "**MONAI VISTA3D** — check the MONAI Model Zoo on HuggingFace (huggingface.co/MONAI). VISTA3D has pancreatic_tumor (label 24) for tumor detection"
+    - "**MONAI pancreas tumor segmentation bundle** — search the MONAI Model Zoo for dedicated pancreas bundles"
+    - "**nnU-Net v2 MSD Pancreas on HuggingFace** — search for community-trained nnU-Net models on MSD Pancreas with tumor labels"
+    - "**SwinUNETR / DiNTS pancreas models** — search for transformer-based pancreas segmentation models on HuggingFace and GitHub"
+
+pro:
+  clinical_background: >
+    Pancreatic tumors in CT include pancreatic ductal
+    adenocarcinoma (PDAC), the most lethal GI malignancy.
+    Pancreatic tumor segmentation is extremely difficult —
+    even SOTA methods achieve only ~0.52 Dice. Your score
+    depends primarily on tumor/lesion Dice — a model that
+    segments pancreas but misses tumors will score near zero.
+    You need a model trained specifically on tumor-annotated data.
+    Note: tools like TotalSegmentator are general organ segmenters —
+    they segment pancreas but do NOT detect tumors.

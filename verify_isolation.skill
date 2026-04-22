@@ -1,0 +1,82 @@
+# verify_isolation.skill — Isolation & Sandbox Verification
+#
+# Use this to test the 3-layer sandbox isolation system that prevents
+# benchmark agents from accessing forbidden files or escaping.
+# All commands assume CWD is MedAgentsBench/ (project root).
+
+## Quick Test (static filter only, no Docker)
+
+```bash
+python eval_seg/docker/tests/test_isolation.py
+```
+
+Expected: 126+ tests pass (96 blocked + 30 allowed), zero failures.
+
+## Adversarial Red-Team (uses Claude API, code NEVER executed)
+
+```bash
+python eval_seg/docker/tests/test_redteam.py --rounds 5 --model anthropic/claude-sonnet-4.6
+```
+
+This prompts an LLM to generate escape attempts and checks each against
+`check_isolation()`. Any bypass = a bug to fix. Results saved to
+`eval_seg/docker/tests/redteam_results.json`.
+
+## Docker Isolation Test (requires built images)
+
+```bash
+python eval_seg/docker/tests/test_isolation.py --docker
+```
+
+Tests the full Docker container flow: verifies agent container cannot
+access /data/private, eval container has no network.
+
+## What the 3 Layers Do
+
+### Layer 1 — Static path substrings (BLOCKED_PATTERNS)
+Blocks code containing forbidden strings: `/data/private`, `/eval`,
+`/results`, `ground_truth`, `/app/agent_loop`, benchmark scripts, etc.
+
+### Layer 2 — Regex escape patterns (BLOCKED_ESCAPE_REGEXES)
+100+ regex patterns catching: `find /`, `ls /`, `os.walk('/')`,
+`os.scandir`, `pathlib`, `os.sep`, `bytes([47,...])`, `struct.pack`,
+`exec()`, `compile()`, `os.chdir('..')`, `map(chr,...)`, `subprocess`
+with list args, string construction evasion, anti-tampering, etc.
+
+### Layer 3 — Runtime audit hook (Python sys.addaudithook)
+Injected as preamble into every Python script. Catches ALL file access
+at the C level regardless of how the path was constructed. Also forces
+cache env vars (HF_HOME, TORCH_HOME, PIP_CACHE_DIR, XDG_CACHE_HOME)
+into /workspace/.cache/.
+
+Bash scripts get function wrappers for cat/head/tail/cp/mv/ln that
+resolve and check paths via `readlink -f`.
+
+## Violation Warning System
+
+- 1st violation: WARNING returned to agent, execution continues
+- 2nd violation: KILL — all remaining S-step scores zeroed, clinical = 0,
+  rating = F (Disqualified)
+
+## Key Files
+
+| File | Role |
+|------|------|
+| `eval_seg/docker/agent/agent_code_executor.py` | Docker sandbox (layers 1-3) |
+| `eval_seg/benchmark_runner.py` | Host sandbox (layers 1-3) + violation handling |
+| `eval_seg/docker/agent/agent_loop.py` | Docker agent loop + violation handling |
+| `eval_seg/docker/orchestrator.py` | Docker orchestrator (exit code 99 = breach) |
+| `eval_seg/docker/tests/test_isolation.py` | Test suite (126 tests) |
+| `eval_seg/docker/tests/test_redteam.py` | Adversarial red-team harness |
+| `eval_seg/docker/config/container_security.json` | Seccomp profile |
+
+## Adding New Blocked Patterns
+
+1. Add regex to `BLOCKED_ESCAPE_REGEXES` in both:
+   - `eval_seg/docker/agent/agent_code_executor.py` (Docker)
+   - `eval_seg/benchmark_runner.py` (Host)
+2. Add test cases to `eval_seg/docker/tests/test_isolation.py`:
+   - `assert_blocked(...)` for the new pattern
+   - `assert_allowed(...)` to verify no false positives
+3. Run: `python eval_seg/docker/tests/test_isolation.py`
+4. Run red-team to verify: `python eval_seg/docker/tests/test_redteam.py --rounds 3`

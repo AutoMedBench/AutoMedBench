@@ -1,0 +1,110 @@
+# bench-kidney-standard.skill
+#
+# Run ANY agent on kidney segmentation, standard tier, with offline judge.
+# One run per invocation. Stateless API (no session ID, no memory, temp=0.0).
+#
+# WARNING: Do NOT kill other running processes or sessions on this machine.
+# SCOPE: Only monitor YOUR OWN run ($BENCH_DIR). Do not touch other runs.
+#
+# Output path: ./runs/<EXPERIMENTER>/bench-<SHORTNAME>-kidney-standard/<YYMMDD-6hex>/
+# Example:     ./runs/kuma/bench-opus-kidney-standard/260412-a3f82b/
+
+## Step 0 — Collect Required Info
+
+Before doing anything else, **ask the user** for all of these:
+
+1. **Experimenter name** — who is running this experiment (e.g. `kuma`, `jin`, `alex`).
+2. **Benchmark agent name** — which agent to benchmark (e.g. `claude-opus-4-6`).
+   Must match a key in `eval_seg/agent_config.yaml`, or the user must provide
+   details to add a new agent entry.
+3. **Where to save** — the output directory (e.g. `./runs/kuma/bench-opus-kidney-standard`).
+   The runner auto-appends a `YYMMDD-6hex` run tag inside this directory.
+
+Do NOT proceed until all values are confirmed. Set shell variables:
+
+```bash
+EXPERIMENTER="<confirmed name>"
+AGENT="<confirmed agent>"
+BENCH_DIR="<confirmed output directory>"
+```
+
+## Prompt (existing agent)
+
+> Read bench-kidney-standard.skill. Ask me for my experimenter name and
+> which agent to benchmark. Verify API, run the benchmark, monitor only
+> your own run until finished, report results.
+> If you hit an API rate limit, stop and tell me.
+
+## Prompt (new agent)
+
+> Read bench-kidney-standard.skill and eval_seg/agent_config.yaml.
+> Ask me for my experimenter name and the new agent details
+> (provider, model, model ID, base_url if needed).
+> Add a new agent entry matching the runner's API format (read
+> eval_seg/benchmark_runner.py if unsure). Verify API, run, monitor,
+> report. If rate limited, stop and tell me.
+
+## Agents
+
+  o3-pro  claude-opus-4-6  gemini-3.1-pro  qwen3.5-397b  kimi-k2.5  deepseek-v3  glm-5.1
+
+## Verify API
+
+```bash
+cd /lustre/fsw/portfolios/healthcareeng/projects/healthcareeng_monai/JHU/kuma_workspace/MedAgentsBench
+# EXPERIMENTER and AGENT must already be set from Step 0
+
+python3 -c "
+import yaml, requests
+cfg = yaml.safe_load(open('eval_seg/agent_config.yaml'))
+agent = cfg['agents']['${AGENT}']
+base = agent.get('base_url', 'https://api.openai.com/v1').rstrip('/')
+url = base + '/chat/completions'
+resp = requests.post(url,
+    headers={'Authorization': f\"Bearer {agent['api_key']}\", 'Content-Type': 'application/json'},
+    json={'model': agent['model'], 'messages': [{'role':'user','content':'Say OK'}], 'max_tokens': 5},
+    timeout=30)
+print(f'Status: {resp.status_code}')
+if resp.status_code == 200:
+    print('API OK:', resp.json()['choices'][0]['message']['content'][:50])
+else:
+    print('FAIL:', resp.text[:200])
+"
+```
+
+## Run
+
+```bash
+# EXPERIMENTER, AGENT, and BENCH_DIR must already be set from Step 0
+# BENCH_DIR is the user-specified output directory (e.g., ./runs/kuma/bench-opus-kidney-standard)
+
+python -u eval_seg/benchmark_runner.py \
+  --agent $AGENT \
+  --task kidney \
+  --tier standard \
+  --output-dir "$BENCH_DIR" \
+  2>&1 | tee "${BENCH_DIR}/run.log"
+```
+
+The runner auto-appends a `YYMMDD-6hex` subdirectory (e.g., `260412-a3f82b`).
+All outputs (detail_report.json, process/, outputs/) land there directly —
+no manual copy needed.
+
+## Monitor
+
+Only YOUR run. If 429 / rate limit / quota — STOP and tell the user.
+
+```bash
+# Find the latest run tag under BENCH_DIR
+RUN_TAG=$(ls -td "${BENCH_DIR}"/*/ 2>/dev/null | head -1)
+tail -f "${BENCH_DIR}/run.log" | grep --line-buffered -E 'Turn|BLOCKED|Rating|Dice|FAIL|429|rate.limit|quota'
+```
+
+## Output
+
+```
+./runs/<EXPERIMENTER>/bench-<SHORTNAME>-kidney-standard/<YYMMDD-6hex>/
+  detail_report.json, run.log, process/, outputs/
+```
+
+Example: `./runs/kuma/bench-opus-kidney-standard/260412-a3f82b/`

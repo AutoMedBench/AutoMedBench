@@ -1,0 +1,9 @@
+# Kidney Segmentation Task Configuration
+task_id: kidney-seg-task
+organ: kidney
+modality: CT
+input_filename: ct.nii.gz
+task_description: "Segment kidneys and detect kidney lesions/tumors."
+data_dir_name: CruzAbdomen_Kidney
+time_limit_s: 3600
+lesion_ratio_min: 0.01

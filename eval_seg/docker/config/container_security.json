@@ -1,0 +1,29 @@
+{
+  "_comment": "Seccomp profile for MedAgentsBench agent container. Blocks dangerous syscalls while allowing GPU + scientific computing.",
+  "defaultAction": "SCMP_ACT_ALLOW",
+  "syscalls": [
+    {
+      "names": [
+        "mount",
+        "umount2",
+        "pivot_root",
+        "chroot",
+        "reboot",
+        "kexec_load",
+        "kexec_file_load",
+        "init_module",
+        "finit_module",
+        "delete_module",
+        "acct",
+        "swapon",
+        "swapoff",
+        "settimeofday",
+        "clock_settime",
+        "sethostname",
+        "setdomainname"
+      ],
+      "action": "SCMP_ACT_ERRNO",
+      "errnoRet": 1
+    }
+  ]
+}

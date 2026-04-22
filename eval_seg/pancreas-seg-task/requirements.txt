@@ -1,0 +1,9 @@
+# Requirements for pancreas segmentation (Lite tier)
+# Base env already has: PyTorch, MONAI, nnU-Net, nibabel, numpy, scipy, pandas
+nnunetv2>=2.6.0
+monai>=1.5.0
+nibabel>=5.0.0
+scipy>=1.10.0
+scikit-image>=0.20.0
+pandas>=2.0.0
+requests>=2.28.0
