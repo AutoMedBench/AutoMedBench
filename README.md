@@ -1,7 +1,7 @@
 # AutoMedBench
 
 [![Website](https://img.shields.io/badge/Website-automedbench-76B900?style=for-the-badge)](https://keen-bonbon-690c3c.netlify.app/)
-[![HuggingFace](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-coming%20soon-FFD21E?style=for-the-badge)](#)
+[![Sandbox](https://img.shields.io/badge/Sandbox-coming_soon-FFD21E?style=for-the-badge)](#)
 [![License](https://img.shields.io/badge/License-Research_only-2B2B25?style=for-the-badge)](LICENSE)
 
 > Towards *Medical AutoResearch* <br>
@@ -23,13 +23,29 @@ Overall = 0.5 × Agentic (S1-S5 rubric) + 0.5 × Task (clinical metric)
 
 ## 2. Quick Start
 
-All sandbox containers and datasets are (or will be) hosted on HuggingFace — getting started is a single pull away.
+Sandbox containers and datasets are hosted on HuggingFace.
 
 <p align="left">
-  <a href="#"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Launch%20on%20HuggingFace-coming%20soon-FFD21E?style=for-the-badge" alt="Launch on HuggingFace — coming soon"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Sandbox-coming_soon-FFD21E?style=for-the-badge" alt="Sandbox — coming soon"></a>
 </p>
 
-Once live, pick the domain branch that matches your task, plug in your agent's API key, and the orchestrator runs the rest. Full per-domain walkthroughs live in each branch's own `README.md`.
+```bash
+# 1. Clone the domain branch you want to test
+git clone --branch eval_seg --single-branch \
+    https://github.com/KumaKuma2002/AutoMedBench.git
+cd AutoMedBench
+
+# 2. Pull the sandbox (tag is in each branch README)
+docker pull <registry>/automedbench-seg:latest
+
+# 3. Run one task cell
+python eval_seg/docker/orchestrator.py \
+    --agent claude-opus-4-6 \
+    --task kidney-seg-task \
+    --tier lite
+```
+
+See each branch's `README.md` for the full setup and flags.
 
 ---
 
