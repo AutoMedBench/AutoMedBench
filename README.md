@@ -149,6 +149,20 @@ Segmentation, VQA, and report generation are just the start. Propose any medical
 ### Ran the benchmark on a new agent?
 Share your results and we'll get them onto the live dashboard. Submission flow is in flight — open an issue to coordinate.
 
+## 8. Citation
+
+If AutoMedBench is useful for your research, please cite:
+
+```bibtex
+@misc{liu2026automedbench,
+  author       = {Liu, Junqi and Song, Kexin and Wang, Yuhan and Mao, Jiawei and Chen, Guiming and Huang, Xiaoke and Qi, Tianhao and Tang, Yucheng and Xu, Daguang and Zhou, Yuyin},
+  title        = {AutoMedBench: Towards Medical AutoResearch},
+  year         = {2026},
+  organization = {GitHub},
+  url          = {https://github.com/AutoMedBench/AutoMedBench},
+}
+```
+
 ---
 
 <p align="center">

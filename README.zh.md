@@ -81,6 +81,20 @@ python eval_seg/docker/orchestrator.py \
 - **想新增领域？** Segmentation、VQA、report generation 只是起点 — 任何具有确定性真值的医学 AI 任务都可纳入。
 - **在新模型上跑过基准？** 分享结果，我们会把它加入实时榜单。
 
+## 7. 引用
+
+如果 AutoMedBench 对你的研究有帮助，请引用：
+
+```bibtex
+@misc{liu2026automedbench,
+  author       = {Liu, Junqi and Song, Kexin and Wang, Yuhan and Mao, Jiawei and Chen, Guiming and Huang, Xiaoke and Qi, Tianhao and Tang, Yucheng and Xu, Daguang and Zhou, Yuyin},
+  title        = {AutoMedBench: Towards Medical AutoResearch},
+  year         = {2026},
+  organization = {GitHub},
+  url          = {https://github.com/AutoMedBench/AutoMedBench},
+}
+```
+
 ---
 
 <p align="center">
