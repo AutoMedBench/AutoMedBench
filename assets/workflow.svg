@@ -1,96 +1,103 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 440" width="1400" height="440"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 580" width="1400" height="580"
      role="img" aria-label="Medical AutoResearch pipeline — UC Santa Cruz × NVIDIA — S1 Plan, S2 Setup, S3 Validate, S4 Inference, S5 Submit">
   <defs>
     <style><![CDATA[
-      .bg       { fill: #141812; }
-      .card     { fill: #1C201B; stroke: #2A2E28; stroke-width: 1.4; }
-      .iconbg   { fill: #232A25; }
-      .icon     { stroke: #84B38D; stroke-width: 2.2; fill: none;
-                  stroke-linecap: round; stroke-linejoin: round; }
-      .pulse    { stroke: #D88A7B; stroke-width: 2.8; fill: none;
-                  stroke-linecap: round; stroke-linejoin: round; }
-      .sid      { font-family: 'Fraunces', 'Georgia', 'Times New Roman', serif;
-                  font-weight: 700; font-size: 16px; fill: #84B38D;
-                  letter-spacing: 0.12em; }
-      .sname    { font-family: 'Inter', 'Helvetica', sans-serif;
-                  font-weight: 700; font-size: 30px; fill: #E4E6DC;
-                  letter-spacing: 0.02em; }
-      .sdesc    { font-family: 'Inter', 'Helvetica', sans-serif;
-                  font-weight: 400; font-size: 16px; fill: #A0A69A; }
-      .arrow    { stroke: #7E9770; stroke-width: 3; fill: none;
-                  stroke-linecap: round; stroke-linejoin: round; }
-      .arrowhd  { fill: #7E9770; }
-      .header   { font-family: 'Fraunces', 'Georgia', 'Times New Roman', serif;
-                  font-weight: 600; font-style: italic; font-size: 32px;
-                  fill: #E4E6DC; }
-      .badge    { font-family: 'Inter', 'Helvetica', sans-serif;
-                  font-weight: 600; font-size: 15px; fill: #D88A7B;
-                  letter-spacing: 0.14em; text-transform: uppercase; }
-      .subhead  { font-family: 'Inter', 'Helvetica', sans-serif;
-                  font-weight: 400; font-size: 17px; fill: #A0A69A; }
-      .lx       { font-family: 'Inter', 'Helvetica', sans-serif;
-                  font-weight: 300; font-size: 26px; fill: #6E746A; }
+      .bg        { fill: #141812; }
+      .card      { fill: #1C201B; stroke: #2A2E28; stroke-width: 1.4; }
+      .iconbg    { fill: #232A25; }
+      .icon      { stroke: #84B38D; stroke-width: 2.2; fill: none;
+                   stroke-linecap: round; stroke-linejoin: round; }
+      .iconfill  { fill: #84B38D; }
+      .pulse     { stroke: #D88A7B; stroke-width: 2.8; fill: none;
+                   stroke-linecap: round; stroke-linejoin: round; }
+      .sid       { font-family: 'Fraunces', 'Georgia', 'Times New Roman', serif;
+                   font-weight: 700; font-size: 16px; fill: #84B38D;
+                   letter-spacing: 0.12em; }
+      .sname     { font-family: 'Inter', 'Helvetica', sans-serif;
+                   font-weight: 700; font-size: 30px; fill: #E4E6DC;
+                   letter-spacing: 0.02em; }
+      .sdesc     { font-family: 'Inter', 'Helvetica', sans-serif;
+                   font-weight: 400; font-size: 16px; fill: #A0A69A; }
+      .arrow     { stroke: #7E9770; stroke-width: 3; fill: none;
+                   stroke-linecap: round; stroke-linejoin: round; }
+      .arrowhd   { fill: #7E9770; }
+      .header    { font-family: 'Fraunces', 'Georgia', 'Times New Roman', serif;
+                   font-weight: 600; font-style: italic; font-size: 34px;
+                   fill: #E4E6DC; }
+      .badge     { font-family: 'Inter', 'Helvetica', sans-serif;
+                   font-weight: 600; font-size: 15px; fill: #D88A7B;
+                   letter-spacing: 0.14em; text-transform: uppercase; }
+      .subhead   { font-family: 'Inter', 'Helvetica', sans-serif;
+                   font-weight: 400; font-size: 17px; fill: #A0A69A; }
+      .lx        { font-family: 'Inter', 'Helvetica', sans-serif;
+                   font-weight: 300; font-size: 26px; fill: #6E746A; }
+      .tasklabel { font-family: 'Fraunces', 'Georgia', 'Times New Roman', serif;
+                   font-weight: 500; font-style: italic; font-size: 18px;
+                   fill: #A0A69A; }
+      .dmnlbl    { font-family: 'Inter', 'Helvetica', sans-serif;
+                   font-weight: 600; font-size: 11px; fill: #7E9770;
+                   letter-spacing: 0.14em; text-transform: uppercase; }
+      .tname     { font-family: 'Inter', 'Helvetica', sans-serif;
+                   font-weight: 500; font-size: 16px; fill: #E4E6DC; }
+      .ticon     { stroke: #C6A98A; stroke-width: 2; fill: none;
+                   stroke-linecap: round; stroke-linejoin: round; }
+      .ticonbg   { fill: #2A2620; }
     ]]></style>
   </defs>
 
-  <rect class="bg" x="0" y="0" width="1400" height="440"/>
+  <rect class="bg" x="0" y="0" width="1400" height="580"/>
 
-  <!-- =====  UPPER-LEFT: UCSC × NVIDIA logos  ===== -->
-  <svg x="40" y="30" width="168" height="40" viewBox="0 0 250 60.757271" preserveAspectRatio="xMinYMid meet">
+  <!-- =====  TOP: medical identity badge (left)  ===== -->
+  <g transform="translate(40, 42)">
+    <polyline class="pulse" points="0,0 8,0 12,-14 20,14 24,0 36,0"/>
+    <text class="badge" x="48" y="7">Medical AutoResearch pipeline</text>
+  </g>
+
+  <!-- =====  TITLE ROW: heading (left) · logos (right)  ===== -->
+  <text class="header" x="40" y="128">Agent Workflow</text>
+
+  <!-- UCSC logo on right -->
+  <svg x="1000" y="99" width="168" height="40" viewBox="0 0 250 60.757271" preserveAspectRatio="xMinYMid meet">
     <g transform="matrix(1.25 0 0 -1.25 -328.03 525.85)">
       <path fill="#E4E6DC"
             transform="matrix(.8 0 0 -.8 262.42 420.68)"
             d="m29.084 1.1191c-6.559 0-7.051 3.4851-7.051 7.0371v46.049c0 3.143 1.886 5.672 7.051 5.672s6.805-2.664 6.805-5.875v-13.188h-3.69v14.758c0 1.503-0.984 2.734-3.115 2.801-2.05 0-3.361-1.365-3.361-2.869v-49.26c0-1.7759 0.491-3.7577 3.361-3.7577 2.951 0.0691 3.115 2.0493 3.115 3.7578v12.776h3.69v-10.932c0-3.4839-0.411-6.9689-6.805-6.9689zm32.137 0c-6.396 0-6.887 3.485-6.887 6.9688v2.8031c0 2.458-0.002 3.963 0.49 6.353 0.492 2.461 0.903 3.895 2.133 6.149l3.607 6.902c1.394 2.594 2.296 4.098 3.034 6.9 0.491 1.845 0.9 2.937 0.9 4.85v12.641c0 1.706-0.163 3.755-3.195 3.826-2.788 0-3.362-1.983-3.362-3.826v-13.872h-3.607v12.024c0 3.553 0.491 7.039 7.051 7.039 6.394-0.068 6.804-3.486 6.804-6.969v-11.002c0-3.005-0.493-4.166-1.312-6.761-0.738-2.461-2.049-4.645-2.787-6.217l-3.444-6.561c-1.148-2.185-1.64-3.552-2.132-5.806-0.492-2.529-0.573-4.1-0.573-6.559v-0.3418-3.4161c0-1.7085 0.328-3.6888 3.362-3.7578 2.787 0 3.195 1.9818 3.195 3.7578v12.641h3.691v-10.729c0-3.4835-0.41-7.0369-6.968-7.0369zm21.642 0c-6.559 0-7.051 3.4851-7.051 7.0371v51.311h3.69v-29.789h6.477v29.789h3.607v-51.379c0-3.4839-0.327-6.9689-6.723-6.9689zm62.227 0c-6.56 0-7.05 3.4851-7.05 7.0371v51.311h3.69v-29.789h6.48v29.789h3.6v-51.379c0-3.4839-0.33-6.9689-6.72-6.9689zm32.79 0c-6.56 0-7.05 3.4851-7.05 7.0371v46.049c0 3.143 1.89 5.672 7.05 5.672 5.17 0 6.81-2.664 6.81-5.875v-13.188h-3.7v14.758c0 1.503-0.98 2.734-3.11 2.801-2.05 0-3.36-1.365-3.36-2.869v-49.26c0-1.7759 0.49-3.7577 3.36-3.7577 2.95 0.0691 3.11 2.0493 3.11 3.7578v12.776h3.7v-10.932c0-3.4839-0.41-6.9689-6.81-6.9689zm-80.341 0.2735v58.074h3.611v-42.223l6.56 31.154v11.069h3.6v-58.074l-3.6-0.0004v35.119l-6.89-35.119-3.281-0.0004zm138.39 0v2.1875h7.95l-8.61 55.887h13.61v-2.393h-9.1l8.61-55.681-12.46-0.0004zm-235.05 0.0703v52.539c0 3.211 1.7212 5.875 6.8867 5.875 5.1644 0 6.8044-2.529 6.8044-5.672v-52.742l-3.689-0.0001v54.041c0 1.504-1.0663 2.869-3.1154 2.869-2.132 0-3.1973-1.298-3.1973-2.801v-54.109l-3.6894-0.0001zm116.58 0v2.1172h5.25v55.887h3.69v-55.887l5.41 0.0001v-2.1172h-14.35zm96.66 0v52.539c0 3.211 1.72 5.875 6.89 5.875 5.16 0 6.8-2.529 6.8-5.672v-52.742l-3.69-0.0001v54.041c0 1.504-1.06 2.869-3.11 2.869-2.14 0-3.2-1.298-3.2-2.801v-54.109l-3.69-0.0001zm-21.24 0.0664v57.938h3.69v-29.858h1.64c1.4 0 2.22 0.206 3.36 1.026 1.15 0.751 1.4 2.529 1.4 4.238v24.594h3.69v-23.707-1.026c0-1.571-0.08-2.936-1.39-4.302-0.74-0.889-2.38-1.778-2.55-1.846 0.17-0.068 2.22-1.094 3.04-2.186 0.73-0.957 0.9-1.709 0.9-2.802v-15.03-0.4801c0-2.0492 0-3.8258-1.8-5.1231-1.73-1.2972-4.43-1.4355-5.42-1.4355h-0.41-6.15z"/>
     </g>
   </svg>
-
-  <text class="lx" x="218" y="58">×</text>
-
-  <svg x="244" y="34" width="144" height="32" viewBox="0 0 160 32" preserveAspectRatio="xMinYMid meet">
+  <text class="lx" x="1180" y="127">×</text>
+  <svg x="1206" y="103" width="144" height="32" viewBox="0 0 160 32" preserveAspectRatio="xMinYMid meet">
     <svg x="0" y="1" width="30" height="30" viewBox="0 0 32 32">
       <path fill="#76B900" d="M13.4 11.2v-1.7c.4-.1.9-.1 1.3-.1 4.6-.1 7.7 4 7.7 4s-3.3 4.6-6.8 4.6c-.8 0-1.5-.1-2.2-.4v-5.3c1.8.2 2.2.9 3.2 2.6l2.2-1.8s-1.6-2.1-4.3-2.1c-.3 0-.6 0-1.1.2zm0-5.6v2.5l1.3-.1c6.4-.2 10.6 5.2 10.6 5.2s-4.8 5.8-9.8 5.8c-.4 0-.9 0-1.3-.1v1.5c.4 0 .7.1 1.1.1 4.6 0 7.9-2.4 11.1-5.1.5.4 2.7 1.5 3.1 1.9-3 2.6-10.1 4.7-14.1 4.7-.4 0-.8 0-1.2-.1v2.2h17.3V5.6H13.4zm0 12.1v1.3c-4.3-.8-5.5-5.3-5.5-5.3s2.1-2.3 5.5-2.7v1.5H13.4c-1.8-.2-3.2 1.5-3.2 1.5s.8 2.8 3.2 3.7zM5.5 12.4s2.6-3.9 7.9-4.3V6.6C7.5 7.1 2.4 12 2.4 12s2.9 8.4 11 9.2v-1.5C7.5 18.9 5.5 12.4 5.5 12.4z"/>
     </svg>
-    <text x="40" y="24"
-          font-family="Helvetica, Arial, sans-serif"
-          font-weight="700" font-style="italic"
-          font-size="20" letter-spacing="-0.5"
-          fill="#76B900">NVIDIA</text>
+    <text x="40" y="24" font-family="Helvetica, Arial, sans-serif" font-weight="700"
+          font-style="italic" font-size="20" letter-spacing="-0.5" fill="#76B900">NVIDIA</text>
   </svg>
 
-  <!-- =====  Medical identity badge  ===== -->
-  <g transform="translate(40, 112)">
-    <polyline class="pulse" points="0,0 8,0 12,-14 20,14 24,0 36,0"/>
-    <text class="badge" x="48" y="7">Medical AutoResearch pipeline</text>
-  </g>
+  <!-- =====  Subhead  ===== -->
+  <text class="subhead" x="40" y="162">Every task, every domain — five stages, each scored independently.</text>
 
-  <!-- =====  Heading + subhead  ===== -->
-  <text class="header"  x="40" y="172">Agent Workflow</text>
-  <text class="subhead" x="40" y="202">Every task, every domain — five stages, each scored independently.</text>
-
-  <!-- =========================== Cards: 5 × 220w, gap 40, start x=70 =========================== -->
-  <!-- S1 PLAN: x=70-290 -->
+  <!-- =========================== Stage cards (5 × 220w, gap 40, y=200-390) =========================== -->
   <g>
-    <rect class="card" x="70" y="240" width="220" height="190" rx="10" ry="10"/>
-    <circle class="iconbg" cx="268" cy="272" r="20"/>
-    <g class="icon" transform="translate(256, 260)">
+    <rect class="card" x="70" y="200" width="220" height="190" rx="10" ry="10"/>
+    <circle class="iconbg" cx="268" cy="232" r="20"/>
+    <g class="icon" transform="translate(256, 220)">
       <rect x="0" y="3" width="18" height="22" rx="2"/>
       <rect x="4" y="0" width="10" height="6" rx="1"/>
       <line x1="5" y1="13" x2="13" y2="13"/>
       <line x1="5" y1="18" x2="13" y2="18"/>
     </g>
-    <text class="sid"   x="94" y="276">S1</text>
-    <text class="sname" x="94" y="316">PLAN</text>
-    <text class="sdesc" x="94" y="372">research candidate</text>
-    <text class="sdesc" x="94" y="394">models, write plan.md</text>
+    <text class="sid"   x="94" y="236">S1</text>
+    <text class="sname" x="94" y="276">PLAN</text>
+    <text class="sdesc" x="94" y="332">research candidate</text>
+    <text class="sdesc" x="94" y="354">models, write plan.md</text>
   </g>
-  <path class="arrow"   d="M298 335 H322"/>
-  <path class="arrowhd" d="M322 330 L332 335 L322 340 Z"/>
+  <path class="arrow"   d="M298 295 H322"/>
+  <path class="arrowhd" d="M322 290 L332 295 L322 300 Z"/>
 
-  <!-- S2 SETUP: x=330-550 -->
   <g>
-    <rect class="card" x="330" y="240" width="220" height="190" rx="10" ry="10"/>
-    <circle class="iconbg" cx="528" cy="272" r="20"/>
-    <g class="icon" transform="translate(516, 260)">
+    <rect class="card" x="330" y="200" width="220" height="190" rx="10" ry="10"/>
+    <circle class="iconbg" cx="528" cy="232" r="20"/>
+    <g class="icon" transform="translate(516, 220)">
       <path d="M3 18 h8"/>
       <path d="M0 22 h18"/>
       <path d="M13 22 a7 7 0 1 0 0-14 h-1"/>
@@ -98,59 +105,131 @@
       <path d="M5 6 L5 2 h7"/>
       <path d="M8 6 L8 4 h2 v2"/>
     </g>
-    <text class="sid"   x="354" y="276">S2</text>
-    <text class="sname" x="354" y="316">SETUP</text>
-    <text class="sdesc" x="354" y="372">download weights,</text>
-    <text class="sdesc" x="354" y="394">install deps, load GPU</text>
+    <text class="sid"   x="354" y="236">S2</text>
+    <text class="sname" x="354" y="276">SETUP</text>
+    <text class="sdesc" x="354" y="332">download weights,</text>
+    <text class="sdesc" x="354" y="354">install deps, load GPU</text>
   </g>
-  <path class="arrow"   d="M558 335 H582"/>
-  <path class="arrowhd" d="M582 330 L592 335 L582 340 Z"/>
+  <path class="arrow"   d="M558 295 H582"/>
+  <path class="arrowhd" d="M582 290 L592 295 L582 300 Z"/>
 
-  <!-- S3 VALIDATE: x=590-810 -->
   <g>
-    <rect class="card" x="590" y="240" width="220" height="190" rx="10" ry="10"/>
-    <circle class="iconbg" cx="788" cy="272" r="20"/>
-    <g class="icon" transform="translate(776, 260)">
+    <rect class="card" x="590" y="200" width="220" height="190" rx="10" ry="10"/>
+    <circle class="iconbg" cx="788" cy="232" r="20"/>
+    <g class="icon" transform="translate(776, 220)">
       <path d="M7 2 v6.5 L1 19 a2 2 0 0 0 1.73 3 h12.54 a2 2 0 0 0 1.73-3 L11 8.5 V2"/>
       <line x1="5" y1="2" x2="13" y2="2"/>
       <path d="M4 15 h10"/>
     </g>
-    <text class="sid"   x="614" y="276">S3</text>
-    <text class="sname" x="614" y="316">VALIDATE</text>
-    <text class="sdesc" x="614" y="372">pilot on one sample,</text>
-    <text class="sdesc" x="614" y="394">check shape &amp; quality</text>
+    <text class="sid"   x="614" y="236">S3</text>
+    <text class="sname" x="614" y="276">VALIDATE</text>
+    <text class="sdesc" x="614" y="332">pilot on one sample,</text>
+    <text class="sdesc" x="614" y="354">check shape &amp; quality</text>
   </g>
-  <path class="arrow"   d="M818 335 H842"/>
-  <path class="arrowhd" d="M842 330 L852 335 L842 340 Z"/>
+  <path class="arrow"   d="M818 295 H842"/>
+  <path class="arrowhd" d="M842 290 L852 295 L842 300 Z"/>
 
-  <!-- S4 INFERENCE: x=850-1070 -->
   <g>
-    <rect class="card" x="850" y="240" width="220" height="190" rx="10" ry="10"/>
-    <circle class="iconbg" cx="1048" cy="272" r="20"/>
-    <g class="icon" transform="translate(1036, 260)">
+    <rect class="card" x="850" y="200" width="220" height="190" rx="10" ry="10"/>
+    <circle class="iconbg" cx="1048" cy="232" r="20"/>
+    <g class="icon" transform="translate(1036, 220)">
       <path d="M6.5 2 A2.5 2.5 0 0 1 9 4.5 v15 a2.5 2.5 0 0 1-4.96 0.44 a2.5 2.5 0 0 1-2.96-3.08 a3 3 0 0 1-0.34-5.58 a2.5 2.5 0 0 1 1.32-4.24 a2.5 2.5 0 0 1 1.98-3 A2.5 2.5 0 0 1 6.5 2 Z"/>
       <path d="M11.5 2 A2.5 2.5 0 0 0 9 4.5 v15 a2.5 2.5 0 0 0 4.96 0.44 a2.5 2.5 0 0 0 2.96-3.08 a3 3 0 0 0 0.34-5.58 a2.5 2.5 0 0 0-1.32-4.24 a2.5 2.5 0 0 0-1.98-3 A2.5 2.5 0 0 0 11.5 2 Z"/>
     </g>
-    <text class="sid"   x="874" y="276">S4</text>
-    <text class="sname" x="874" y="316">INFERENCE</text>
-    <text class="sdesc" x="874" y="372">run the full cohort,</text>
-    <text class="sdesc" x="874" y="394">save per-sample outputs</text>
+    <text class="sid"   x="874" y="236">S4</text>
+    <text class="sname" x="874" y="276">INFERENCE</text>
+    <text class="sdesc" x="874" y="332">run the full cohort,</text>
+    <text class="sdesc" x="874" y="354">save per-sample outputs</text>
   </g>
-  <path class="arrow"   d="M1078 335 H1102"/>
-  <path class="arrowhd" d="M1102 330 L1112 335 L1102 340 Z"/>
+  <path class="arrow"   d="M1078 295 H1102"/>
+  <path class="arrowhd" d="M1102 290 L1112 295 L1102 300 Z"/>
 
-  <!-- S5 SUBMIT: x=1110-1330 -->
   <g>
-    <rect class="card" x="1110" y="240" width="220" height="190" rx="10" ry="10"/>
-    <circle class="iconbg" cx="1308" cy="272" r="20"/>
-    <g class="icon" transform="translate(1296, 260)">
+    <rect class="card" x="1110" y="200" width="220" height="190" rx="10" ry="10"/>
+    <circle class="iconbg" cx="1308" cy="232" r="20"/>
+    <g class="icon" transform="translate(1296, 220)">
       <rect x="0" y="3" width="18" height="22" rx="2"/>
       <rect x="4" y="0" width="10" height="6" rx="1"/>
       <polyline points="5,14 8,17 13,12"/>
     </g>
-    <text class="sid"   x="1134" y="276">S5</text>
-    <text class="sname" x="1134" y="316">SUBMIT</text>
-    <text class="sdesc" x="1134" y="372">verify completeness,</text>
-    <text class="sdesc" x="1134" y="394">call submit_results</text>
+    <text class="sid"   x="1134" y="236">S5</text>
+    <text class="sname" x="1134" y="276">SUBMIT</text>
+    <text class="sdesc" x="1134" y="332">verify completeness,</text>
+    <text class="sdesc" x="1134" y="354">call submit_results</text>
+  </g>
+
+  <!-- =========================== Task showcase strip =========================== -->
+  <text class="tasklabel" x="40" y="440">Example tasks, spanning five medical domains:</text>
+
+  <!-- 5 task chips, width 256, gap 10, y=460-546 -->
+  <!-- 1. Segmentation -->
+  <g>
+    <rect class="card" x="40" y="460" width="256" height="86" rx="10" ry="10"/>
+    <circle class="ticonbg" cx="78" cy="503" r="20"/>
+    <g class="ticon" transform="translate(66, 491)">
+      <polygon points="12,0 0,5 12,10 24,5"/>
+      <polyline points="0,10 12,15 24,10"/>
+      <polyline points="0,15 12,20 24,15"/>
+    </g>
+    <text class="dmnlbl" x="110" y="495">Segmentation</text>
+    <text class="tname"  x="110" y="522">Pancreas tumor segmentation</text>
+  </g>
+
+  <!-- 2. Enhancement -->
+  <g>
+    <rect class="card" x="306" y="460" width="256" height="86" rx="10" ry="10"/>
+    <circle class="ticonbg" cx="344" cy="503" r="20"/>
+    <g class="ticon" transform="translate(332, 491)">
+      <path d="M12 1 L14 9 L22 11 L14 13 L12 21 L10 13 L2 11 L10 9 Z"/>
+      <path d="M4 2 v3"/>
+      <path d="M2 3.5 h4"/>
+      <path d="M20 17 v3"/>
+      <path d="M18 18.5 h4"/>
+    </g>
+    <text class="dmnlbl" x="376" y="495">Enhancement</text>
+    <text class="tname"  x="376" y="522">LDCT low-dose denoising</text>
+  </g>
+
+  <!-- 3. Report Generation -->
+  <g>
+    <rect class="card" x="572" y="460" width="256" height="86" rx="10" ry="10"/>
+    <circle class="ticonbg" cx="610" cy="503" r="20"/>
+    <g class="ticon" transform="translate(598, 491)">
+      <path d="M14 0 H3 a1.5 1.5 0 0 0 -1.5 1.5 V22 a1.5 1.5 0 0 0 1.5 1.5 h15 a1.5 1.5 0 0 0 1.5-1.5 V5.5 Z"/>
+      <polyline points="14,0 14,6 20,6"/>
+      <line x1="6" y1="12" x2="15" y2="12"/>
+      <line x1="6" y1="16" x2="15" y2="16"/>
+      <line x1="6" y1="20" x2="11" y2="20"/>
+    </g>
+    <text class="dmnlbl" x="642" y="495">Report Generation</text>
+    <text class="tname"  x="642" y="522">CXR findings generation</text>
+  </g>
+
+  <!-- 4. VQA -->
+  <g>
+    <rect class="card" x="838" y="460" width="256" height="86" rx="10" ry="10"/>
+    <circle class="ticonbg" cx="876" cy="503" r="20"/>
+    <g class="ticon" transform="translate(864, 491)">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M9 9 a3 3 0 0 1 5.83 1 c 0 2 -2.91 2.83 -2.91 2.83"/>
+      <circle cx="12" cy="17.5" r="0.6" fill="#C6A98A" stroke="none"/>
+    </g>
+    <text class="dmnlbl" x="908" y="495">VQA</text>
+    <text class="tname"  x="908" y="522">Expert-level medical VQA</text>
+  </g>
+
+  <!-- 5. Lesion Detection -->
+  <g>
+    <rect class="card" x="1104" y="460" width="256" height="86" rx="10" ry="10"/>
+    <circle class="ticonbg" cx="1142" cy="503" r="20"/>
+    <g class="ticon" transform="translate(1130, 491)">
+      <path d="M3 7 V 5 a 2 2 0 0 1 2 -2 h 2"/>
+      <path d="M17 3 h 2 a 2 2 0 0 1 2 2 v 2"/>
+      <path d="M21 17 v 2 a 2 2 0 0 1 -2 2 h -2"/>
+      <path d="M7 21 H 5 a 2 2 0 0 1 -2 -2 v -2"/>
+      <rect x="8" y="8" width="8" height="8"/>
+    </g>
+    <text class="dmnlbl" x="1174" y="495">Lesion Detection</text>
+    <text class="tname"  x="1174" y="522">CXR abnormality detection</text>
   </g>
 </svg>
