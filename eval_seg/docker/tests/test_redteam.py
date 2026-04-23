@@ -26,9 +26,11 @@ EVAL_SEG_DIR = os.path.dirname(DOCKER_DIR)
 sys.path.insert(0, os.path.join(DOCKER_DIR, "agent"))
 from agent_code_executor import check_isolation
 
-# API config — uses the same OpenRouter key from agent_config.yaml
-API_KEY = "REDACTED_OPENROUTER_API_KEY"
+# API config — read from environment. Set OPENROUTER_API_KEY before running.
+API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 DEFAULT_MODEL = "anthropic/claude-sonnet-4.6"
+if not API_KEY:
+    raise SystemExit("Set OPENROUTER_API_KEY in the environment before running this red-team test.")
 
 # ──────────────────────────────────────────────────────────────────────
 # Adversarial system prompt — tells the LLM to try to escape

@@ -16,7 +16,7 @@ agents:
     provider: openai
     model: azure/openai/gpt-5.4
     base_url: https://inference-api.nvidia.com
-    api_key: REDACTED_NVIDIA_API_KEY
+    api_key: ${NVIDIA_API_KEY}
   o3-pro:
     provider: openai
     model: o3-pro
@@ -26,19 +26,19 @@ agents:
     provider: openai
     model: aws/anthropic/bedrock-claude-opus-4-7
     base_url: https://inference-api.nvidia.com
-    api_key: REDACTED_NVIDIA_API_KEY
+    api_key: ${NVIDIA_API_KEY}
     reasoning: true
   claude-opus-4-6:
     provider: openai
     model: aws/anthropic/bedrock-claude-opus-4-6
     base_url: https://inference-api.nvidia.com
-    api_key: REDACTED_NVIDIA_API_KEY
+    api_key: ${NVIDIA_API_KEY}
     reasoning: true
   claude-sonnet-4-6:
     provider: openai
     model: aws/anthropic/bedrock-claude-sonnet-4-6
     base_url: https://inference-api.nvidia.com
-    api_key: REDACTED_NVIDIA_API_KEY
+    api_key: ${NVIDIA_API_KEY}
     reasoning: true
 
   # --- Google ---
@@ -46,7 +46,7 @@ agents:
     provider: openai
     model: gcp/google/gemini-3.1-pro-preview
     base_url: https://inference-api.nvidia.com
-    api_key: REDACTED_NVIDIA_API_KEY
+    api_key: ${NVIDIA_API_KEY}
   gemini-3-flash:
     provider: google
     model: gemini-3.0-flash
@@ -56,14 +56,14 @@ agents:
     provider: openai
     model: nvidia/qwen/qwen3-5-397b-a17b
     base_url: https://inference-api.nvidia.com
-    api_key: REDACTED_NVIDIA_API_KEY
+    api_key: ${NVIDIA_API_KEY}
 
   # --- Moonshot Kimi K2 Thinking (via OpenRouter) ---
   kimik2.5:
     provider: openai
     model: moonshotai/kimi-k2-thinking
     base_url: https://openrouter.ai/api/v1
-    api_key: REDACTED_OPENROUTER_API_KEY
+    api_key: ${OPENROUTER_API_KEY}
     reasoning: true
 
   # --- DeepSeek (OpenAI-compatible) ---
@@ -81,28 +81,28 @@ agents:
     provider: openai
     model: nvidia/nvidia/nemotron-3-super-v3
     base_url: https://inference-api.nvidia.com
-    api_key: REDACTED_NVIDIA_API_KEY
+    api_key: ${NVIDIA_API_KEY}
 
   # --- Llama Nemotron (via NVIDIA Inference API) ---
   llama3.3-nemotron-49b:
     provider: openai
     model: nvidia/nvidia/llama-3.3-nemotron-super-49b-v1.5
     base_url: https://inference-api.nvidia.com
-    api_key: REDACTED_NVIDIA_API_KEY
+    api_key: ${NVIDIA_API_KEY}
 
   # --- MiniMax (via NVIDIA Inference API) ---
   minimax-m2.5:
     provider: openai
     model: nvidia/minimaxai/minimax-m2.5
     base_url: https://inference-api.nvidia.com
-    api_key: REDACTED_NVIDIA_API_KEY
+    api_key: ${NVIDIA_API_KEY}
 
   # --- Z AI (via NVIDIA Inference API) ---
   glm-5:
     provider: openai
     model: nvidia/zai-org/glm-5
     base_url: https://inference-api.nvidia.com
-    api_key: REDACTED_NVIDIA_API_KEY
+    api_key: ${NVIDIA_API_KEY}
 
   # --- Z AI (OpenAI-compatible, direct) ---
   glm-5.1:
