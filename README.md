@@ -1,4 +1,4 @@
-# AutoMedBench
+# [AutoMedBench](https://keen-bonbon-690c3c.netlify.app/)
 
 [![Website](https://img.shields.io/badge/Website-automedbench-76B900?style=for-the-badge)](https://keen-bonbon-690c3c.netlify.app/)
 [![Sandbox](https://img.shields.io/badge/Sandbox-coming_soon-FFD21E?style=for-the-badge)](#)
