@@ -256,6 +256,7 @@ def call_api(
     body = json.dumps(payload)
     last_exc: Exception | None = None
     response = None
+    data: dict[str, Any] | None = None
     for attempt in range(1, 5):
         try:
             response = requests.post(endpoint, headers=headers, data=body, timeout=600)
@@ -267,9 +268,13 @@ def call_api(
                     wait = 0.0
                 if wait <= 0:
                     wait = min(60.0, 2 ** attempt + random.uniform(0, 1))
+                try:
+                    body_preview = (response.text or "")[:200]
+                except Exception:
+                    body_preview = ""
                 sys.stderr.write(
                     f"[call_api] HTTP {response.status_code} attempt {attempt}/4 "
-                    f"sleeping {wait:.1f}s\n"
+                    f"body_preview={body_preview!r} sleeping {wait:.1f}s\n"
                 )
                 sys.stderr.flush()
                 time.sleep(wait)
@@ -284,6 +289,25 @@ def call_api(
                 )
                 sys.stderr.flush()
             response.raise_for_status()
+            # Some providers (NVDA / OpenRouter) occasionally return HTTP 200
+            # with a non-JSON body (HTML error page, truncated SSE chunk).
+            # Treat that as transient: log a body preview and retry instead of
+            # crashing the whole worker (BUG: kimik2.5-r02 lost in formal sweep).
+            try:
+                data = response.json()
+            except (json.JSONDecodeError, requests.exceptions.JSONDecodeError) as exc:
+                last_exc = exc
+                if attempt == 4:
+                    raise
+                preview = (response.text or "")[:400]
+                wait = min(60.0, 2 ** attempt + random.uniform(0, 1))
+                sys.stderr.write(
+                    f"[call_api] non-JSON body (HTTP {response.status_code}) "
+                    f"attempt {attempt}/4 sleeping {wait:.1f}s preview={preview!r}\n"
+                )
+                sys.stderr.flush()
+                time.sleep(wait)
+                continue
             break
         except (requests.ConnectionError, requests.Timeout) as exc:
             last_exc = exc
@@ -299,11 +323,37 @@ def call_api(
         if last_exc:
             raise last_exc
     assert response is not None
-    data = response.json()
-    if "error" in data:
-        raise RuntimeError(f"API error: {data['error']}")
-    choice = data["choices"][0]
-    message = choice["message"]
+    # BUG-048: defend against non-JSON / malformed-JSON / empty-choices
+    # responses. Upstream CDNs and proxies occasionally return HTML error
+    # pages with 200, or SSE bodies with application/json content-type, or
+    # {"error":...} dicts with missing/empty choices. Prior code crashed
+    # the worker with JSONDecodeError / KeyError / IndexError and silently
+    # zeroed the whole run.
+    try:
+        data = response.json()
+    except (ValueError, json.JSONDecodeError) as exc:
+        preview = (response.text or "")[:800]
+        raise RuntimeError(
+            f"API returned non-JSON (status={response.status_code}, "
+            f"len={len(response.text or '')}): {exc}; body_preview={preview!r}"
+        ) from exc
+    if not isinstance(data, dict):
+        raise RuntimeError(
+            f"API returned non-dict JSON (status={response.status_code}): "
+            f"type={type(data).__name__} preview={str(data)[:200]!r}"
+        )
+    if "error" in data and not data.get("choices"):
+        raise RuntimeError(
+            f"API error (status={response.status_code}): {data['error']}"
+        )
+    choices = data.get("choices") or []
+    if not choices:
+        raise RuntimeError(
+            f"API returned no choices (status={response.status_code}, "
+            f"keys={list(data)}): preview={str(data)[:500]!r}"
+        )
+    choice = choices[0]
+    message = choice.get("message") or {}
     tool_calls = []
     malformed_tool_calls = 0
     for tool_call in message.get("tool_calls") or []:
@@ -778,9 +828,17 @@ class AgentBenchmarkRunner:
             os.unlink(self.data_dir)
         elif os.path.exists(self.data_dir):
             shutil.rmtree(self.data_dir)
-        if not os.path.exists(self.data_dir):
-            if os.path.isdir(self.public_dir):
-                os.symlink(self.public_dir, self.data_dir)
+        # Stage only the resolved question_ids so `ls data_dir` matches the
+        # `sample_count` declared in the prompt. Previously we symlinked the
+        # full public/ tree, so agents always discovered all 500/451/1061
+        # questions and the `Process ALL discovered questions` instruction
+        # forced them to ignore --sample-limit.
+        if os.path.isdir(self.public_dir):
+            os.makedirs(self.data_dir, exist_ok=True)
+            for qid in self.question_ids:
+                src = os.path.join(self.public_dir, qid)
+                if os.path.isdir(src):
+                    os.symlink(src, os.path.join(self.data_dir, qid))
         os.makedirs(os.path.join(self.output_dir, "plan"), exist_ok=True)
 
         if self.tier.name == "lite":

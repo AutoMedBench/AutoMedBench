@@ -187,8 +187,14 @@ def check_submission(
 
     expected = max(report["counts"]["expected"], 1)
     report["placeholder_rate"] = round(report["counts"]["placeholder_files"] / expected, 4)
+    # output_format_valid keeps all-or-nothing semantics (every file passes
+    # schema checks). submission_format_valid is graded: >=50% valid answers
+    # avoids hard-F when a handful of questions honestly return empty
+    # (e.g. LLaVA-Med decode edge cases) while the rest are answered.
+    valid_rate = report["counts"]["valid_files"] / expected
+    report["valid_rate"] = round(valid_rate, 4)
     report["output_format_valid"] = all_valid
-    report["submission_format_valid"] = all_valid
+    report["submission_format_valid"] = valid_rate >= 0.5
     if not all_valid:
         for question_id, item in report["per_question"].items():
             for error in item["errors"]:

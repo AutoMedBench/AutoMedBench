@@ -161,6 +161,10 @@ def check_smoke_forward(workspace_dir: str | None) -> dict[str, Any]:
     if sample_lower.startswith(("heuristic:", "fallback:", "placeholder:", "mock:")):
         result["reason"] = f"raw_output_sample looks like placeholder: {sample[:40]!r}"
         return result
+    device_str = str(record.get("device") or "").lower().strip()
+    if "cuda" not in device_str:
+        result["reason"] = f"device must be CUDA (got {device_str!r}); CPU inference is not allowed"
+        return result
 
     result["valid"] = True
     result["reason"] = "ok"
