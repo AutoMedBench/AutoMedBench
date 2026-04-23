@@ -2,7 +2,7 @@
 
 [![Website](https://img.shields.io/badge/Website-automedbench-76B900?style=for-the-badge)](https://automedbench.github.io/)
 [![Sandbox](https://img.shields.io/badge/Sandbox-coming_soon-FFD21E?style=for-the-badge)](#)
-[![License](https://img.shields.io/badge/License-Research_only-2B2B25?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-2B2B25?style=for-the-badge)](LICENSE)
 
 [English](README.md) · **中文**
 
