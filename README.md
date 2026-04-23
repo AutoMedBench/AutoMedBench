@@ -4,6 +4,8 @@
 [![Sandbox](https://img.shields.io/badge/Sandbox-coming_soon-FFD21E?style=for-the-badge)](#)
 [![License](https://img.shields.io/badge/License-Research_only-2B2B25?style=for-the-badge)](LICENSE)
 
+**English** · [中文](README.zh.md)
+
 > Towards *Medical AutoResearch* <br>
 > — a benchmark for AI agents on medical AI tasks.
 
