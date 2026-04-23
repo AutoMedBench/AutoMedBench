@@ -223,6 +223,21 @@
     <rect class="card" x="572" y="460" width="256" height="90" rx="10" ry="10"/>
     <circle class="ticonbg" cx="616" cy="505" r="24"/>
     <g transform="translate(593, 482)">
+      <rect class="ticon-s" x="1" y="3" width="22" height="22" rx="2"/>
+      <line class="ticon-s" x1="12" y1="10" x2="12" y2="18"/>
+      <line class="ticon-s" x1="8" y1="14" x2="16" y2="14"/>
+      <circle class="ticon-acc" cx="32" cy="32" r="9"/>
+      <path class="ticon-acc" d="M29 30 a2.6 2.6 0 0 1 5.2 0 c 0 1.6 -2.6 2.1 -2.6 3.5"/>
+      <circle class="ticon-fill" cx="31.6" cy="37" r="1"/>
+    </g>
+    <text class="dmnlbl" x="654" y="497">VQA</text>
+    <text class="tname"  x="654" y="524">Expert medical VQA</text>
+  </g>
+
+  <g>
+    <rect class="card" x="838" y="460" width="256" height="90" rx="10" ry="10"/>
+    <circle class="ticonbg" cx="882" cy="505" r="24"/>
+    <g transform="translate(859, 482)">
       <rect class="ticon-s" x="2" y="2" width="28" height="40" rx="2.5"/>
       <path class="ticon-s" d="M6 10 Q 16 8 26 10"/>
       <path class="ticon-s" d="M6 16 Q 16 14 26 16"/>
@@ -232,23 +247,8 @@
       <line class="ticon-acc" x1="37" y1="19" x2="40" y2="22"/>
       <line class="ticon-acc" x1="37" y1="25" x2="40" y2="22"/>
     </g>
-    <text class="dmnlbl" x="654" y="497">Report Generation</text>
-    <text class="tname"  x="654" y="524">CXR findings</text>
-  </g>
-
-  <g>
-    <rect class="card" x="838" y="460" width="256" height="90" rx="10" ry="10"/>
-    <circle class="ticonbg" cx="882" cy="505" r="24"/>
-    <g transform="translate(859, 482)">
-      <rect class="ticon-s" x="1" y="3" width="22" height="22" rx="2"/>
-      <line class="ticon-s" x1="12" y1="10" x2="12" y2="18"/>
-      <line class="ticon-s" x1="8" y1="14" x2="16" y2="14"/>
-      <circle class="ticon-acc" cx="32" cy="32" r="9"/>
-      <path class="ticon-acc" d="M29 30 a2.6 2.6 0 0 1 5.2 0 c 0 1.6 -2.6 2.1 -2.6 3.5"/>
-      <circle class="ticon-fill" cx="31.6" cy="37" r="1"/>
-    </g>
-    <text class="dmnlbl" x="920" y="497">VQA</text>
-    <text class="tname"  x="920" y="524">Expert medical VQA</text>
+    <text class="dmnlbl" x="920" y="497">Report Generation</text>
+    <text class="tname"  x="920" y="524">CXR findings</text>
   </g>
 
   <g>

@@ -10,12 +10,12 @@
 | FeTA | Segmentation | [FeTA Challenge](https://fetachallenge.github.io/) | 2021 |
 | LDCT-SimNICT | Enhancement | [AAPM Low-Dose CT Grand Challenge](https://www.aapm.org/GrandChallenge/LowDoseCT/) | 2016 |
 | SR-MRI | Enhancement | [fastMRI](https://www.fastmri.org/) | 2018 |
-| MIMIC-CXR | Report Generation | [PhysioNet MIMIC-CXR](https://physionet.org/content/mimic-cxr/) | 2019 |
 | PathVQA | VQA | [He et al., 2020](https://arxiv.org/abs/2003.10286) | 2020 |
 | VQA-RAD | VQA | [Lau et al., 2018](https://osf.io/89kps/) | 2018 |
 | SLAKE | VQA | [Liu et al., ISBI 2021](https://www.med-vqa.com/slake/) | 2021 |
 | MedFrameQA | VQA | [HuggingFace dataset](https://huggingface.co/datasets/SuhaoYu1020/MedFrameQA) | 2024 |
 | MedXpertQA-MM | VQA | [TsinghuaC3I MedXpertQA](https://huggingface.co/datasets/TsinghuaC3I/MedXpertQA) | 2024 |
+| MIMIC-CXR | Report Generation | [PhysioNet MIMIC-CXR](https://physionet.org/content/mimic-cxr/) | 2019 |
 | VinDr-CXR | Lesion Detection | [PhysioNet VinDr-CXR](https://physionet.org/content/vindr-cxr/) | 2022 |
 
 Every dataset satisfies three requirements: (1) publicly available, (2) deterministic ground truth, (3) peer-reviewed / challenge-backed.
