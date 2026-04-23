@@ -11,12 +11,12 @@
 
 ## 1. Introduction
 
-**AutoMedBench** benchmarks autonomous coding agents on real medical imaging and reasoning tasks — to test how far they can go, unassisted, from "read the clinical problem" to "submit results."
+**AutoMedBench** benchmarks autonomous coding agents on real medical imaging and reasoning tasks — to test how far they can go, unassisted, from "read the medical research problem" to "submit results."
 
 Unlike output-only benchmarks, AutoMedBench grades the *working process* itself. Every run is scored across five stages (**S1 Plan · S2 Setup · S3 Validate · S4 Inference · S5 Submit**) with a strict rubric, not just its final metric:
 
 ```
-Overall = 0.5 × Agentic (S1-S5 rubric) + 0.5 × Task (clinical metric)
+Overall = 0.5 × Agentic (S1-S5 rubric) + 0.5 × Task (task metric)
 ```
 
 ---
@@ -123,7 +123,7 @@ The orchestrator (`docker/orchestrator.py`) chains them sequentially and applies
 Overall = 0.5 × Agentic + 0.5 × Task
 Agentic = weighted mean of S1-S5 stage scores
           (S1 25% · S2 15% · S3 35% · S4 15% · S5 10%)
-Task    = mean Dice / SSIM / clinical / accuracy / mAP
+Task    = mean Dice / SSIM / MLRG-7 / accuracy / mAP
 ```
 
 See `SCORING_RUBRICS.md` on each branch for the full per-sub-criterion breakdown.
@@ -135,10 +135,10 @@ See `SCORING_RUBRICS.md` on each branch for the full per-sub-criterion breakdown
 We welcome contributions from clinicians, researchers, and engineers — you do not need to know our harness internals to help.
 
 ### Have a task idea?
-Open a GitHub issue describing a clinical problem you'd like agents to tackle: what the input looks like, what the ground truth is, and what "done" means. We'll handle the wiring.
+Open a GitHub issue describing a medical problem you'd like agents to tackle: what the input looks like, what the ground truth is, and what "done" means. We'll handle the wiring.
 
 ### Want a new domain?
-Segmentation, VQA, and report generation are just the start. Propose any clinical AI task with deterministic ground truth — we'd love to add it.
+Segmentation, VQA, and report generation are just the start. Propose any medical AI task with deterministic ground truth — we'd love to add it.
 
 ### Ran the benchmark on a new agent?
 Share your results and we'll get them onto the live dashboard. Submission flow is in flight — open an issue to coordinate.

@@ -6,7 +6,7 @@ Each task ships in 2–3 tiers, controlled by how much scaffolding the agent rec
 |---|---|---|---|---|
 | **Lite** | Exact SOTA model named (e.g. "use nnU-Net KiTS19") | `requirements.txt` provided | S1 + S2 + S3 skills all provided | Execution competence: can the agent follow a recipe? |
 | **Standard** | 2–5 candidate model families listed | Agent figures out pinning | S1 skill only | Judgment under constrained choice: can it pick wisely? |
-| **Pro** | Only clinical background text | Agent figures everything out | No skills | Open-research capability: can it design from scratch? |
+| **Pro** | Only medical background text | Agent figures everything out | No skills | Open-research capability: can it design from scratch? |
 
 ## Why three tiers
 

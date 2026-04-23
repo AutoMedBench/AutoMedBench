@@ -1,13 +1,21 @@
 # Task Gallery
 
-AutoMedBench currently hosts **13 tasks across 5 domains**. Each task is defined on its own branch.
+AutoMedBench currently hosts **13 sub-tasks across 5 domains**. Each branch holds the code, configs, and prompts for one domain.
 
-| Branch | Domain | Tasks | Clinical metric |
-|---|---|---|---|
-| [`eval_seg`](../../../tree/eval_seg) | 3D segmentation | kidney · liver · pancreas · feta (7-class fetal brain) | mean Dice |
-| [`eval_image_enhancement`](../../../tree/eval_image_enhancement) | 2D image enhancement | LDCT denoising · MRI ×2 super-resolution | mean SSIM |
-| [`eval_report_gen`](../../../tree/eval_report_gen) | CXR report generation | MIMIC-CXR findings | MLRG 7-metric mean |
-| [`eval_vqa`](../../../tree/eval_vqa) | medical VQA | PathVQA · VQA-RAD · SLAKE · MedFrameQA · MedXpertQA-MM | accuracy |
-| [`eval_det2d`](../../../tree/eval_det2d) | 2D detection *(beta)* | VinDr-CXR abnormality | mAP@0.5 |
+| Branch | Domain | Sub-task | Source | Task metric |
+|---|---|---|---|---|
+| [`eval_seg`](../../../tree/eval_seg) | Segmentation | Kidney tumor segmentation | [KiTS19](https://kits19.grand-challenge.org/) | Dice |
+| [`eval_seg`](../../../tree/eval_seg) | Segmentation | Liver tumor segmentation | [LiTS](https://competitions.codalab.org/competitions/17094) | Dice |
+| [`eval_seg`](../../../tree/eval_seg) | Segmentation | Pancreas tumor segmentation | [PanTS](https://huggingface.co/datasets/BodyMaps/PanTSMini) | Dice |
+| [`eval_seg`](../../../tree/eval_seg) | Segmentation | Fetal brain 7-class segmentation | [FeTA](https://fetachallenge.github.io/) | Dice |
+| [`eval_image_enhancement`](../../../tree/eval_image_enhancement) | Enhancement | LDCT denoising | [LDCT-SimNICT](https://www.aapm.org/GrandChallenge/LowDoseCT/) | SSIM |
+| [`eval_image_enhancement`](../../../tree/eval_image_enhancement) | Enhancement | MRI super-resolution (×2) | [SR-MRI](https://www.fastmri.org/) | SSIM |
+| [`eval_report_gen`](../../../tree/eval_report_gen) | Report Generation | CXR findings generation | [MIMIC-CXR](https://physionet.org/content/mimic-cxr/) | MLRG-7 mean |
+| [`eval_vqa`](../../../tree/eval_vqa) | VQA | Pathology VQA | [PathVQA](https://github.com/UCSD-AI4H/PathVQA) | accuracy |
+| [`eval_vqa`](../../../tree/eval_vqa) | VQA | Radiology VQA | [VQA-RAD](https://osf.io/89kps/) | accuracy |
+| [`eval_vqa`](../../../tree/eval_vqa) | VQA | Bilingual medical VQA | [SLAKE](https://www.med-vqa.com/slake/) | accuracy |
+| [`eval_vqa`](../../../tree/eval_vqa) | VQA | Multi-frame medical VQA | [MedFrameQA](https://huggingface.co/datasets/SuhaoYu1020/MedFrameQA) | accuracy |
+| [`eval_vqa`](../../../tree/eval_vqa) | VQA | Expert-level medical VQA | [MedXpertQA-MM](https://huggingface.co/datasets/TsinghuaC3I/MedXpertQA) | accuracy |
+| [`eval_det2d`](../../../tree/eval_det2d) | Lesion Detection | Chest X-ray abnormality | [VinDr-CXR](https://physionet.org/content/vindr-cxr/) | mAP@0.5 |
 
-Each task directory contains `config.yaml` (task metadata), `model_info.yaml` (candidate models for Standard tier), `requirements.txt`, and per-tier skill markdown files (`lite_s1.md`, `standard_s1.md`, …).
+Each sub-task directory contains `config.yaml` (task metadata), `model_info.yaml` (candidate models for Standard tier), `requirements.txt`, and per-tier skill markdown files (`lite_s1.md`, `standard_s1.md`, …).
