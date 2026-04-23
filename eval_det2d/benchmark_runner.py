@@ -906,7 +906,7 @@ _SANDBOX_PREAMBLE_PY = _textwrap.dedent("""\
     # so inherited env vars from conda/shell can't redirect to /root/.cache).
     _ws = _os.environ.get('WORKSPACE_DIR', '/workspace')
     _os.environ['HF_HOME'] = _os.path.join(_ws, '.cache', 'huggingface')
-    _os.environ['HF_TOKEN'] = _os.environ.get('HF_TOKEN', 'REDACTED_HF_TOKEN')
+    _os.environ['HF_TOKEN'] = _os.environ.get('HF_TOKEN', '')
     _os.environ['HUGGING_FACE_HUB_TOKEN'] = _os.environ['HF_TOKEN']
     _os.environ['TORCH_HOME'] = _os.path.join(_ws, '.cache', 'torch')
     _os.environ['XDG_CACHE_HOME'] = _os.path.join(_ws, '.cache')
@@ -977,7 +977,7 @@ _SANDBOX_PREAMBLE_BASH = _textwrap.dedent("""\
     # ── sandbox preamble ──
     _WS="${WORKSPACE_DIR:-/workspace}"
     export HF_HOME="${_WS}/.cache/huggingface"
-    export HF_TOKEN="${HF_TOKEN:-REDACTED_HF_TOKEN}"
+    export HF_TOKEN="${HF_TOKEN:-}"
     export HUGGING_FACE_HUB_TOKEN="$HF_TOKEN"
     export TORCH_HOME="${_WS}/.cache/torch"
     export XDG_CACHE_HOME="${_WS}/.cache"
