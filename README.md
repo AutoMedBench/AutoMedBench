@@ -36,7 +36,7 @@ Sandbox containers and datasets are hosted on HuggingFace.
 ```bash
 # 1. Clone the domain branch you want to test
 git clone --branch eval_seg --single-branch \
-    https://github.com/KumaKuma2002/AutoMedBench.git
+    https://github.com/AutoMedBench/AutoMedBench.git
 cd AutoMedBench
 
 # 2. Pull the sandbox (tag is in each branch README)
