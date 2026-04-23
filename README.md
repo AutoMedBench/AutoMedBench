@@ -1,6 +1,6 @@
-# [AutoMedBench](https://keen-bonbon-690c3c.netlify.app/)
+# [AutoMedBench](https://automedbench.github.io/)
 
-[![Website](https://img.shields.io/badge/Website-automedbench-76B900?style=for-the-badge)](https://keen-bonbon-690c3c.netlify.app/)
+[![Website](https://img.shields.io/badge/Website-automedbench-76B900?style=for-the-badge)](https://automedbench.github.io/)
 [![Sandbox](https://img.shields.io/badge/Sandbox-coming_soon-FFD21E?style=for-the-badge)](#)
 [![License](https://img.shields.io/badge/License-Research_only-2B2B25?style=for-the-badge)](LICENSE)
 
@@ -84,7 +84,7 @@ Full per-stage rubric: see each branch's `SCORING_RUBRICS.md`.
 
 ## 5. Live Dashboard
 
-A live leaderboard is maintained at **[keen-bonbon-690c3c.netlify.app](https://keen-bonbon-690c3c.netlify.app/)**.
+A live leaderboard is maintained at **[automedbench.github.io](https://automedbench.github.io/)**.
 
 The dashboard shows:
 - **Overall Score** across all tasks, per agent
