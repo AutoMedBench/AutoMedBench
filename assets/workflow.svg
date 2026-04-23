@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 320" width="1400" height="320"
+     role="img" aria-label="Medical AutoResearch pipeline — S1 Plan, S2 Setup, S3 Validate, S4 Inference, S5 Submit">
+  <defs>
+    <style><![CDATA[
+      .bg       { fill: #F6F1E6; }
+      .card     { fill: #FAF6EE; stroke: #ECE4D2; stroke-width: 1.2; }
+      .iconbg   { fill: #E6EDE5; }
+      .icon     { stroke: #4A7355; stroke-width: 1.7; fill: none;
+                  stroke-linecap: round; stroke-linejoin: round; }
+      .pulse    { stroke: #B56A5B; stroke-width: 2; fill: none;
+                  stroke-linecap: round; stroke-linejoin: round; }
+      .sid      { font-family: 'Fraunces', 'Georgia', 'Times New Roman', serif;
+                  font-weight: 700; font-size: 13px; fill: #4A7355;
+                  letter-spacing: 0.12em; }
+      .sname    { font-family: 'Inter', 'Helvetica', sans-serif;
+                  font-weight: 700; font-size: 24px; fill: #3B4538;
+                  letter-spacing: 0.02em; }
+      .sdesc    { font-family: 'Inter', 'Helvetica', sans-serif;
+                  font-weight: 400; font-size: 13px; fill: #737A6D; }
+      .arrow    { stroke: #83996E; stroke-width: 2.4; fill: none;
+                  stroke-linecap: round; stroke-linejoin: round; }
+      .arrowhd  { fill: #83996E; }
+      .header   { font-family: 'Fraunces', 'Georgia', 'Times New Roman', serif;
+                  font-weight: 600; font-style: italic; font-size: 22px;
+                  fill: #3B4538; }
+      .badge    { font-family: 'Inter', 'Helvetica', sans-serif;
+                  font-weight: 600; font-size: 12px; fill: #B56A5B;
+                  letter-spacing: 0.12em; text-transform: uppercase; }
+      .subhead  { font-family: 'Inter', 'Helvetica', sans-serif;
+                  font-weight: 400; font-size: 14px; fill: #737A6D; }
+    ]]></style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1400" height="320"/>
+
+  <!-- Medical identity badge: heart-pulse icon + MEDICAL AUTORESEARCH -->
+  <g transform="translate(40, 42)">
+    <polyline class="pulse" points="0,0 6,0 9,-10 15,10 18,0 28,0"/>
+    <text class="badge" x="38" y="5">Medical AutoResearch pipeline</text>
+  </g>
+
+  <!-- Heading + subheading -->
+  <text class="header"  x="40" y="82">Agent Workflow</text>
+  <text class="subhead" x="40" y="104">Every task, every domain — five stages, each scored independently.</text>
+
+  <!-- =========================== S1 PLAN =========================== -->
+  <g>
+    <rect class="card" x="40" y="140" width="220" height="150" rx="8" ry="8"/>
+    <!-- clipboard-list icon, 28x28, top-right -->
+    <circle class="iconbg" cx="228" cy="168" r="16"/>
+    <g class="icon" transform="translate(214, 154)">
+      <rect x="5" y="3" width="18" height="22" rx="2"/>
+      <rect x="9" y="0" width="10" height="6" rx="1"/>
+      <line x1="10" y1="13" x2="18" y2="13"/>
+      <line x1="10" y1="18" x2="18" y2="18"/>
+    </g>
+    <text class="sid"   x="60" y="172">S1</text>
+    <text class="sname" x="60" y="204">PLAN</text>
+    <text class="sdesc" x="60" y="242">research candidate</text>
+    <text class="sdesc" x="60" y="260">models, write plan.md</text>
+  </g>
+  <path class="arrow"   d="M268 215 H307"/>
+  <path class="arrowhd" d="M307 211 L315 215 L307 219 Z"/>
+
+  <!-- =========================== S2 SETUP ========================== -->
+  <g>
+    <rect class="card" x="323" y="140" width="220" height="150" rx="8" ry="8"/>
+    <!-- microscope icon -->
+    <circle class="iconbg" cx="511" cy="168" r="16"/>
+    <g class="icon" transform="translate(497, 154)">
+      <path d="M6 18 h8"/>
+      <path d="M3 22 h18"/>
+      <path d="M14 22 a7 7 0 1 0 0-14 h-1"/>
+      <path d="M9 14 h2"/>
+      <path d="M8 6 L8 2 h7"/>
+      <path d="M11 6 L11 4 h2 v2"/>
+    </g>
+    <text class="sid"   x="343" y="172">S2</text>
+    <text class="sname" x="343" y="204">SETUP</text>
+    <text class="sdesc" x="343" y="242">download weights,</text>
+    <text class="sdesc" x="343" y="260">install deps, load GPU</text>
+  </g>
+  <path class="arrow"   d="M551 215 H590"/>
+  <path class="arrowhd" d="M590 211 L598 215 L590 219 Z"/>
+
+  <!-- =========================== S3 VALIDATE ======================= -->
+  <g>
+    <rect class="card" x="606" y="140" width="240" height="150" rx="8" ry="8"/>
+    <!-- flask / test tube icon -->
+    <circle class="iconbg" cx="814" cy="168" r="16"/>
+    <g class="icon" transform="translate(800, 154)">
+      <path d="M10 2 v6.5 L4 19 a2 2 0 0 0 1.73 3 h12.54 a2 2 0 0 0 1.73-3 L14 8.5 V2"/>
+      <line x1="8" y1="2" x2="16" y2="2"/>
+      <path d="M7 15 h10"/>
+    </g>
+    <text class="sid"   x="626" y="172">S3</text>
+    <text class="sname" x="626" y="204">VALIDATE</text>
+    <text class="sdesc" x="626" y="242">pilot on one sample,</text>
+    <text class="sdesc" x="626" y="260">check shape &amp; quality</text>
+  </g>
+  <path class="arrow"   d="M854 215 H893"/>
+  <path class="arrowhd" d="M893 211 L901 215 L893 219 Z"/>
+
+  <!-- =========================== S4 INFERENCE ====================== -->
+  <g>
+    <rect class="card" x="909" y="140" width="240" height="150" rx="8" ry="8"/>
+    <!-- brain icon (simplified) -->
+    <circle class="iconbg" cx="1117" cy="168" r="16"/>
+    <g class="icon" transform="translate(1103, 154)">
+      <path d="M9.5 2 A2.5 2.5 0 0 1 12 4.5 v15 a2.5 2.5 0 0 1-4.96 0.44 a2.5 2.5 0 0 1-2.96-3.08 a3 3 0 0 1-0.34-5.58 a2.5 2.5 0 0 1 1.32-4.24 a2.5 2.5 0 0 1 1.98-3 A2.5 2.5 0 0 1 9.5 2 Z"/>
+      <path d="M14.5 2 A2.5 2.5 0 0 0 12 4.5 v15 a2.5 2.5 0 0 0 4.96 0.44 a2.5 2.5 0 0 0 2.96-3.08 a3 3 0 0 0 0.34-5.58 a2.5 2.5 0 0 0-1.32-4.24 a2.5 2.5 0 0 0-1.98-3 A2.5 2.5 0 0 0 14.5 2 Z"/>
+    </g>
+    <text class="sid"   x="929" y="172">S4</text>
+    <text class="sname" x="929" y="204">INFERENCE</text>
+    <text class="sdesc" x="929" y="242">run the full cohort,</text>
+    <text class="sdesc" x="929" y="260">save per-sample outputs</text>
+  </g>
+  <path class="arrow"   d="M1157 215 H1196"/>
+  <path class="arrowhd" d="M1196 211 L1204 215 L1196 219 Z"/>
+
+  <!-- =========================== S5 SUBMIT ========================= -->
+  <g>
+    <rect class="card" x="1212" y="140" width="148" height="150" rx="8" ry="8"/>
+    <!-- clipboard-check icon -->
+    <circle class="iconbg" cx="1328" cy="168" r="16"/>
+    <g class="icon" transform="translate(1314, 154)">
+      <rect x="5" y="3" width="18" height="22" rx="2"/>
+      <rect x="9" y="0" width="10" height="6" rx="1"/>
+      <polyline points="10,14 13,17 18,12"/>
+    </g>
+    <text class="sid"   x="1232" y="172">S5</text>
+    <text class="sname" x="1232" y="204">SUBMIT</text>
+    <text class="sdesc" x="1232" y="242">verify completeness,</text>
+    <text class="sdesc" x="1232" y="260">call submit_results</text>
+  </g>
+</svg>

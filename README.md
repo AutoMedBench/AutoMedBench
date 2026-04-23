@@ -7,6 +7,10 @@
 > Towards *Medical AutoResearch* <br>
 > — a benchmark for AI agents on medical AI tasks.
 
+<p align="center">
+  <img src="assets/workflow.png" alt="AutoMedBench agent workflow — S1 Plan, S2 Setup, S3 Validate, S4 Inference, S5 Submit" width="960">
+</p>
+
 ---
 
 ## 1. Introduction
