@@ -60,7 +60,7 @@ agents:
     provider: openai
     model: moonshotai/kimi-k2-thinking
     base_url: https://openrouter.ai/api/v1
-    api_key: REDACTED_OPENROUTER_API_KEY
+    api_key: ${OPENROUTER_API_KEY}
     reasoning: true
 
   # --- DeepSeek (OpenAI-compatible) ---
