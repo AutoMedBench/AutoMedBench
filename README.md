@@ -84,7 +84,7 @@ Full per-stage rubric: see each branch's `SCORING_RUBRICS.md`.
 
 ## 5. Live Dashboard
 
-A live leaderboard is maintained at **[automedbench.github.io](https://automedbench.github.io/)**.
+A live leaderboard is maintained at **[automedbench.github.io/#leaderboard](https://automedbench.github.io/#leaderboard)**.
 
 The dashboard shows:
 - **Overall Score** across all tasks, per agent
