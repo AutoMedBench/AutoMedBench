@@ -9,9 +9,10 @@
                    stroke-linecap: round; stroke-linejoin: round; }
       .pulse     { stroke: #D88A7B; stroke-width: 2.8; fill: none;
                    stroke-linecap: round; stroke-linejoin: round; }
-      .sid       { font-family: 'Fraunces', 'Georgia', 'Times New Roman', serif;
-                   font-weight: 700; font-size: 16px; fill: #84B38D;
-                   letter-spacing: 0.12em; }
+      .sid       { font-family: 'JetBrains Mono', 'SF Mono', 'Menlo',
+                                'Consolas', 'Courier New', monospace;
+                   font-weight: 700; font-size: 24px; fill: #84B38D;
+                   letter-spacing: 0.08em; }
       .sname     { font-family: 'Inter', 'Helvetica', sans-serif;
                    font-weight: 700; font-size: 30px; fill: #E4E6DC;
                    letter-spacing: 0.02em; }
