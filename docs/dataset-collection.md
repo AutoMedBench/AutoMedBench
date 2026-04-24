@@ -16,7 +16,7 @@
 | MedFrameQA | VQA | [HuggingFace dataset](https://huggingface.co/datasets/SuhaoYu1020/MedFrameQA) | 2024 |
 | MedXpertQA-MM | VQA | [TsinghuaC3I MedXpertQA](https://huggingface.co/datasets/TsinghuaC3I/MedXpertQA) | 2024 |
 | MIMIC-CXR | Report Generation | [PhysioNet MIMIC-CXR](https://physionet.org/content/mimic-cxr/) | 2019 |
-| VinDr-CXR | Lesion Detection | [PhysioNet VinDr-CXR](https://physionet.org/content/vindr-cxr/) | 2022 |
+| VinBigData CXR | Lesion Detection | [Kaggle VinBigData Chest X-ray Abnormalities Detection](https://www.kaggle.com/competitions/vinbigdata-chest-xray-abnormalities-detection/) | 2020 |
 
 Every dataset satisfies three requirements: (1) publicly available, (2) deterministic ground truth, (3) peer-reviewed / challenge-backed.
 
@@ -50,14 +50,13 @@ The agent container has **no mount** to `private/`. The eval container runs with
 | MedFrameQA | see HuggingFace card | public (HuggingFace) | verify on source | verify on source |
 | MedXpertQA-MM | see HuggingFace card | public (HuggingFace) | verify on source | verify on source |
 | MIMIC-CXR | [PhysioNet Credentialed Health Data License 1.5.0](https://physionet.org/content/mimic-cxr/) | **credentialed; DUA + CITI training required** | **not permitted** | **not permitted** |
-| VinDr-CXR | [PhysioNet Credentialed Health Data License 1.5.0](https://physionet.org/content/vindr-cxr/) | **credentialed; DUA + CITI training required** | **not permitted** | **not permitted** |
+| VinBigData CXR | see [competition rules](https://www.kaggle.com/competitions/vinbigdata-chest-xray-abnormalities-detection/rules) | public (Kaggle, login required) | verify on source | verify on source |
 
 ### Strict-access datasets
 
-Three datasets require institutional credentialing and a signed Data Use Agreement before anyone may access the files. Running the benchmark tasks that depend on them requires the runner to hold valid credentials. AutoMedBench never stages this data into any public branch.
+Two datasets require institutional credentialing and a signed Data Use Agreement before anyone may access the files. Running the benchmark tasks that depend on them requires the runner to hold valid credentials. AutoMedBench never stages this data into any public branch.
 
 - **MIMIC-CXR** — PhysioNet credentialed; DUA + CITI training. No redistribution, no commercial use.
-- **VinDr-CXR** — same PhysioNet credentialed license. No redistribution, no commercial use.
 - **SR-MRI (fastMRI)** — NYU Langone Data Sharing Agreement; application required. No redistribution, no commercial use; MLCommons/MLPerf benchmarking is the only carve-out.
 
 ### A note on AutoMedBench's own license
