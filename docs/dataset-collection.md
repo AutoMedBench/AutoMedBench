@@ -32,6 +32,34 @@ data/<DatasetName>/
 
 The agent container has **no mount** to `private/`. The eval container runs with `--network none` and scores agent outputs against `private/` offline.
 
-## Licensing
+## Licensing & access
 
-Each dataset keeps its original license. Redistribution of any AutoMedBench artifact that touches a dataset must preserve that dataset's license terms (KiTS, LiTS, MSD, FeTA, MIMIC-CXR, PathVQA, VQA-RAD, SLAKE, VinDr-CXR, etc.).
+> **Important.** AutoMedBench does not redistribute any dataset. Each dataset is governed by its own license and access requirements — the table below is a convenience pointer, not a legal statement. **Always verify the current license on the official source page** before using any dataset, and consult your institution's legal/compliance office for any use beyond individual non-commercial research.
+
+| Dataset | License | Access | Commercial use | Redistribution |
+|---|---|---|---|---|
+| KiTS19 | see [source](https://github.com/neheller/kits19) | public download | verify on source | verify on source |
+| LiTS | verify on source | public (Codalab) | verify on source | verify on source |
+| PanTS | [CC BY-NC-SA 4.0](https://huggingface.co/datasets/BodyMaps/PanTSMini) | public (HuggingFace) | **not permitted** | permitted under same license |
+| FeTA | verify on source | request-based | verify on source | verify on source |
+| LDCT-SimNICT | verify on source ([AAPM](https://www.aapm.org/GrandChallenge/LowDoseCT/)) | research-agreement | verify on source | verify on source |
+| SR-MRI (fastMRI) | [NYU Langone Data Sharing Agreement](https://fastmri.med.nyu.edu/) | application required | **not permitted** | **not permitted** |
+| PathVQA | see source | public (GitHub) | verify on source | verify on source |
+| VQA-RAD | verify on source | public (OSF) | verify on source | verify on source |
+| SLAKE | verify on source | public download | verify on source | verify on source |
+| MedFrameQA | see HuggingFace card | public (HuggingFace) | verify on source | verify on source |
+| MedXpertQA-MM | see HuggingFace card | public (HuggingFace) | verify on source | verify on source |
+| MIMIC-CXR | [PhysioNet Credentialed Health Data License 1.5.0](https://physionet.org/content/mimic-cxr/) | **credentialed; DUA + CITI training required** | **not permitted** | **not permitted** |
+| VinDr-CXR | [PhysioNet Credentialed Health Data License 1.5.0](https://physionet.org/content/vindr-cxr/) | **credentialed; DUA + CITI training required** | **not permitted** | **not permitted** |
+
+### Strict-access datasets
+
+Three datasets require institutional credentialing and a signed Data Use Agreement before anyone may access the files. Running the benchmark tasks that depend on them requires the runner to hold valid credentials. AutoMedBench never stages this data into any public branch.
+
+- **MIMIC-CXR** — PhysioNet credentialed; DUA + CITI training. No redistribution, no commercial use.
+- **VinDr-CXR** — same PhysioNet credentialed license. No redistribution, no commercial use.
+- **SR-MRI (fastMRI)** — NYU Langone Data Sharing Agreement; application required. No redistribution, no commercial use; MLCommons/MLPerf benchmarking is the only carve-out.
+
+### A note on AutoMedBench's own license
+
+The AutoMedBench **code** is MIT-licensed (see `LICENSE`). The code license does not extend to any dataset it reads: using AutoMedBench to run tasks on a given dataset means you are also bound by that dataset's license and access terms.
