@@ -7,6 +7,7 @@
 | KiTS19 | Segmentation | [KiTS19 Challenge](https://kits19.grand-challenge.org/) | 2019 |
 | LiTS | Segmentation | [LiTS Challenge](https://competitions.codalab.org/competitions/17094) | 2017 |
 | PanTS | Segmentation | [BodyMaps PanTS](https://huggingface.co/datasets/BodyMaps/PanTSMini) | 2024 |
+| AMOS | Segmentation | [AMOS Challenge](https://amos22.grand-challenge.org/) | 2022 |
 | FeTA | Segmentation | [FeTA Challenge](https://fetachallenge.github.io/) | 2021 |
 | LDCT-SimNICT | Enhancement | [AAPM Low-Dose CT Grand Challenge](https://www.aapm.org/GrandChallenge/LowDoseCT/) | 2016 |
 | SR-MRI | Enhancement | [fastMRI](https://www.fastmri.org/) | 2018 |

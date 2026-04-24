@@ -1,12 +1,13 @@
 # Task Gallery
 
-AutoMedBench currently hosts **13 sub-tasks across 5 domains**. Each branch holds the code, configs, and prompts for one domain.
+AutoMedBench currently hosts **14 sub-tasks across 5 domains**. Each branch holds the code, configs, and prompts for one domain.
 
 | Branch | Domain | Sub-task | Source | Task metric |
 |---|---|---|---|---|
 | [`eval_seg`](../../../tree/eval_seg) | Segmentation | Kidney tumor segmentation | [KiTS19](https://kits19.grand-challenge.org/) | Dice |
 | [`eval_seg`](../../../tree/eval_seg) | Segmentation | Liver tumor segmentation | [LiTS](https://competitions.codalab.org/competitions/17094) | Dice |
 | [`eval_seg`](../../../tree/eval_seg) | Segmentation | Pancreas tumor segmentation | [PanTS](https://huggingface.co/datasets/BodyMaps/PanTSMini) | Dice |
+| [`eval_seg`](../../../tree/eval_seg) | Segmentation | Pancreatic tumor + organs-at-risk (multi-organ) | [AMOS](https://amos22.grand-challenge.org/) | macro-Dice |
 | [`eval_seg`](../../../tree/eval_seg) | Segmentation | Fetal brain 7-class segmentation | [FeTA](https://fetachallenge.github.io/) | Dice |
 | [`eval_image_enhancement`](../../../tree/eval_image_enhancement) | Enhancement | LDCT denoising | [LDCT-SimNICT](https://www.aapm.org/GrandChallenge/LowDoseCT/) | SSIM |
 | [`eval_image_enhancement`](../../../tree/eval_image_enhancement) | Enhancement | MRI super-resolution (×2) | [SR-MRI](https://www.fastmri.org/) | SSIM |
