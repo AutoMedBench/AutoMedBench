@@ -5,7 +5,6 @@
 | Dataset | Task | Challenge / Paper | Year |
 |---|---|---|---|
 | KiTS19 | Segmentation | [KiTS19 Challenge](https://kits19.grand-challenge.org/) | 2019 |
-| LiTS | Segmentation | [LiTS Challenge](https://competitions.codalab.org/competitions/17094) | 2017 |
 | PanTS | Segmentation | [BodyMaps PanTS](https://huggingface.co/datasets/BodyMaps/PanTSMini) | 2024 |
 | FeTA | Segmentation | [FeTA Challenge](https://fetachallenge.github.io/) | 2021 |
 | LDCT-SimNICT | Enhancement | [AAPM Low-Dose CT Grand Challenge](https://www.aapm.org/GrandChallenge/LowDoseCT/) | 2016 |
@@ -16,7 +15,7 @@
 | MedFrameQA | VQA | [HuggingFace dataset](https://huggingface.co/datasets/SuhaoYu1020/MedFrameQA) | 2024 |
 | MedXpertQA-MM | VQA | [TsinghuaC3I MedXpertQA](https://huggingface.co/datasets/TsinghuaC3I/MedXpertQA) | 2024 |
 | MIMIC-CXR | Report Generation | [PhysioNet MIMIC-CXR](https://physionet.org/content/mimic-cxr/) | 2019 |
-| VinBigData CXR | Lesion Detection | [Kaggle VinBigData Chest X-ray Abnormalities Detection](https://www.kaggle.com/competitions/vinbigdata-chest-xray-abnormalities-detection/) | 2020 |
+| VinDr-CXR | Lesion Detection | [VinDr.ai VinDr-CXR](https://vindr.ai/datasets/vindr-cxr) | 2022 |
 
 Every dataset satisfies three requirements: (1) publicly available, (2) deterministic ground truth, (3) peer-reviewed / challenge-backed.
 
@@ -39,7 +38,6 @@ The agent container has **no mount** to `private/`. The eval container runs with
 | Dataset | License | Access | Commercial use | Redistribution |
 |---|---|---|---|---|
 | KiTS19 | see [source](https://github.com/neheller/kits19) | public download | verify on source | verify on source |
-| LiTS | verify on source | public (Codalab) | verify on source | verify on source |
 | PanTS | [CC BY-NC-SA 4.0](https://huggingface.co/datasets/BodyMaps/PanTSMini) | public (HuggingFace) | **not permitted** | permitted under same license |
 | FeTA | verify on source | request-based | verify on source | verify on source |
 | LDCT-SimNICT | verify on source ([AAPM](https://www.aapm.org/GrandChallenge/LowDoseCT/)) | research-agreement | verify on source | verify on source |
@@ -50,7 +48,7 @@ The agent container has **no mount** to `private/`. The eval container runs with
 | MedFrameQA | see HuggingFace card | public (HuggingFace) | verify on source | verify on source |
 | MedXpertQA-MM | see HuggingFace card | public (HuggingFace) | verify on source | verify on source |
 | MIMIC-CXR | [PhysioNet Credentialed Health Data License 1.5.0](https://physionet.org/content/mimic-cxr/) | **credentialed; DUA + CITI training required** | **not permitted** | **not permitted** |
-| VinBigData CXR | see [competition rules](https://www.kaggle.com/competitions/vinbigdata-chest-xray-abnormalities-detection/rules) | public (Kaggle, login required) | verify on source | verify on source |
+| VinDr-CXR | see [VinDr.ai terms](https://vindr.ai/datasets/vindr-cxr) | public (VinDr.ai) | verify on source | verify on source |
 
 ### Strict-access datasets
 
