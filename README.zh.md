@@ -1,7 +1,7 @@
 # [AutoMedBench](https://automedbench.github.io/)
 
 [![Website](https://img.shields.io/badge/Website-automedbench-76B900?style=for-the-badge)](https://automedbench.github.io/)
-[![Sandbox](https://img.shields.io/badge/Sandbox-coming_soon-FFD21E?style=for-the-badge)](#)
+[![Sandbox](https://img.shields.io/badge/Sandbox-online-D2B684?style=for-the-badge)](https://automedbench.github.io/submit.html)
 [![License](https://img.shields.io/badge/License-MIT-2B2B25?style=for-the-badge)](LICENSE)
 
 [English](README.md) · **中文**
@@ -26,7 +26,7 @@ Overall = 0.5 × Agentic (S1–S5 过程评分) + 0.5 × Task (任务指标)
 沙箱容器与数据集将托管在 HuggingFace。
 
 <p align="left">
-  <a href="#"><img src="https://img.shields.io/badge/Sandbox-coming_soon-FFD21E?style=for-the-badge" alt="Sandbox — coming soon"></a>
+  <a href="https://automedbench.github.io/submit.html"><img src="https://img.shields.io/badge/Sandbox-online-D2B684?style=for-the-badge" alt="Sandbox — online"></a>
 </p>
 
 ```bash
