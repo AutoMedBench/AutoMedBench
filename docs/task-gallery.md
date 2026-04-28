@@ -4,11 +4,11 @@ AutoMedBench currently hosts **32 active task combos across 5 domains** — 16 u
 
 | Branch | Domain | Sub-task | Source | Task metric |
 |---|---|---|---|---|
-| [`eval_seg`](../../../tree/eval_seg) | Segmentation | Kidney Tumor | [KiTS19](https://kits19.grand-challenge.org/) | Dice |
-| [`eval_seg`](../../../tree/eval_seg) | Segmentation | Pancreas Tumor | [PanTS](https://huggingface.co/datasets/BodyMaps/PanTSMini) | Dice |
+| [`eval_seg`](../../../tree/eval_seg) | Segmentation | Kidney Tumor | [KiTS19](https://kits19.grand-challenge.org/) | macro-Dice |
+| [`eval_seg`](../../../tree/eval_seg) | Segmentation | Pancreas Tumor | [PanTS](https://huggingface.co/datasets/BodyMaps/PanTSMini) | macro-Dice |
 | [`eval_seg`](../../../tree/eval_seg) | Segmentation | Pancreas OAR | [PanTS](https://huggingface.co/datasets/BodyMaps/PanTSMini) | macro-Dice |
-| [`eval_seg`](../../../tree/eval_seg) | Segmentation | Fetal Brain Tissues | [FeTA](https://fetachallenge.github.io/) | Dice |
-| [`eval_seg`](../../../tree/eval_seg) | Segmentation | Airway Tree | [AeroPath](https://github.com/raidionics/AeroPath) | Dice |
+| [`eval_seg`](../../../tree/eval_seg) | Segmentation | Fetal Brain Tissues | [FeTA](https://fetachallenge.github.io/) | macro-Dice |
+| [`eval_seg`](../../../tree/eval_seg) | Segmentation | Airway Tree | [AeroPath](https://github.com/raidionics/AeroPath) | macro-Dice |
 | [`eval_seg`](../../../tree/eval_seg) | Segmentation | Multi-Organ | [TotalSegmentator](https://github.com/wasserth/TotalSegmentator) | macro-Dice |
 | [`eval_image_enhancement`](../../../tree/eval_image_enhancement) | Enhancement | LDCT Denoising | [LDCT-SimNICT](https://www.aapm.org/GrandChallenge/LowDoseCT/) | SSIM |
 | [`eval_image_enhancement`](../../../tree/eval_image_enhancement) | Enhancement | MRI Super-Resolution | [SR-MRI](https://www.fastmri.org/) | SSIM |
