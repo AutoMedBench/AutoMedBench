@@ -94,7 +94,7 @@ The dashboard shows:
 - **Per-task leaderboards** with Dice / SSIM / accuracy / mAP distributions
 - **Cost, turns, wall-time, token use** per run
 
-Currently live: segmentation + image enhancement. VQA and report generation are scored pending.
+Currently live across all 5 domains: segmentation, image enhancement, VQA, report generation, and lesion detection — 32 active task combos in total.
 
 ---
 

@@ -7,6 +7,8 @@
 | KiTS19 | Segmentation | [KiTS19 Challenge](https://kits19.grand-challenge.org/) | 2019 |
 | PanTS | Segmentation | [BodyMaps PanTS](https://huggingface.co/datasets/BodyMaps/PanTSMini) | 2024 |
 | FeTA | Segmentation | [FeTA Challenge](https://fetachallenge.github.io/) | 2021 |
+| AeroPath | Segmentation | [AeroPath](https://github.com/raidionics/AeroPath) | 2023 |
+| TotalSegmentator | Segmentation | [TotalSegmentator](https://github.com/wasserth/TotalSegmentator) | 2023 |
 | LDCT-SimNICT | Enhancement | [AAPM Low-Dose CT Grand Challenge](https://www.aapm.org/GrandChallenge/LowDoseCT/) | 2016 |
 | SR-MRI | Enhancement | [fastMRI](https://www.fastmri.org/) | 2018 |
 | PathVQA | VQA | [He et al., 2020](https://arxiv.org/abs/2003.10286) | 2020 |
@@ -16,6 +18,9 @@
 | MedXpertQA-MM | VQA | [TsinghuaC3I MedXpertQA](https://huggingface.co/datasets/TsinghuaC3I/MedXpertQA) | 2024 |
 | MIMIC-CXR | Report Generation | [PhysioNet MIMIC-CXR](https://physionet.org/content/mimic-cxr/) | 2019 |
 | VinDr-CXR | Lesion Detection | [VinDr.ai VinDr-CXR](https://vindr.ai/datasets/vindr-cxr) | 2022 |
+| BCCD | Lesion Detection | [BCCD (HuggingFace)](https://huggingface.co/datasets/keremberke/blood-cell-object-detection) | 2018 |
+| DENTEX | Lesion Detection | [DENTEX (HuggingFace)](https://huggingface.co/datasets/ibrahimhamamci/DENTEX) | 2023 |
+| GRAZPEDWRI-DX | Lesion Detection | [GRAZPEDWRI-DX (figshare)](https://figshare.com/articles/dataset/GRAZPEDWRI-DX/14825193) | 2022 |
 
 Every dataset satisfies three requirements: (1) publicly available, (2) deterministic ground truth, (3) peer-reviewed / challenge-backed.
 
@@ -40,6 +45,8 @@ The agent container has **no mount** to `private/`. The eval container runs with
 | KiTS19 | see [source](https://github.com/neheller/kits19) | public download | verify on source | verify on source |
 | PanTS | [CC BY-NC-SA 4.0](https://huggingface.co/datasets/BodyMaps/PanTSMini) | public (HuggingFace) | **not permitted** | permitted under same license |
 | FeTA | verify on source | request-based | verify on source | verify on source |
+| AeroPath | see [source](https://github.com/raidionics/AeroPath) | public download | verify on source | verify on source |
+| TotalSegmentator | see [source](https://github.com/wasserth/TotalSegmentator) | public download | verify on source | verify on source |
 | LDCT-SimNICT | verify on source ([AAPM](https://www.aapm.org/GrandChallenge/LowDoseCT/)) | research-agreement | verify on source | verify on source |
 | SR-MRI (fastMRI) | [NYU Langone Data Sharing Agreement](https://fastmri.med.nyu.edu/) | application required | **not permitted** | **not permitted** |
 | PathVQA | see source | public (GitHub) | verify on source | verify on source |
@@ -49,6 +56,9 @@ The agent container has **no mount** to `private/`. The eval container runs with
 | MedXpertQA-MM | see HuggingFace card | public (HuggingFace) | verify on source | verify on source |
 | MIMIC-CXR | [PhysioNet Credentialed Health Data License 1.5.0](https://physionet.org/content/mimic-cxr/) | **credentialed; DUA + CITI training required** | **not permitted** | **not permitted** |
 | VinDr-CXR | see [VinDr.ai terms](https://vindr.ai/datasets/vindr-cxr) | public (VinDr.ai) | verify on source | verify on source |
+| BCCD | see [HuggingFace card](https://huggingface.co/datasets/keremberke/blood-cell-object-detection) | public (HuggingFace) | verify on source | verify on source |
+| DENTEX | see [HuggingFace card](https://huggingface.co/datasets/ibrahimhamamci/DENTEX) | public (HuggingFace) | verify on source | verify on source |
+| GRAZPEDWRI-DX | see [figshare record](https://figshare.com/articles/dataset/GRAZPEDWRI-DX/14825193) | public (figshare) | verify on source | verify on source |
 
 ### Strict-access datasets
 
