@@ -13,8 +13,6 @@
 | SR-MRI | Enhancement | [fastMRI](https://www.fastmri.org/) | 2018 |
 | PathVQA | VQA | [He et al., 2020](https://arxiv.org/abs/2003.10286) | 2020 |
 | VQA-RAD | VQA | [Lau et al., 2018](https://osf.io/89kps/) | 2018 |
-| SLAKE | VQA | [Liu et al., ISBI 2021](https://www.med-vqa.com/slake/) | 2021 |
-| MedFrameQA | VQA | [HuggingFace dataset](https://huggingface.co/datasets/SuhaoYu1020/MedFrameQA) | 2024 |
 | MedXpertQA-MM | VQA | [TsinghuaC3I MedXpertQA](https://huggingface.co/datasets/TsinghuaC3I/MedXpertQA) | 2024 |
 | MIMIC-CXR | Report Generation | [PhysioNet MIMIC-CXR](https://physionet.org/content/mimic-cxr/) | 2019 |
 | VinDr-CXR | Lesion Detection | [VinDr.ai VinDr-CXR](https://vindr.ai/datasets/vindr-cxr) | 2022 |
@@ -51,8 +49,6 @@ The agent container has **no mount** to `private/`. The eval container runs with
 | SR-MRI (fastMRI) | [NYU Langone Data Sharing Agreement](https://fastmri.med.nyu.edu/) | application required | **not permitted** | **not permitted** |
 | PathVQA | see source | public (GitHub) | verify on source | verify on source |
 | VQA-RAD | verify on source | public (OSF) | verify on source | verify on source |
-| SLAKE | verify on source | public download | verify on source | verify on source |
-| MedFrameQA | see HuggingFace card | public (HuggingFace) | verify on source | verify on source |
 | MedXpertQA-MM | see HuggingFace card | public (HuggingFace) | verify on source | verify on source |
 | MIMIC-CXR | [PhysioNet Credentialed Health Data License 1.5.0](https://physionet.org/content/mimic-cxr/) | **credentialed; DUA + CITI training required** | **not permitted** | **not permitted** |
 | VinDr-CXR | see [VinDr.ai terms](https://vindr.ai/datasets/vindr-cxr) | public (VinDr.ai) | verify on source | verify on source |
