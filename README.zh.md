@@ -69,7 +69,7 @@ python eval_seg/docker/orchestrator.py \
 
 实时榜单维护于 **[automedbench.github.io/#leaderboard](https://automedbench.github.io/#leaderboard)**。
 
-目前 5 个领域全部上线：segmentation · image enhancement · VQA · report generation · lesion detection — 共 32 个活跃任务组合。
+目前 5 个领域全部上线：segmentation · image enhancement · VQA · report generation · lesion detection — 共 **48 个活跃任务组合**（Segmentation 16 · Image Enhancement 4 · VQA 10 · Report Generation 10 · Lesion Detection 8），覆盖 **7 个智能体模型**、**3,700+ 次实验**。
 
 ## 6. 贡献
 

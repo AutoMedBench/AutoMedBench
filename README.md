@@ -94,7 +94,7 @@ The dashboard shows:
 - **Per-task leaderboards** with Dice / SSIM / accuracy / mAP distributions
 - **Cost, turns, wall-time, token use** per run
 
-Currently live across all 5 domains: segmentation, image enhancement, VQA, report generation, and lesion detection — 32 active task combos in total.
+Currently live across all 5 domains: segmentation, image enhancement, VQA, report generation, and lesion detection — **48 active task combos** in total (Segmentation 16 · Image Enhancement 4 · VQA 10 · Report Generation 10 · Lesion Detection 8), evaluated on **7 agentic models** across **3,700+ recorded runs**.
 
 ---
 
