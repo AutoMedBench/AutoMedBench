@@ -1,6 +1,7 @@
 # [AutoMedBench](https://automedbench.github.io/)
 
 [![Website](https://img.shields.io/badge/Website-automedbench-76B900?style=for-the-badge)](https://automedbench.github.io/)
+[![arXiv](https://img.shields.io/badge/arXiv-2606.01961-B31B1B?style=for-the-badge)](https://arxiv.org/abs/2606.01961)
 [![Sandbox](https://img.shields.io/badge/Sandbox-online-D2B684?style=for-the-badge)](https://automedbench.github.io/submit.html)
 [![License](https://img.shields.io/badge/License-MIT-2B2B25?style=for-the-badge)](LICENSE)
 
@@ -155,11 +156,12 @@ If AutoMedBench is useful for your research, please cite:
 
 ```bibtex
 @misc{liu2026automedbench,
-  author       = {Liu, Junqi and Song, Salena and Wang, Yuhan and Mao, Jiawei and Chen, Guiming and Huang, Xiaoke and Qi, Tianhao and Tang, Yucheng and Xu, Daguang and Zhou, Yuyin},
-  title        = {AutoMedBench: Towards Medical AutoResearch},
-  year         = {2026},
-  organization = {GitHub},
-  url          = {https://github.com/AutoMedBench/AutoMedBench},
+  title         = {AutoMedBench: Towards Medical AutoResearch with Agentic AI Models},
+  author        = {Liu, Junqi and Song, Salena and Wang, Yuhan and Mao, Jiawei and Chen, Hardy and Huang, Xiaoke and Qi, Tianhao and Guo, Pengfei and Tang, Yucheng and He, Yufan and Zhao, Can and Myronenko, Andriy and Yang, Dong and Xu, Daguang and Zhou, Yuyin},
+  year          = {2026},
+  eprint        = {2606.01961},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
 }
 ```
 
