@@ -157,7 +157,7 @@ If AutoMedBench is useful for your research, please cite:
 ```bibtex
 @misc{liu2026automedbench,
   title         = {AutoMedBench: Towards Medical AutoResearch with Agentic AI Models},
-  author        = {Liu, Junqi and Song, Salena and Wang, Yuhan and Mao, Jiawei and Chen, Hardy and Huang, Xiaoke and Qi, Tianhao and Guo, Pengfei and Tang, Yucheng and He, Yufan and Zhao, Can and Myronenko, Andriy and Yang, Dong and Xu, Daguang and Zhou, Yuyin},
+  author        = {Liu, Junqi and Song, Selena and Wang, Yuhan and Mao, Jiawei and Chen, Hardy and Huang, Xiaoke and Qi, Tianhao and Guo, Pengfei and Tang, Yucheng and He, Yufan and Zhao, Can and Myronenko, Andriy and Yang, Dong and Xu, Daguang and Zhou, Yuyin},
   year          = {2026},
   eprint        = {2606.01961},
   archivePrefix = {arXiv},
