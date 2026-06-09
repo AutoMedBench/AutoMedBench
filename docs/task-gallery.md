@@ -1,6 +1,6 @@
 # Task Gallery
 
-AutoMedBench currently hosts **48 active task combos across 5 domains** — 24 unique sub-tasks evaluated at Lite / Standard tiers (Pro tier coming soon). Each branch holds the code, configs, and prompts for one domain.
+AutoMedBench currently hosts **50 active task combos across 6 domains** — 25 unique sub-tasks evaluated at Lite / Standard tiers (Pro tier coming soon). Each branch holds the code, configs, and prompts for one domain.
 
 | Branch | Domain | Sub-task | Source | Task metric |
 |---|---|---|---|---|
@@ -28,5 +28,6 @@ AutoMedBench currently hosts **48 active task combos across 5 domains** — 24 u
 | [`eval_det2d`](../../../tree/eval_det2d) | Lesion Detection | Blood Cell Detection | [BCCD](https://huggingface.co/datasets/keremberke/blood-cell-object-detection) | mAP@0.5 |
 | [`eval_det2d`](../../../tree/eval_det2d) | Lesion Detection | Dental Disease Detection | [DENTEX](https://huggingface.co/datasets/ibrahimhamamci/DENTEX) | mAP@0.5 |
 | [`eval_det2d`](../../../tree/eval_det2d) | Lesion Detection | Wrist Anomaly Detection | [GRAZPEDWRI-DX](https://figshare.com/articles/dataset/GRAZPEDWRI-DX/14825193) | mAP@0.5 |
+| [`eval_cls`](../../../tree/eval_cls) | Classification | Brain Tumor MRI · 4-class | [Brain Tumor MRI](https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset) | accuracy |
 
 Each sub-task directory contains `config.yaml` (task metadata), `model_info.yaml` (candidate models for Standard tier), `requirements.txt`, and per-tier skill markdown files (`lite_s1.md`, `standard_s1.md`, …).

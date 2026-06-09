@@ -11,8 +11,10 @@
 > — a benchmark for AI agents on medical AI tasks.
 
 <p align="center">
-  <img src="assets/workflow.png" alt="AutoMedBench agent workflow — S1 Plan, S2 Setup, S3 Validate, S4 Inference, S5 Submit" width="960">
+  <img src="post_images/fig_teaser_figure.png" alt="Final-output-only benchmarks see a black box and a failed run; AutoMedBench grades the S1–S5 process and pinpoints where the agent broke (e.g. skipped S3 Validate)" width="960">
 </p>
+
+<p align="center"><sub><em>Final-output-only scoring hides <strong>how</strong> a run failed. AutoMedBench grades the whole research process (S1–S5) and shows <strong>where</strong> it broke.</em></sub></p>
 
 ---
 
@@ -75,6 +77,10 @@ Every task in every domain runs the same five-stage pipeline. Each stage is scor
 
 Full per-stage rubric: see each branch's `SCORING_RUBRICS.md`.
 
+<p align="center">
+  <img src="post_images/fig_method.png" alt="AutoMedBench design: task formulation (20+ public-challenge data sources, task brief, Lite/Standard difficulty tiers) and the shared S1–S5 auto-research workflow inside an isolated per-stage execution container" width="960">
+</p>
+
 ---
 
 ## 4. Further Documentation
@@ -85,17 +91,21 @@ Full per-stage rubric: see each branch's `SCORING_RUBRICS.md`.
 
 ---
 
-## 5. Live Dashboard
+## 5. Results & Live Dashboard
 
-A live leaderboard is maintained at **[automedbench.github.io/#leaderboard](https://automedbench.github.io/#leaderboard)**.
+We evaluated **6 frontier agents** end-to-end. Two findings stand out.
 
-The dashboard shows:
-- **Overall Score** across all tasks, per agent
-- **S1-S5 per-stage breakdown** — you can see *where* each agent fails, not just whether it failed
-- **Per-task leaderboards** with Dice / SSIM / accuracy / mAP distributions
-- **Cost, turns, wall-time, token use** per run
+<p align="center">
+  <img src="post_images/fig_leaderboard_overall.png" alt="Overall, Agentic and Task scores for six agents — Opus 4.6 66.5, GLM-5 61.6, Gemini 3.1 Pro 59.0, ChatGPT-5.4 55.3, MiniMax-M2.5 51.6, Qwen3.5 51.2" width="860">
+</p>
 
-Currently live across all 5 domains: segmentation, image enhancement, VQA, report generation, and lesion detection — **48 active task combos** in total (Segmentation 16 · Image Enhancement 4 · VQA 10 · Report Generation 10 · Lesion Detection 8), evaluated on **7 agentic models** across **3,700+ recorded runs**.
+**1 · No agent is uniformly best — and the spread is wide (15.3 pts overall).** Opus 4.6 leads (66.5), then GLM-5 (61.6), Gemini 3.1 Pro (59.0), ChatGPT-5.4 (55.3), MiniMax-M2.5 (51.6), Qwen3.5 (51.2). But GLM-5 tops VQA while Opus leads most other tracks — no single number tells the whole story.
+
+**2 · Agents fail at verification, not knowledge.** Stage-by-stage, **Validate is the weakest stage and Setup the strongest** — agents build a pipeline well but rarely check whether it is reliable before committing to full inference. The error mix confirms it: **verification/recovery 37.7%** and **deliverable/submission 38.1%** of all fired error codes, versus only **0.9%** for task understanding. And it is costly — a run that fires even one error code scores **~48% lower overall** than a clean run.
+
+A live leaderboard is maintained at **[automedbench.github.io/#leaderboard](https://automedbench.github.io/#leaderboard)** — Overall score per agent, the **S1–S5 per-stage breakdown** (see *where* an agent fails, not just whether), per-task boards (Dice / SSIM / accuracy / mAP), and cost / turns / wall-time / tokens per run.
+
+Currently live across all **6 domains** — segmentation, image enhancement, VQA, report generation, lesion detection, and classification — **50 active task combos** in total (Segmentation 16 · Image Enhancement 4 · VQA 10 · Report Generation 10 · Lesion Detection 8 · Classification 2), evaluated on **7 agentic models** (6 with full cross-track coverage on the overall board) across **5,500+ recorded runs**.
 
 ---
 

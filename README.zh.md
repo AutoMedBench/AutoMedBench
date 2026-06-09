@@ -10,6 +10,12 @@
 > 迈向 *医学自动研究* <br>
 > — 面向医学 AI 任务的基础模型智能体基准。
 
+<p align="center">
+  <img src="post_images/fig_teaser_figure.png" alt="仅看最终输出会把失败当成黑盒；AutoMedBench 评估 S1–S5 全过程，定位 agent 在哪一步（如跳过 S3 验证）失败" width="960">
+</p>
+
+<p align="center"><sub><em>只看最终输出会掩盖运行<strong>如何</strong>失败。AutoMedBench 评估完整研究流程（S1–S5），指出它<strong>在哪一步</strong>失败。</em></sub></p>
+
 ---
 
 ## 1. 简介
@@ -60,17 +66,31 @@ python eval_seg/docker/orchestrator.py \
 
 完整评分规则见各分支的 `SCORING_RUBRICS.md`。
 
+<p align="center">
+  <img src="post_images/fig_method.png" alt="AutoMedBench 设计：任务构建（20+ 公开挑战数据源、任务简介、Lite/Standard 难度分级）与隔离式逐阶段执行容器中的 S1–S5 自动研究工作流" width="960">
+</p>
+
 ## 4. 更多文档
 
 - **[任务库](docs/task-gallery.md)** — 所有任务、指标与对应分支一览
 - **[数据集](docs/dataset-collection.md)** — 使用的数据集与公/私数据拆分方案
 - **[难度分级](docs/task-difficulty-tiers.md)** — Lite / Standard / Pro 定义与各级度量目标
 
-## 5. 实时榜单
+## 5. 结果与实时榜单
 
-实时榜单维护于 **[automedbench.github.io/#leaderboard](https://automedbench.github.io/#leaderboard)**。
+我们端到端评测了 **6 个前沿 agent**，两个发现尤为突出。
 
-目前 5 个领域全部上线：segmentation · image enhancement · VQA · report generation · lesion detection — 共 **48 个活跃任务组合**（Segmentation 16 · Image Enhancement 4 · VQA 10 · Report Generation 10 · Lesion Detection 8），覆盖 **7 个智能体模型**、**3,700+ 次实验**。
+<p align="center">
+  <img src="post_images/fig_leaderboard_overall.png" alt="六个 agent 的 Overall / Agentic / Task 分数" width="860">
+</p>
+
+**1 · 没有 agent 全面最优，且差距很大（Overall 相差 15.3 分）。** Opus 4.6 领先（66.5），其后为 GLM-5（61.6）、Gemini 3.1 Pro（59.0）、ChatGPT-5.4（55.3）、MiniMax-M2.5（51.6）、Qwen3.5（51.2）。但 GLM-5 在 VQA 上最强，Opus 在其余多数赛道领先——单一分数无法说明全部。
+
+**2 · agent 的短板是"验证"，而非"知识"。** 分阶段看，**Validate 阶段最弱、Setup 阶段最强**——agent 很会搭流程，却很少在全量推理前检查其可靠性。错误类型也印证了这一点：**验证/恢复类错误占 37.7%**、**交付/提交类占 38.1%**，而任务理解类仅 **0.9%**。代价高昂——只要触发一个错误码，整体得分就比"干净"运行约低 **48%**。
+
+实时榜单维护于 **[automedbench.github.io/#leaderboard](https://automedbench.github.io/#leaderboard)**：每个 agent 的 Overall 分、**S1–S5 分阶段拆解**（看清在哪一步失败）、各任务榜单（Dice / SSIM / accuracy / mAP）及每次运行的成本/轮次/时长/token。
+
+目前 **6 个领域**全部上线——segmentation · image enhancement · VQA · report generation · lesion detection · classification，共 **50 个活跃任务组合**（Segmentation 16 · Image Enhancement 4 · VQA 10 · Report Generation 10 · Lesion Detection 8 · Classification 2），覆盖 **7 个智能体模型**（其中 6 个具备全赛道覆盖、计入总榜），**5,500+ 次实验**。
 
 ## 6. 贡献
 

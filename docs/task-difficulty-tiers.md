@@ -23,5 +23,6 @@ Same data, same metric — different scaffolding. Each row below is something th
 | `eval_vqa` | ✓ | ✓ | planned |
 | `eval_report_gen` | ✓ | ✓ | planned |
 | `eval_det2d` | ✓ | ✓ | planned |
+| `eval_cls` | ✓ | ✓ | planned |
 
 Same agent on the same task across tiers is the sharpest measure of how much of the "research pipeline" the agent can actually do unassisted. Scores typically drop by 0.15–0.35 on Agentic as you move Lite → Standard → Pro.
