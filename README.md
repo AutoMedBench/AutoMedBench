@@ -3,6 +3,9 @@
 [![Website](https://img.shields.io/badge/Website-automedbench-76B900?style=for-the-badge)](https://automedbench.github.io/)
 [![arXiv](https://img.shields.io/badge/arXiv-2606.01961-B31B1B?style=for-the-badge)](https://arxiv.org/abs/2606.01961)
 [![Sandbox](https://img.shields.io/badge/Sandbox-online-D2B684?style=for-the-badge)](https://automedbench.github.io/submit.html)
+[![Lite Release](https://img.shields.io/badge/HuggingFace-Lite%20v0.1-FFD21E?style=for-the-badge)](https://huggingface.co/datasets/MitakaKuma/AutoMedBench-Lite-release)
+[![Full Release](https://img.shields.io/badge/HuggingFace-Full%20v0.1-FFD21E?style=for-the-badge)](https://huggingface.co/datasets/MitakaKuma/AutoMedBench-Full-release)
+[![Full Leaderboard](https://img.shields.io/badge/Full%20Leaderboard-live-4A7355?style=for-the-badge)](https://huggingface.co/spaces/MitakaKuma/AutoMedBench-Full-Leaderboard)
 [![License](https://img.shields.io/badge/License-MIT-2B2B25?style=for-the-badge)](LICENSE)
 
 **English** · [中文](README.zh.md)
@@ -28,15 +31,25 @@ Unlike output-only benchmarks, AutoMedBench grades the *working process* itself.
 Overall = 0.5 × Agentic (S1-S5 rubric) + 0.5 × Task (task metric)
 ```
 
+<p align="center">
+  <img src="post_images/fig_tab_5.png" alt="Table 5: more scaffolding does not consistently improve agentic scores across Lite and Standard tiers" width="740">
+</p>
+
+<p align="center"><sub><em>AutoMedBench tests the workflow itself: more scaffolding does not consistently produce better agentic behavior.</em></sub></p>
+
 ---
 
 ## 2. Quick Start
 
-Sandbox containers and datasets are hosted on HuggingFace.
+The benchmark releases are live on Hugging Face:
 
 <p align="left">
-  <a href="https://automedbench.github.io/submit.html"><img src="https://img.shields.io/badge/Sandbox-online-D2B684?style=for-the-badge" alt="Sandbox — online"></a>
+  <a href="https://huggingface.co/datasets/MitakaKuma/AutoMedBench-Lite-release"><img src="https://img.shields.io/badge/AutoMedBench--Lite--v0.1-live-D2B684?style=for-the-badge" alt="AutoMedBench-Lite-v0.1 — live"></a>
+  <a href="https://huggingface.co/datasets/MitakaKuma/AutoMedBench-Full-release"><img src="https://img.shields.io/badge/AutoMedBench--Full--v0.1-live-D2B684?style=for-the-badge" alt="AutoMedBench-Full-v0.1 — live"></a>
 </p>
+
+- **[AutoMedBench-Lite-v0.1](https://huggingface.co/datasets/MitakaKuma/AutoMedBench-Lite-release)** — seven Lite held-out sandbox tasks for fast local testing.
+- **[AutoMedBench-Full-v0.1](https://huggingface.co/datasets/MitakaKuma/AutoMedBench-Full-release)** — 48 tasks across 7 tracks, with Lite and Standard tiers for 96 task-tier combinations.
 
 ```bash
 # 1. Clone the domain branch you want to test
@@ -103,9 +116,9 @@ We evaluated **6 frontier agents** end-to-end. Two findings stand out.
 
 **2 · Agents fail at verification, not knowledge.** Stage-by-stage, **Validate is the weakest stage and Setup the strongest** — agents build a pipeline well but rarely check whether it is reliable before committing to full inference. The error mix confirms it: **verification/recovery 37.7%** and **deliverable/submission 38.1%** of all fired error codes, versus only **0.9%** for task understanding. And it is costly — a run that fires even one error code scores **~48% lower overall** than a clean run.
 
-A live leaderboard is maintained at **[automedbench.github.io/#leaderboard](https://automedbench.github.io/#leaderboard)** — Overall score per agent, the **S1–S5 per-stage breakdown** (see *where* an agent fails, not just whether), per-task boards (Dice / SSIM / accuracy / mAP), and cost / turns / wall-time / tokens per run.
+A live website leaderboard is maintained at **[automedbench.github.io/#leaderboard](https://automedbench.github.io/#leaderboard)** — Overall score per agent, the **S1–S5 per-stage breakdown** (see *where* an agent fails, not just whether), per-task boards (Dice / SSIM / accuracy / mAP), and cost / turns / wall-time / tokens per run. The **Full leaderboard Space is live** at **[huggingface.co/spaces/MitakaKuma/AutoMedBench-Full-Leaderboard](https://huggingface.co/spaces/MitakaKuma/AutoMedBench-Full-Leaderboard)**.
 
-Currently live across all **6 domains** — segmentation, image enhancement, VQA, report generation, lesion detection, and classification — **50 active task combos** in total (Segmentation 16 · Image Enhancement 4 · VQA 10 · Report Generation 10 · Lesion Detection 8 · Classification 2), evaluated on **7 agentic models** (6 with full cross-track coverage on the overall board) across **5,500+ recorded runs**.
+The website leaderboard is live across **6 evaluated domains** — segmentation, image enhancement, VQA, report generation, lesion detection, and classification — **50 active task combos** in total (Segmentation 16 · Image Enhancement 4 · VQA 10 · Report Generation 10 · Lesion Detection 8 · Classification 2), evaluated on **7 agentic models** (6 with full cross-track coverage on the overall board) across **5,500+ recorded runs**. The Hugging Face Full release packages **7 tracks** including synthesis, with **48 tasks** and **96 Lite/Standard task-tier combinations**.
 
 ---
 

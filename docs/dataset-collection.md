@@ -1,84 +1,133 @@
 # Dataset Collection
 
-## Datasets
+This page tracks the dataset sources used by AutoMedBench and the release
+policy for the public benchmark packages. It is a convenience index, not legal
+advice and not a license grant.
 
-| Dataset | Task | Challenge / Paper | Year |
+## Live releases
+
+| Release | Link | Contents | Dataset handling |
 |---|---|---|---|
-| KiTS19 | Segmentation | [KiTS19 Challenge](https://kits19.grand-challenge.org/) | 2019 |
-| PanTS | Segmentation | [BodyMaps PanTS](https://huggingface.co/datasets/BodyMaps/PanTSMini) | 2024 |
-| FeTA | Segmentation | [FeTA Challenge](https://fetachallenge.github.io/) | 2021 |
-| AeroPath | Segmentation | [AeroPath](https://github.com/raidionics/AeroPath) | 2023 |
-| TotalSegmentator | Segmentation | [TotalSegmentator](https://github.com/wasserth/TotalSegmentator) | 2023 |
-| PANTHER 2025 (T1, T2) | Segmentation | [PANTHER Challenge](https://panther.grand-challenge.org/) | 2025 |
-| LDCT-SimNICT | Enhancement | [AAPM Low-Dose CT Grand Challenge](https://www.aapm.org/GrandChallenge/LowDoseCT/) | 2016 |
-| SR-MRI | Enhancement | [fastMRI](https://www.fastmri.org/) | 2018 |
-| PathVQA | VQA | [PathVQA (HuggingFace)](https://huggingface.co/datasets/flaviagiammarino/path-vqa) | 2020 |
-| VQA-RAD | VQA | [VQA-RAD (HuggingFace)](https://huggingface.co/datasets/flaviagiammarino/vqa-rad) | 2018 |
-| MedFrameQA | VQA | [MedFrameQA (HuggingFace)](https://huggingface.co/datasets/SuhaoYu1020/MedFrameQA) | 2025 |
-| SLAKE-EN | VQA | [SLAKE-EN (HuggingFace)](https://huggingface.co/datasets/BoKelvin/SLAKE) | 2021 |
-| MedXpertQA-MM | VQA | [TsinghuaC3I MedXpertQA](https://huggingface.co/datasets/TsinghuaC3I/MedXpertQA) | 2024 |
-| MIMIC-CXR | Report Generation | [PhysioNet MIMIC-CXR](https://physionet.org/content/mimic-cxr/) | 2019 |
-| IU / Open-i | Report Generation | [Open-i (NLM)](https://openi.nlm.nih.gov/) | 2015 |
-| CheXpert Plus | Report Generation | [Stanford AIMI CheXpert Plus](https://stanfordaimi.azurewebsites.net/datasets/5158c524-d3ab-4e02-96e9-6ee9efc110a1) | 2024 |
-| PathCap | Report Generation | [PathCap (HuggingFace)](https://huggingface.co/datasets/jamessyx/PathCap) | 2024 |
-| VinDr-CXR | Lesion Detection | [VinDr.ai VinDr-CXR](https://vindr.ai/datasets/vindr-cxr) | 2022 |
-| BCCD | Lesion Detection | [BCCD (HuggingFace)](https://huggingface.co/datasets/keremberke/blood-cell-object-detection) | 2018 |
-| DENTEX | Lesion Detection | [DENTEX (HuggingFace)](https://huggingface.co/datasets/ibrahimhamamci/DENTEX) | 2023 |
-| GRAZPEDWRI-DX | Lesion Detection | [GRAZPEDWRI-DX (figshare)](https://figshare.com/articles/dataset/GRAZPEDWRI-DX/14825193) | 2022 |
-| Brain Tumor MRI | Classification | [Brain Tumor MRI (Kaggle)](https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset) | 2021 |
-
-Every dataset satisfies three requirements: (1) publicly available, (2) deterministic ground truth, (3) peer-reviewed / challenge-backed.
+| AutoMedBench-Lite-v0.1 | [Hugging Face release](https://huggingface.co/datasets/MitakaKuma/AutoMedBench-Lite-release) | 7 Lite held-out sandbox tasks | Includes staged Lite subsets for local scoring; see the release `DATA_CARD.md` and obey each upstream source term. |
+| AutoMedBench-Full-v0.1 | [Hugging Face release](https://huggingface.co/datasets/MitakaKuma/AutoMedBench-Full-release) | 48 tasks across 7 tracks; Lite and Standard tiers; 96 task-tier combinations | Dataset bytes are not bundled. Users must download authorized source data independently and mount it at runtime. |
 
 ## Data layout
 
-Before each run, `stage_data.py` materializes a public/private split:
+Before each run, the staging code materializes a public/private split:
 
-```
+```text
 data/<DatasetName>/
   public/<patient_id>/     # inputs the agent sees
   private/<patient_id>/    # ground truth the eval container scores against
 ```
 
-The agent container has **no mount** to `private/`. The eval container runs with `--network none` and scores agent outputs against `private/` offline.
+The agent container has no mount to `private/`. The eval container runs with
+`--network none` and scores agent outputs against `private/` offline. For
+restricted datasets, the runner must hold valid credentials or an accepted data
+use agreement before staging local files.
 
-## Licensing & access
+## Licensing and access policy
 
-> **Important.** AutoMedBench does not redistribute any dataset. Each dataset is governed by its own license and access requirements — the table below is a convenience pointer, not a legal statement. **Always verify the current license on the official source page** before using any dataset, and consult your institution's legal/compliance office for any use beyond individual non-commercial research.
+AutoMedBench code is MIT-licensed under this repository's `LICENSE`. That code
+license does not apply to any upstream dataset.
 
-| Dataset | License | Access | Commercial use | Redistribution |
-|---|---|---|---|---|
-| KiTS19 | [CC BY-NC-SA 4.0](https://kits19.grand-challenge.org/data/) (data; code MIT) | public download | **not permitted** | permitted under same license |
-| PanTS | [CC BY-NC-SA 4.0](https://huggingface.co/datasets/BodyMaps/PanTSMini) | public (HuggingFace) | **not permitted** | permitted under same license |
-| FeTA | [custom data-use agreement](https://fetachallenge.github.io/pages/Data_download.html) — research/education only | request-based (Synapse + institutional DTA) | **not permitted** | **not permitted** |
-| AeroPath | [CC BY 4.0](https://zenodo.org/records/10069289) (data; code MIT) | public download (Zenodo / HuggingFace) | permitted | permitted (with attribution) |
-| TotalSegmentator | [CC BY 4.0](https://zenodo.org/records/10047292) (dataset; code Apache-2.0) | public download (Zenodo) | permitted | permitted (with attribution) |
-| PANTHER 2025 (T1, T2) | [CC BY-NC 4.0](https://panther.grand-challenge.org/dataset-imging-labels/) (public training set) | public (Zenodo); registration for hidden test | **not permitted** | permitted (with attribution) |
-| LDCT-SimNICT | [CC BY 4.0](https://www.cancerimagingarchive.net/collection/ldct-and-projection-data/) (Chest / Liver / Phantom; Head subset NIH-restricted) | public download (TCIA) | permitted | permitted (with attribution) |
-| SR-MRI (fastMRI) | [NYU fastMRI Data Sharing Agreement](https://fastmri.med.nyu.edu/) | application required | **not permitted** | **not permitted** |
-| PathVQA | [MIT](https://huggingface.co/datasets/flaviagiammarino/path-vqa) (QA; source images third-party) | public (HuggingFace) | permitted | permitted (preserve notice) |
-| VQA-RAD | [CC0 1.0](https://huggingface.co/datasets/flaviagiammarino/vqa-rad) | public (HuggingFace) | permitted | permitted |
-| MedFrameQA | [CC BY 4.0](https://huggingface.co/datasets/SuhaoYu1020/MedFrameQA) (frames from public videos — verify upstream) | public (HuggingFace) | verify on source | verify on source |
-| SLAKE-EN | [CC BY 4.0](https://huggingface.co/datasets/BoKelvin/SLAKE) (HF tag; originator page silent) | public (HuggingFace) | verify on source | verify on source |
-| MedXpertQA-MM | [MIT](https://huggingface.co/datasets/TsinghuaC3I/MedXpertQA) (harness; exam content third-party) | public (HuggingFace) | verify on source | **not permitted** (no-reshare policy) |
-| MIMIC-CXR | [PhysioNet Credentialed Health Data License 1.5.0](https://physionet.org/content/mimic-cxr/) | **credentialed; DUA + CITI training** | **not permitted** | **not permitted** |
-| IU / Open-i | [CC BY-NC-ND 4.0](https://openi.nlm.nih.gov/) | public (NLM) | **not permitted** | **not permitted** (NoDerivatives) |
-| CheXpert Plus | [Stanford Dataset Research Use Agreement](https://stanfordaimi.azurewebsites.net/datasets/5158c524-d3ab-4e02-96e9-6ee9efc110a1) | research registration (Stanford AIMI) | **not permitted** | **not permitted** |
-| PathCap | [CC BY-NC 2.0](https://huggingface.co/datasets/jamessyx/PathCap) | public (HuggingFace) | **not permitted** | permitted under same license |
-| VinDr-CXR | [PhysioNet Credentialed Health Data License 1.5.0](https://physionet.org/content/vindr-cxr/) | **credentialed; DUA + CITI training** | **not permitted** | **not permitted** |
-| BCCD | [MIT](https://public.roboflow.com/object-detection/bccd) | public (HuggingFace / Roboflow) | permitted | permitted (preserve notice) |
-| DENTEX | [CC BY-NC-SA 4.0](https://huggingface.co/datasets/ibrahimhamamci/DENTEX) | public (HuggingFace) | **not permitted** | permitted under same license |
-| GRAZPEDWRI-DX | [CC BY 4.0](https://figshare.com/articles/dataset/GRAZPEDWRI-DX/14825193) | public (figshare) | permitted | permitted (with attribution) |
-| Brain Tumor MRI | [CC BY 4.0](https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset) (aggregate; Br35H / SARTAJ components — verify for commercial/redistribution) | public download (Kaggle) | permitted | permitted (with attribution) |
+The table below records the current public source, license or access term, and
+release readiness status used by AutoMedBench-Full-v0.1. It should be read
+conservatively:
 
-### Strict-access datasets
+- If a row says `Restricted`, `Credentialed DUA`, `Controlled`,
+  `Permission required`, `Mixed`, `No explicit license`, `No explicit
+  redistribution grant`, `No clear bulk redistribution license`, or
+  `Per-image`, do not redistribute the data unless you have separate written
+  permission or a governing agreement that allows it.
+- If a row lists a permissive or Creative Commons license, attribution and all
+  license conditions still apply.
+- Always verify the current upstream page before using a dataset for a new
+  purpose, especially for commercial use or redistribution.
 
-Several datasets require institutional credentialing and/or a signed Data Use Agreement before anyone may access the files. Running the benchmark tasks that depend on them requires the runner to hold valid credentials. AutoMedBench never stages this data into any public branch.
+## Full-v0.1 task source matrix
 
-- **MIMIC-CXR** — PhysioNet credentialed; DUA + CITI training. No redistribution, no commercial use.
-- **VinDr-CXR** — PhysioNet credentialed; DUA + CITI training. Non-commercial research only; no redistribution. (Older `vindr.ai/datasets/...` links now resolve to the PhysioNet release.)
-- **SR-MRI (fastMRI)** — NYU Langone Data Sharing Agreement; application required. No redistribution, no commercial use; MLCommons/MLPerf benchmarking is the only carve-out.
-- **FeTA** — gated via a Synapse account + accepted terms (Zurich data) and a signed institutional data transfer agreement (Vienna data); research/education only.
+| Track | Task ID | Upstream dataset | Source | License / terms | Access / status |
+|---|---|---|---|---|---|
+| Segmentation | `kidney-seg-task` | KiTS19 | [kits19.grand-challenge.org](https://kits19.grand-challenge.org/) | CC BY-NC-SA 4.0 | Public; acquisition ready |
+| Segmentation | `pancreas-seg-task` | PanTS | [github.com/MrGiovanni/PanTS](https://github.com/MrGiovanni/PanTS) | CC BY-NC-ND 4.0 | Public; acquisition ready |
+| Segmentation | `pancreas-oar-seg-task` | PanTS | [github.com/MrGiovanni/PanTS](https://github.com/MrGiovanni/PanTS) | CC BY-NC-ND 4.0 | Public; acquisition ready |
+| Segmentation | `liver-seg-task` | MSD Task03 Liver | [medicaldecathlon.com](https://medicaldecathlon.com/) | Provenance conflict | Public; staged verified |
+| Segmentation | `aeropath-seg-task` | AeroPath | [zenodo.org/records/10069289](https://zenodo.org/records/10069289) | CC BY 4.0 | Public; acquisition ready |
+| Segmentation | `tsg-multiorgan-seg-task` | TotalSegmentator v2.0.1 | [zenodo.org/records/10047263](https://zenodo.org/records/10047263) | CC BY 4.0 | Public; staged verified |
+| Segmentation | `colon-seg-task` | MSD Task10 Colon | [medicaldecathlon.com](https://medicaldecathlon.com/) | CC BY-SA 4.0 | Public; staged verified |
+| Segmentation | `hepaticvessel-seg-task` | MSD Task08 HepaticVessel | [medicaldecathlon.com](https://medicaldecathlon.com/) | CC BY-SA 4.0 | Public; staged verified |
+| Segmentation | `spleen-seg-task` | MSD Task09 Spleen | [medicaldecathlon.com](https://medicaldecathlon.com/) | CC BY-SA 4.0 | Public; staged verified |
+| Segmentation | `heart-seg-task` | MSD Task02 Heart | [medicaldecathlon.com](https://medicaldecathlon.com/) | CC BY-SA 4.0 | Public; staged verified |
+| Segmentation | `prostate-seg-task` | MSD Task05 Prostate | [medicaldecathlon.com](https://medicaldecathlon.com/) | CC BY-SA 4.0 | Public; staged verified |
+| Segmentation | `feta-seg-task` | FeTA | [zenodo.org/records/4541606](https://zenodo.org/records/4541606) | Research agreement | Gated; externally blocked |
+| Segmentation | `panther-t1-seg-task` | PANTHER | [zenodo.org/records/15192302](https://zenodo.org/records/15192302) | CC BY-NC 4.0 + access controls | Restricted; externally blocked |
+| Segmentation | `panther-t2-seg-task` | PANTHER | [zenodo.org/records/15192302](https://zenodo.org/records/15192302) | CC BY-NC 4.0 + access controls | Restricted; externally blocked |
+| Enhancement | `ldct-denoising-task` | AAPM Low Dose CT Grand Challenge | [aapm.org/grandchallenge/lowdosect](https://www.aapm.org/GrandChallenge/LowDoseCT/) | No explicit redistribution grant | Public library; download required |
+| Enhancement | `lidc-idri-denoising-task` | LIDC-IDRI | [cancerimagingarchive.net/collection/lidc-idri](https://www.cancerimagingarchive.net/collection/lidc-idri/) | CC BY 3.0 | Public; acquisition ready |
+| Enhancement | `deeplesion-denoising-task` | NIH DeepLesion | [nihcc.app.box.com/v/DeepLesion](https://nihcc.app.box.com/v/DeepLesion) | No explicit license | Public; acquisition ready |
+| Enhancement | `mri-sr-task` | fastMRI | [fastmri.med.nyu.edu](https://fastmri.med.nyu.edu/) | Agreement prohibits redistribution | Application required; externally blocked |
+| Enhancement | `brats-t1c-sr-task` | BraTS 2023 GLI | [synapse.org/Synapse:syn51156910](https://www.synapse.org/Synapse:syn51156910/wiki/) | Controlled access | Controlled; externally blocked |
+| Enhancement | `ixi-t1-sr-task` | IXI T1 | [brain-development.org/ixi-dataset](https://brain-development.org/ixi-dataset/) | CC BY-SA 3.0 | Public; acquisition ready |
+| Enhancement | `nih-cxr-sr-task` | NIH ChestXray14 | [nihcc.app.box.com/v/ChestXray-NIHCC](https://nihcc.app.box.com/v/ChestXray-NIHCC) | CC0 (NIH Kaggle) | Public; acquisition ready |
+| VQA | `pathvqa-task` | PathVQA | [huggingface.co/datasets/flaviagiammarino/path-vqa](https://huggingface.co/datasets/flaviagiammarino/path-vqa) | MIT | Public; staged verified |
+| VQA | `vqa-rad-task` | VQA-RAD | [huggingface.co/datasets/flaviagiammarino/vqa-rad](https://huggingface.co/datasets/flaviagiammarino/vqa-rad) | CC0 1.0 | Public; staged verified |
+| VQA | `medframeqa-task` | MedFrameQA | [huggingface.co/datasets/SuhaoYu1020/MedFrameQA](https://huggingface.co/datasets/SuhaoYu1020/MedFrameQA) | CC BY 4.0 | Public; staged verified |
+| VQA | `slake-task` | SLAKE | [huggingface.co/datasets/BoKelvin/SLAKE](https://huggingface.co/datasets/BoKelvin/SLAKE) | CC BY 4.0 | Public; staged verified |
+| VQA | `medxpertqa-mm-task` | MedXpertQA | [huggingface.co/datasets/TsinghuaC3I/MedXpertQA](https://huggingface.co/datasets/TsinghuaC3I/MedXpertQA) | MIT | Public; staged verified |
+| VQA | `vqa-kvasir-task` | Kvasir-VQA | [huggingface.co/datasets/SimulaMet-HOST/Kvasir-VQA](https://huggingface.co/datasets/SimulaMet-HOST/Kvasir-VQA) | CC BY-NC 4.0 + benchmark permission | Permission required; externally blocked |
+| VQA | `vqa-omnimedvqa-task` | OmniMedVQA | [huggingface.co/datasets/foreverbeliever/OmniMedVQA](https://huggingface.co/datasets/foreverbeliever/OmniMedVQA) | Mixed; no global license | Mixed access; externally blocked |
+| VQA | `vqa-pmc-vqa-task` | PMC-VQA | [huggingface.co/datasets/RadGenome/PMC-VQA](https://huggingface.co/datasets/RadGenome/PMC-VQA) | CC BY-SA | Public; staged verified |
+| VQA | `vqa-mmmu-medical-task` | MMMU medical subsets | [huggingface.co/datasets/MMMU/MMMU](https://huggingface.co/datasets/MMMU/MMMU) | Apache-2.0 | Public; staged verified |
+| Report generation | `mimic-cxr-report-task` | MIMIC-CXR | [physionet.org/content/mimic-cxr/2.1.0](https://physionet.org/content/mimic-cxr/2.1.0/) | DUA prohibits sharing | Credentialed DUA; externally blocked |
+| Report generation | `iu-xray-report-task` | IU Open-i | [openi.nlm.nih.gov](https://openi.nlm.nih.gov/) | No clear bulk redistribution license | Public search; acquisition ready |
+| Report generation | `chexpert-plus-cxr-task` | CheXpert Plus | [aimi.stanford.edu/datasets/chexpert-plus](https://aimi.stanford.edu/datasets/chexpert-plus) | No license declared by mirror | Public mirror; staged verified |
+| Report generation | `pathology-caption-100-task` | PathCap | [huggingface.co/datasets/jamessyx/PathCap](https://huggingface.co/datasets/jamessyx/PathCap) | CC BY-NC 2.0 + click-through | Auto-gated; staged verified |
+| Report generation | `pathology-caption-500-task` | PathCap | [huggingface.co/datasets/jamessyx/PathCap](https://huggingface.co/datasets/jamessyx/PathCap) | CC BY-NC 2.0 + click-through | Auto-gated; staged verified |
+| Detection | `vindr-cxr-det-task` | VinDr-CXR | [physionet.org/content/vindr-cxr/1.0.0](https://physionet.org/content/vindr-cxr/1.0.0/) | PhysioNet Credentialed Health Data License | Credentialed DUA; externally blocked |
+| Detection | `bccd-det-task` | BCCD | [github.com/Shenggan/BCCD_Dataset](https://github.com/Shenggan/BCCD_Dataset) | MIT | Public; staged verified |
+| Detection | `dentex-det-task` | DENTEX | [huggingface.co/datasets/ibrahimhamamci/DENTEX](https://huggingface.co/datasets/ibrahimhamamci/DENTEX) | CC BY-NC-SA 4.0 | Public; staged verified |
+| Detection | `grazpedwri-det-task` | GRAZPEDWRI-DX | [figshare.com/articles/dataset/GRAZPEDWRI-DX/14825193](https://figshare.com/articles/dataset/GRAZPEDWRI-DX/14825193) | CC BY 4.0 | Public; staged verified |
+| Classification | `braintumor-cls-task` | Brain Tumor MRI | [kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset](https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset) | CC BY 4.0 | Public; acquisition ready |
+| Classification | `crc-histology-cls-task` | NCT-CRC-HE-100K | [zenodo.org/records/1214456](https://zenodo.org/records/1214456) | CC BY 4.0 | Public; acquisition ready |
+| Classification | `patchcamelyon-cls-task` | PatchCamelyon | [github.com/basveeling/pcam](https://github.com/basveeling/pcam) | CC0 | Public; acquisition ready |
+| Classification | `chest-xray-pneumonia-cls-task` | Kermany chest X-ray | [data.mendeley.com/datasets/rscbjbr9sj/2](https://data.mendeley.com/datasets/rscbjbr9sj/2) | CC BY 4.0 | Public; acquisition ready |
+| Classification | `skin-lesion-cls-task` | ISIC Archive | [isic-archive.com](https://www.isic-archive.com/) | Per-image; not frozen | Public; staged verified |
+| Synthesis | `synthrad2025-mrct-task` | SynthRAD2025 | [zenodo.org/records/15373853](https://zenodo.org/records/15373853) | CC BY-NC 4.0 | Public; acquisition ready |
+| Synthesis | `ctorg-ctsr-task` | CT-ORG | [cancerimagingarchive.net/collection/ct-org](https://www.cancerimagingarchive.net/collection/ct-org/) | CC BY 3.0 | Public; acquisition ready |
+| Synthesis | `msd-pancreas-ctsr-task` | MSD Task07 Pancreas | [medicaldecathlon.com](https://medicaldecathlon.com/) | CC BY-SA 4.0 | Public; staged verified |
+| Synthesis | `totalsegmentator-ctsr-task` | TotalSegmentator | [github.com/wasserth/TotalSegmentator](https://github.com/wasserth/TotalSegmentator) | CC BY 4.0 | Public; acquisition ready |
 
-### A note on AutoMedBench's own license
+## Lite-v0.1 packaged task sources
 
-The AutoMedBench **code** is MIT-licensed (see `LICENSE`). The code license does not extend to any dataset it reads: using AutoMedBench to run tasks on a given dataset means you are also bound by that dataset's license and access terms.
+AutoMedBench-Lite-v0.1 is a smaller local sandbox release. It packages staged
+Lite subsets for offline local scoring, so review the release data card and
+upstream terms before redistribution or use outside the intended benchmark
+workflow.
+
+| Track | Task ID | Upstream source | License / terms |
+|---|---|---|---|
+| Classification | `skin-lesion-cls-task` | [HAM10000 / ISIC 2018](https://challenge.isic-archive.com/data/) | CC BY-NC 4.0 |
+| Synthesis | `msd-pancreas-ctsr-task` | [Medical Segmentation Decathlon Task07 Pancreas](http://medicaldecathlon.com/) / [AWS Open Data mirror](https://registry.opendata.aws/msd/) | CC BY-SA 4.0 |
+| Detection | `grazpedwri-det-task` | [GRAZPEDWRI-DX](https://www.nature.com/articles/s41597-022-01328-z) | CC BY 4.0 |
+| Segmentation | `tsg-multiorgan-seg-task` | [TotalSegmentator CT-Lite](https://huggingface.co/datasets/YongchengYAO/TotalSegmentator-CT-Lite) | CC BY 4.0 |
+| VQA | `medxpertqa-mm-task` | [MedXpertQA-MM](https://huggingface.co/datasets/TsinghuaC3I/MedXpertQA) | MIT |
+| Report generation | `chexpert-plus-cxr-task` | [CheXpert-plus-RRG](https://huggingface.co/datasets/X-iZhang/CheXpert-plus-RRG), derived from [CheXpert Plus](https://aimi.stanford.edu/datasets/chexpert-plus) | License not declared on the mirror; follow CheXpert Plus / Stanford source terms |
+| Enhancement | `ldct-denoising-task` | [SimNICT](https://huggingface.co/datasets/YutingHe-list/SimNICT) | CC BY-ND 4.0 |
+
+## Strict-access and unclear-license datasets
+
+The following sources require special care before use:
+
+- **Credentialed or gated access:** MIMIC-CXR, VinDr-CXR, FeTA, PANTHER,
+  fastMRI, BraTS 2023 GLI, and Kvasir-VQA.
+- **Mixed or unclear redistribution terms:** AAPM LDCT, NIH DeepLesion,
+  IU/Open-i, CheXpert Plus mirrors, OmniMedVQA, and ISIC per-image subsets.
+- **Non-commercial or no-derivatives terms:** CC BY-NC, CC BY-NC-SA,
+  CC BY-NC-ND, and CC BY-ND rows should be treated as incompatible with
+  commercial redistribution unless the upstream owner grants explicit
+  permission.
+
+For the Full release, the conservative rule is simple: no dataset bytes are
+embedded in any task package, runtime image, or task-tier image. Runtime data is
+mounted from a local directory prepared independently by the authorized user.

@@ -3,6 +3,9 @@
 [![Website](https://img.shields.io/badge/Website-automedbench-76B900?style=for-the-badge)](https://automedbench.github.io/)
 [![arXiv](https://img.shields.io/badge/arXiv-2606.01961-B31B1B?style=for-the-badge)](https://arxiv.org/abs/2606.01961)
 [![Sandbox](https://img.shields.io/badge/Sandbox-online-D2B684?style=for-the-badge)](https://automedbench.github.io/submit.html)
+[![Lite Release](https://img.shields.io/badge/HuggingFace-Lite%20v0.1-FFD21E?style=for-the-badge)](https://huggingface.co/datasets/MitakaKuma/AutoMedBench-Lite-release)
+[![Full Release](https://img.shields.io/badge/HuggingFace-Full%20v0.1-FFD21E?style=for-the-badge)](https://huggingface.co/datasets/MitakaKuma/AutoMedBench-Full-release)
+[![Full Leaderboard](https://img.shields.io/badge/Full%20Leaderboard-live-4A7355?style=for-the-badge)](https://huggingface.co/spaces/MitakaKuma/AutoMedBench-Full-Leaderboard)
 [![License](https://img.shields.io/badge/License-MIT-2B2B25?style=for-the-badge)](LICENSE)
 
 [English](README.md) · **中文**
@@ -28,13 +31,23 @@
 Overall = 0.5 × Agentic (S1–S5 过程评分) + 0.5 × Task (任务指标)
 ```
 
+<p align="center">
+  <img src="post_images/fig_tab_5.png" alt="Table 5: 更多脚手架并不总能提升 Lite 和 Standard 难度下的 agentic 分数" width="740">
+</p>
+
+<p align="center"><sub><em>AutoMedBench 评估的是完整工作流：更多提示与脚手架并不总能带来更好的 agentic 行为。</em></sub></p>
+
 ## 2. 快速开始
 
-沙箱容器与数据集将托管在 HuggingFace。
+基准发布已在 Hugging Face 上线：
 
 <p align="left">
-  <a href="https://automedbench.github.io/submit.html"><img src="https://img.shields.io/badge/Sandbox-online-D2B684?style=for-the-badge" alt="Sandbox — online"></a>
+  <a href="https://huggingface.co/datasets/MitakaKuma/AutoMedBench-Lite-release"><img src="https://img.shields.io/badge/AutoMedBench--Lite--v0.1-live-D2B684?style=for-the-badge" alt="AutoMedBench-Lite-v0.1 — live"></a>
+  <a href="https://huggingface.co/datasets/MitakaKuma/AutoMedBench-Full-release"><img src="https://img.shields.io/badge/AutoMedBench--Full--v0.1-live-D2B684?style=for-the-badge" alt="AutoMedBench-Full-v0.1 — live"></a>
 </p>
+
+- **[AutoMedBench-Lite-v0.1](https://huggingface.co/datasets/MitakaKuma/AutoMedBench-Lite-release)** — 7 个 Lite held-out 沙箱任务，用于快速本地测试。
+- **[AutoMedBench-Full-v0.1](https://huggingface.co/datasets/MitakaKuma/AutoMedBench-Full-release)** — 覆盖 7 个赛道的 48 个任务，包含 Lite 与 Standard 两个层级，共 96 个任务-层级组合。
 
 ```bash
 # 1. 克隆想测试的领域分支
@@ -88,9 +101,9 @@ python eval_seg/docker/orchestrator.py \
 
 **2 · agent 的短板是"验证"，而非"知识"。** 分阶段看，**Validate 阶段最弱、Setup 阶段最强**——agent 很会搭流程，却很少在全量推理前检查其可靠性。错误类型也印证了这一点：**验证/恢复类错误占 37.7%**、**交付/提交类占 38.1%**，而任务理解类仅 **0.9%**。代价高昂——只要触发一个错误码，整体得分就比"干净"运行约低 **48%**。
 
-实时榜单维护于 **[automedbench.github.io/#leaderboard](https://automedbench.github.io/#leaderboard)**：每个 agent 的 Overall 分、**S1–S5 分阶段拆解**（看清在哪一步失败）、各任务榜单（Dice / SSIM / accuracy / mAP）及每次运行的成本/轮次/时长/token。
+网站实时榜单维护于 **[automedbench.github.io/#leaderboard](https://automedbench.github.io/#leaderboard)**：每个 agent 的 Overall 分、**S1–S5 分阶段拆解**（看清在哪一步失败）、各任务榜单（Dice / SSIM / accuracy / mAP）及每次运行的成本/轮次/时长/token。**Full leaderboard Space 已上线**：**[huggingface.co/spaces/MitakaKuma/AutoMedBench-Full-Leaderboard](https://huggingface.co/spaces/MitakaKuma/AutoMedBench-Full-Leaderboard)**。
 
-目前 **6 个领域**全部上线——segmentation · image enhancement · VQA · report generation · lesion detection · classification，共 **50 个活跃任务组合**（Segmentation 16 · Image Enhancement 4 · VQA 10 · Report Generation 10 · Lesion Detection 8 · Classification 2），覆盖 **7 个智能体模型**（其中 6 个具备全赛道覆盖、计入总榜），**5,500+ 次实验**。
+网站榜单目前覆盖 **6 个已评测领域**——segmentation · image enhancement · VQA · report generation · lesion detection · classification，共 **50 个活跃任务组合**（Segmentation 16 · Image Enhancement 4 · VQA 10 · Report Generation 10 · Lesion Detection 8 · Classification 2），覆盖 **7 个智能体模型**（其中 6 个具备全赛道覆盖、计入总榜），**5,500+ 次实验**。Hugging Face Full release 还包含 synthesis，共 **7 个赛道**、**48 个任务**、**96 个 Lite/Standard 任务-层级组合**。
 
 ## 6. 贡献
 
