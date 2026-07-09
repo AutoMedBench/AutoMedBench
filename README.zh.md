@@ -32,10 +32,10 @@ Overall = 0.5 × Agentic (S1–S5 过程评分) + 0.5 × Task (任务指标)
 ```
 
 <p align="center">
-  <img src="post_images/fig_tab_5.png" alt="Table 5: 更多脚手架并不总能提升 Lite 和 Standard 难度下的 agentic 分数" width="740">
+  <img src="post_images/fig_tab_3.png" alt="Table 3: 与医学和健康智能体基准的对比" width="960">
 </p>
 
-<p align="center"><sub><em>AutoMedBench 评估的是完整工作流：更多提示与脚手架并不总能带来更好的 agentic 行为。</em></sub></p>
+<p align="center"><sub><em>AutoMedBench 与既有医学智能体基准的区别在于：覆盖完整医学 AI 流程、工作流评分、隐藏评测、可控难度层级，以及运行后错误诊断。</em></sub></p>
 
 ## 2. 快速开始
 

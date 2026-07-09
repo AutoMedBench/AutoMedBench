@@ -32,10 +32,10 @@ Overall = 0.5 × Agentic (S1-S5 rubric) + 0.5 × Task (task metric)
 ```
 
 <p align="center">
-  <img src="post_images/fig_tab_5.png" alt="Table 5: more scaffolding does not consistently improve agentic scores across Lite and Standard tiers" width="740">
+  <img src="post_images/fig_tab_3.png" alt="Table 3: comparison with medical and healthcare agent benchmarks" width="960">
 </p>
 
-<p align="center"><sub><em>AutoMedBench tests the workflow itself: more scaffolding does not consistently produce better agentic behavior.</em></sub></p>
+<p align="center"><sub><em>AutoMedBench differs from prior medical-agent benchmarks by covering the full medical-AI pipeline, workflow scoring, hidden evaluation, controlled tiers, and post-run error diagnosis.</em></sub></p>
 
 ---
 
